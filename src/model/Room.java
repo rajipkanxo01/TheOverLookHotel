@@ -18,6 +18,42 @@ public class Room
 
   }
 
-  public void setRoomNumber
+  public void setRoomNumber(String roomNumber)
+  {
+    this.roomNumber = roomNumber;
+  }
+
+  public String getRoomNumber()
+  {
+    return roomNumber;
+  }
+
+  public double getPrice()
+  {
+    return price;
+  }
+
+  public boolean ifSmoking()
+  {
+    return smoking;
+  }
+
+  public void setSmoking(Boolean smoking)
+  {
+    this.smoking = smoking;
+  }
+
+  public void changeAvailability(Boolean available)
+  {
+    this.available = available;
+  }
+
+  public boolean ifAvailable()
+  {
+    return available;
+  }
+
+
+
 
 }
