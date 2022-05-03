@@ -28,13 +28,13 @@ public class RoomList
     return null;
   }
 
-  public RoomList getRoomOfType(String type)
-  {
-    for (int i = 0; i <rooms.size() ; i++)
-    {
-      if (rooms.get(i).ge)
-      {
-      }
-    }
-  }
+//  public RoomList getRoomOfType(String type)
+//  {
+//    for (int i = 0; i <rooms.size() ; i++)
+//    {
+//      if (rooms.get(i).ge)
+//      {
+//      }
+//    }
+//  }
 }

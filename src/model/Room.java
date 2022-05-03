@@ -60,7 +60,7 @@ public class Room
   /**
    * If smoking boolean.
    *
-   * @return the boolean
+   * @return boolean as true or false if smoking or not
    */
   public boolean ifSmoking()
   {
