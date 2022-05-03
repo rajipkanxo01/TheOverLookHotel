@@ -64,17 +64,17 @@
           </Menu>
         </menus>
       </MenuBar>
-      <TabPane prefHeight="424.0" prefWidth="763.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="tabPane" prefHeight="424.0" prefWidth="763.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Room Status">
+          <Tab fx:id="roomStatus" text="Room Status">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <Pane layoutX="14.0" layoutY="14.0" prefHeight="242.0" prefWidth="239.0" style="-fx-background-color: #F5F5F5; -fx-border-color: #000000;">
                            <children>
                               <Label layoutX="10.0" layoutY="12.0" text="Arrival Date" />
-                              <DatePicker layoutX="9.0" layoutY="29.0" prefHeight="26.0" prefWidth="185.0" />
-                              <DatePicker layoutX="8.0" layoutY="80.0" prefHeight="26.0" prefWidth="185.0" />
+                              <DatePicker fx:id="roomArrivalDate" layoutX="9.0" layoutY="29.0" prefHeight="26.0" prefWidth="185.0" />
+                              <DatePicker fx:id="roomDepartureDate" layoutX="8.0" layoutY="80.0" prefHeight="26.0" prefWidth="185.0" />
                               <Label layoutX="9.0" layoutY="63.0" text="Departure Date" />
                               <CheckBox layoutX="10.0" layoutY="170.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="88.0" text="Smoking" />
                               <Button layoutX="165.0" layoutY="208.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="61.0" text="Search" />
@@ -90,12 +90,12 @@
                               <TableColumn prefWidth="87.20001220703125" text="Smoking" />
                           </columns>
                         </TableView>
-                        <Button layoutX="687.0" layoutY="354.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="61.0" text="Next" />
+                        <Button layoutX="687.0" layoutY="354.0" mnemonicParsing="false" onAction="#next" prefHeight="26.0" prefWidth="61.0" text="Next" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="Create Booking">
+          <Tab fx:id="createBooking" text="Create Booking">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -127,10 +127,16 @@
                               <Button layoutX="232.0" layoutY="313.0" mnemonicParsing="false" text="Back" />
                            </children>
                         </Pane>
-                        <Pane layoutX="13.0" layoutY="11.0" prefHeight="118.0" prefWidth="200.0" style="-fx-background-color: #F5F5F5; -fx-border-color: #000000;" />
+                        <Pane layoutX="13.0" layoutY="11.0" prefHeight="231.0" prefWidth="200.0" style="-fx-background-color: #F5F5F5; -fx-border-color: #000000;">
+                           <children>
+                              <Label layoutX="7.0" layoutY="112.0" text="Room Type" />
+                              <TextField layoutX="6.0" layoutY="133.0" prefHeight="25.0" prefWidth="174.0" />
+                              <Label layoutX="7.0" layoutY="167.0" text="Room Number" />
+                              <TextField layoutX="6.0" layoutY="188.0" prefHeight="25.0" prefWidth="174.0" />
+                           </children></Pane>
                         <Label layoutX="21.0" layoutY="19.0" text="Arrival Date" />
-                        <DatePicker layoutX="20.0" layoutY="36.0" prefHeight="26.0" prefWidth="185.0" />
-                        <DatePicker layoutX="19.0" layoutY="87.0" prefHeight="26.0" prefWidth="185.0" />
+                        <DatePicker fx:id="createArrivalDate" layoutX="20.0" layoutY="36.0" prefHeight="26.0" prefWidth="185.0" />
+                        <DatePicker fx:id="createDepartureDate" layoutX="19.0" layoutY="87.0" prefHeight="26.0" prefWidth="185.0" />
                         <Label layoutX="20.0" layoutY="70.0" text="Departure Date" />
                      </children>
                   </AnchorPane>
