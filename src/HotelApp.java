@@ -15,5 +15,6 @@ public class HotelApp extends Application
     Scene scene = new Scene(loader.load());
     window.setScene(scene);
     window.show();
+    window.setResizable(false);
   }
 }
