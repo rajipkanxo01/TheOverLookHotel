@@ -4,6 +4,11 @@ import java.time.LocalDate;
 
 public class Guest
 {
+  /**
+   * A class that is used to store the first name,last name, address, phone number, nationality and date of birth of a guest.
+   * @author Rajib Paudyal
+   * @version 1.0.0
+   */
   private String firstName;
   private String lastName;
   private String address;
