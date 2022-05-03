@@ -8,5 +8,6 @@ public class HotelTest
   public static void main(String[] args)
   {
     Application.launch(HotelGUIFXML.class);
+    System.out.println();
   }
 }
