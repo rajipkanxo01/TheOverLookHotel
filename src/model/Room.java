@@ -1,14 +1,16 @@
 package model;
 
+
 public class Room
 {
   private double price;
   private String type;
   private boolean smoking;
   private boolean available;
-  private String roomNumber;
+  private int roomNumber;
 
-  public Room(double price, String type, boolean smoking, boolean available, String roomNumber)
+
+  public Room(double price, String type, boolean smoking, boolean available, int roomNumber)
   {
     this.price = price;
     this.type = type;
@@ -18,12 +20,17 @@ public class Room
 
   }
 
-  public void setRoomNumber(String roomNumber)
+  /**
+   * Sets room number.
+   *
+   * @param roomNumber the room number
+   */
+  public void setRoomNumber(int roomNumber)
   {
     this.roomNumber = roomNumber;
   }
 
-  public String getRoomNumber()
+  public int getRoomNumber()
   {
     return roomNumber;
   }
