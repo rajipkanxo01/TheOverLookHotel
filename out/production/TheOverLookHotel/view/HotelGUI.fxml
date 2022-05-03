@@ -13,7 +13,6 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
@@ -64,17 +63,17 @@
           </Menu>
         </menus>
       </MenuBar>
-      <TabPane prefHeight="424.0" prefWidth="763.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="tabPane" prefHeight="424.0" prefWidth="763.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Room Status">
+          <Tab fx:id="roomStatus" text="Room Status">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <Pane layoutX="14.0" layoutY="14.0" prefHeight="242.0" prefWidth="239.0" style="-fx-background-color: #F5F5F5; -fx-border-color: #000000;">
                            <children>
                               <Label layoutX="10.0" layoutY="12.0" text="Arrival Date" />
-                              <DatePicker layoutX="9.0" layoutY="29.0" prefHeight="26.0" prefWidth="185.0" />
-                              <DatePicker layoutX="8.0" layoutY="80.0" prefHeight="26.0" prefWidth="185.0" />
+                              <DatePicker fx:id="roomArrivalDate" layoutX="9.0" layoutY="29.0" prefHeight="26.0" prefWidth="185.0" />
+                              <DatePicker fx:id="roomDepartureDate" layoutX="8.0" layoutY="80.0" prefHeight="26.0" prefWidth="185.0" />
                               <Label layoutX="9.0" layoutY="63.0" text="Departure Date" />
                               <CheckBox layoutX="10.0" layoutY="170.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="88.0" text="Smoking" />
                               <Button layoutX="165.0" layoutY="208.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="61.0" text="Search" />
@@ -90,12 +89,12 @@
                               <TableColumn prefWidth="87.20001220703125" text="Smoking" />
                           </columns>
                         </TableView>
-                        <Button layoutX="687.0" layoutY="354.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="61.0" text="Next" />
+                        <Button layoutX="687.0" layoutY="354.0" mnemonicParsing="false" onAction="#next" prefHeight="26.0" prefWidth="61.0" text="Next" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="Create Booking">
+          <Tab fx:id="createBooking" text="Create Booking">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -122,21 +121,27 @@
                               <Label layoutX="271.0" layoutY="110.0" prefHeight="19.0" prefWidth="49.0" text="Zip Code" />
                               <TextField layoutX="272.0" layoutY="129.0" prefHeight="25.0" prefWidth="177.0" />
                               <Button layoutX="419.0" layoutY="313.0" mnemonicParsing="false" text="Save" />
-                              <Button layoutX="359.0" layoutY="313.0" mnemonicParsing="false" text="Clear" />
-                              <Button layoutX="294.0" layoutY="313.0" mnemonicParsing="false" text="Next" />
-                              <Button layoutX="232.0" layoutY="313.0" mnemonicParsing="false" text="Back" />
+                              <Button layoutX="359.0" layoutY="313.0" mnemonicParsing="false" onAction="#clear" text="Clear" />
+                              <Button layoutX="249.0" layoutY="313.0" mnemonicParsing="false" onAction="#goToCheckIn" text="Go to Check-In" />
+                              <Button layoutX="194.0" layoutY="313.0" mnemonicParsing="false" onAction="#createBack" text="Back" />
                            </children>
                         </Pane>
-                        <Pane layoutX="13.0" layoutY="11.0" prefHeight="118.0" prefWidth="200.0" style="-fx-background-color: #F5F5F5; -fx-border-color: #000000;" />
+                        <Pane layoutX="13.0" layoutY="11.0" prefHeight="231.0" prefWidth="200.0" style="-fx-background-color: #F5F5F5; -fx-border-color: #000000;">
+                           <children>
+                              <Label layoutX="7.0" layoutY="112.0" text="Room Type" />
+                              <TextField layoutX="6.0" layoutY="133.0" prefHeight="25.0" prefWidth="174.0" />
+                              <Label layoutX="7.0" layoutY="167.0" text="Room Number" />
+                              <TextField layoutX="6.0" layoutY="188.0" prefHeight="25.0" prefWidth="174.0" />
+                           </children></Pane>
                         <Label layoutX="21.0" layoutY="19.0" text="Arrival Date" />
-                        <DatePicker layoutX="20.0" layoutY="36.0" prefHeight="26.0" prefWidth="185.0" />
-                        <DatePicker layoutX="19.0" layoutY="87.0" prefHeight="26.0" prefWidth="185.0" />
+                        <DatePicker fx:id="createArrivalDate" layoutX="20.0" layoutY="36.0" prefHeight="26.0" prefWidth="185.0" />
+                        <DatePicker fx:id="createDepartureDate" layoutX="19.0" layoutY="87.0" prefHeight="26.0" prefWidth="185.0" />
                         <Label layoutX="20.0" layoutY="70.0" text="Departure Date" />
                      </children>
                   </AnchorPane>
             </content>
           </Tab>
-            <Tab text="Check-In">
+            <Tab fx:id="checkInTab" text="Check-In">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -176,7 +181,12 @@
                         </Pane>
                         <Button layoutX="569.0" layoutY="323.0" mnemonicParsing="false" text="Back" />
                         <Button layoutX="676.0" layoutY="322.0" minWidth="-Infinity" mnemonicParsing="false" text="Check-in" />
-                        <TextArea layoutX="13.0" layoutY="261.0" prefHeight="46.0" prefWidth="200.0" />
+                        <TableView layoutX="14.0" layoutY="262.0" prefHeight="59.0" prefWidth="200.0">
+                          <columns>
+                            <TableColumn prefWidth="97.59997367858887" text="Room Number" />
+                            <TableColumn prefWidth="102.40003204345703" text="Booked by" />
+                          </columns>
+                        </TableView>
                      </children>
                   </AnchorPane>
                </content>
@@ -219,7 +229,12 @@
                               <Button layoutX="399.0" layoutY="239.0" mnemonicParsing="false" text="Check-Out" />
                            </children>
                         </Pane>
-                        <TextArea layoutX="15.0" layoutY="263.0" prefHeight="66.0" prefWidth="198.0" />
+                        <TableView layoutX="14.0" layoutY="261.0" prefHeight="59.0" prefWidth="200.0">
+                           <columns>
+                              <TableColumn prefWidth="97.59997367858887" text="Room Number" />
+                              <TableColumn prefWidth="102.40003204345703" text="Checked- In" />
+                           </columns>
+                        </TableView>
                      </children>
                   </AnchorPane>
                </content>
