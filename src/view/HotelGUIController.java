@@ -3,6 +3,9 @@ package view;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import org.w3c.dom.Text;
+
+import java.time.LocalDate;
 
 /**
  * @author
@@ -22,6 +25,13 @@ public class HotelGUIController
   @FXML Tab createBooking;
   @FXML DatePicker createArrivalDate;
   @FXML DatePicker createDepartureDate;
+  @FXML TextField createFirstName;
+  @FXML TextField createLastName;
+  @FXML TextField createPhoneNumber;
+  @FXML TextField createNationality;
+  @FXML TextField createAddress;
+  @FXML DatePicker createDateOfBirth;
+  @FXML Spinner<Integer> createNumberOfGuest;
 
   // Check in tab private fields
   @FXML Tab checkInTab;
@@ -45,9 +55,21 @@ public class HotelGUIController
     createDepartureDate.setValue(roomDepartureDate.getValue());
   }
 
+  /**
+   * It clears all the text fields and the date picker
+   *
+   * @author Rajib Paudyal
+   * @param actionEvent The action event that triggered the action.
+   */
   public void clear(ActionEvent actionEvent)
   {
-
+    createFirstName.clear();
+    createLastName.clear();
+    createPhoneNumber.clear();
+    createAddress.clear();
+    createNationality.clear();
+    createDateOfBirth.getEditor().clear();
+    createNumberOfGuest.cancelEdit();
   }
 
   /**
