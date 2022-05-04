@@ -9,6 +9,7 @@ public class Room
   private boolean smoking;
   private boolean available;
   private int roomNumber;
+  private String type;
 
   /**
    * Instantiates a new Room.
@@ -18,13 +19,13 @@ public class Room
    * @param available  the available
    * @param roomNumber the room number
    */
-  public Room(double price, boolean smoking, boolean available, int roomNumber)
+  public Room(double price, boolean smoking, boolean available, int roomNumber,String type)
   {
     this.price = price;
     this.smoking = smoking;
     this.available = available;
     this.roomNumber = roomNumber;
-
+    this.type = type;
   }
 
   /**
@@ -97,7 +98,25 @@ public class Room
     return available;
   }
 
+  /**
+   * Gets type.
+   *
+   * @return the type
+   */
+  public String getType()
+  {
+    return type;
+  }
 
+  /**
+   * Sets type.
+   *
+   * @param type the type
+   */
+  public void setType(String type)
+  {
+    this.type = type;
+  }
 
 
 }
