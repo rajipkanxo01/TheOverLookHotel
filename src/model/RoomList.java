@@ -18,7 +18,7 @@ public class RoomList
 
   public Room getRoomByNumber(int roomNumber)
   {
-    for (int i = 0; i <rooms.size() ; i++)
+    for (int i = 0; i < rooms.size(); i++)
     {
       if (rooms.get(i).getRoomNumber() == roomNumber)
       {
@@ -28,13 +28,44 @@ public class RoomList
     return null;
   }
 
-//  public RoomList getRoomOfType(String type)
-//  {
-//    for (int i = 0; i <rooms.size() ; i++)
-//    {
-//      if (rooms.get(i).ge)
-//      {
-//      }
-//    }
-//  }
+  public ArrayList<Room> getRoomOfType(String type)
+  {
+    ArrayList<Room> roomsType = new ArrayList<Room>();
+    for (int i = 0; i < rooms.size(); i++)
+    {
+      if (rooms.get(i).getType().equals(type))
+      {
+        roomsType.add(rooms.get(i));
+      }
+    }
+    return roomsType;
+  }
+
+  public ArrayList<Room> getBookedRoomsOfType(String type)
+  {
+    ArrayList<Room> roomsType = new ArrayList<Room>();
+    for (int i = 0; i < rooms.size(); i++)
+    {
+      if (rooms.get(i).getType().equals(type))
+      {
+        if (rooms.get(i).ifAvailable())
+        {
+          roomsType.add(rooms.get(i));
+        }
+      }
+    }
+    return roomsType;
+  }
+
+  public double getPriceOfRoomType(String type)
+  {
+    for (int i = 0; i < rooms.size(); i++)
+    {
+      if (rooms.get(i).getType().equals(type))
+      {
+        return rooms.get(i).getPrice();
+      }
+    }
+    return 0;
+  }
 }

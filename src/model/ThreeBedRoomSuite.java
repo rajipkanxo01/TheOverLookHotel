@@ -1,11 +1,7 @@
 package model;
 
-/**
- * The type Single room.
- */
-public class SingleRoom extends Room
+public class ThreeBedRoomSuite extends Room
 {
-
   /**
    * Instantiates a new Single room.
    *
@@ -15,7 +11,7 @@ public class SingleRoom extends Room
    * @param roomNumber the room number
    * @param type       the type
    */
-  public SingleRoom(double price, boolean smoking, boolean available,
+  public ThreeBedRoomSuite(double price, boolean smoking, boolean available,
       int roomNumber, String type)
   {
     super(price, smoking, available, roomNumber,type);
@@ -30,5 +26,4 @@ public class SingleRoom extends Room
     return super.getType();
   }
 }
-
 
