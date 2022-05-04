@@ -121,9 +121,9 @@
                                     <Label layoutX="271.0" layoutY="110.0" prefHeight="19.0" prefWidth="49.0" text="Zip Code" />
                                     <TextField layoutX="272.0" layoutY="129.0" prefHeight="25.0" prefWidth="177.0" />
                                     <Button layoutX="419.0" layoutY="313.0" mnemonicParsing="false" text="Save" />
-                                    <Button layoutX="359.0" layoutY="313.0" mnemonicParsing="false" text="Clear" />
-                                    <Button layoutX="294.0" layoutY="313.0" mnemonicParsing="false" text="Next" />
-                                    <Button layoutX="232.0" layoutY="313.0" mnemonicParsing="false" text="Back" />
+                                    <Button layoutX="359.0" layoutY="313.0" mnemonicParsing="false" onAction="#clear" text="Clear" />
+                                    <Button layoutX="254.0" layoutY="313.0" mnemonicParsing="false" onAction="#goToCheckIn" text="Go To Check-In" />
+                                    <Button layoutX="206.0" layoutY="313.0" mnemonicParsing="false" onAction="#createBack" text="Back" />
                                 </children>
                             </Pane>
                             <Pane layoutX="13.0" layoutY="11.0" prefHeight="231.0" prefWidth="200.0" style="-fx-background-color: #F5F5F5; -fx-border-color: #000000;">
@@ -179,7 +179,7 @@
                               <Button layoutX="354.0" layoutY="311.0" mnemonicParsing="false" text="Add" />
                            </children>
                         </Pane>
-                        <Button layoutX="569.0" layoutY="323.0" mnemonicParsing="false" text="Back" />
+                        <Button layoutX="569.0" layoutY="323.0" mnemonicParsing="false" onAction="#checkInBack" text="Back" />
                         <Button layoutX="676.0" layoutY="322.0" minWidth="-Infinity" mnemonicParsing="false" text="Check-in" />
                         <TableView layoutX="14.0" layoutY="262.0" prefHeight="59.0" prefWidth="200.0">
                           <columns>

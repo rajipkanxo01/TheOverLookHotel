@@ -5,9 +5,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 /**
- * @version  1.0.0
+ * @author
+ * @version 1.0.0
  */
-
 
 public class HotelGUIController
 {
@@ -15,27 +15,18 @@ public class HotelGUIController
   // Room status tab private fields
   @FXML DatePicker roomArrivalDate;
   @FXML DatePicker roomDepartureDate;
-  @FXML DatePicker createArrivalDate;
-  @FXML DatePicker createDepartureDate;
   @FXML TabPane tabPane;
   @FXML Tab roomStatus;
-  @FXML Tab createBooking;
-  @FXML Tab checkInTab;
-
-
-
 
   // Create booking tab private fields
-
-
-
+  @FXML Tab createBooking;
+  @FXML DatePicker createArrivalDate;
+  @FXML DatePicker createDepartureDate;
 
   // Check in tab private fields
-
-
+  @FXML Tab checkInTab;
 
   // Check out tab private fields
-
 
   /**
    * The function is called when the user clicks the "Next" button on the "Room"
@@ -44,11 +35,12 @@ public class HotelGUIController
    * dates on the "Room" tab
    *
    * @param actionEvent The event that triggered the action.
+   * @author Rajib Paudyal
    */
   public void next(ActionEvent actionEvent)
   {
-    SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
-    selectionModel.select(createBooking);
+    SingleSelectionModel<Tab> selectionModelNextButton = tabPane.getSelectionModel();
+    selectionModelNextButton.select(createBooking);
     createArrivalDate.setValue(roomArrivalDate.getValue());
     createDepartureDate.setValue(roomDepartureDate.getValue());
   }
@@ -58,24 +50,43 @@ public class HotelGUIController
 
   }
 
-
-
   /**
    * When the user clicks the "Check In" button, the program will switch to the
    * "Check In" tab.
    *
    * @param actionEvent This is the event that is triggered when the button is
-   * clicked.
+   *                    clicked.
+   * @author Rajib Paudyal
    */
   public void goToCheckIn(ActionEvent actionEvent)
   {
-    SingleSelectionModel<Tab> selectionCheckIn = tabPane.getSelectionModel();
-    selectionCheckIn.select(checkInTab);
+    SingleSelectionModel<Tab> selectionModelGoToCheckIn = tabPane.getSelectionModel();
+    selectionModelGoToCheckIn.select(checkInTab);
   }
 
+  /**
+   * When user clicks a "back" button, the program will switch to "room status" tab
+   *
+   * @param actionEvent The event that triggered the action.
+   * @author Rajib Paudyal
+   */
   public void createBack(ActionEvent actionEvent)
   {
-    SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
-    selectionModel.select(roomStatus);
+    SingleSelectionModel<Tab> selectionModelCreateBackButton = tabPane.getSelectionModel();
+    selectionModelCreateBackButton.select(roomStatus);
+  }
+
+  /**
+   * When the user clicks the "Check In" button, the tab pane will switch to the
+   * "Create Booking" tab
+   *
+   * @param actionEvent This is the event that is triggered when the button is
+   *                    clicked.
+   * @author Rajib Paudyal
+   */
+  public void checkInBack(ActionEvent actionEvent)
+  {
+    SingleSelectionModel<Tab> selectionCheckInBackButton = tabPane.getSelectionModel();
+    selectionCheckInBackButton.select(createBooking);
   }
 }
