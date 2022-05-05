@@ -1,5 +1,8 @@
 package model;
 
+/**
+ * The type Single bed room suit.
+ */
 public class SingleBedRoomSuit extends Room
 {
   /**
