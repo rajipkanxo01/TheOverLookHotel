@@ -3,14 +3,16 @@ package model;
 import java.util.ArrayList;
 
 /**
- * The type Room list.
+ * A class that is used to add into an Arraylist all the rooms
+ * @author Rodrigo Reyes
+ * @version 1.0.0
  */
 public class RoomList
 {
   private ArrayList<Room> rooms;
 
   /**
-   * Instantiates a new Room list.
+   * Constructor that Instantiates a new Room list.
    */
   public RoomList()
   {
@@ -18,9 +20,9 @@ public class RoomList
   }
 
   /**
-   * Add room.
+   * Add room object of type room.
    *
-   * @param room the room
+   * @param room the object room
    */
   public void addRoom(Room room)
   {
@@ -28,10 +30,10 @@ public class RoomList
   }
 
   /**
-   * Gets room by number.
+   * Gets the room by the roomNumber given.
    *
    * @param roomNumber the room number
-   * @return the room by number
+   * @return the room information by the number given
    */
   public Room getRoomByNumber(int roomNumber)
   {
@@ -46,12 +48,12 @@ public class RoomList
   }
 
   /**
-   * Gets room of type.
+   * Gets the rooms of that type.
    *
-   * @param type the type
-   * @return the room of type
+   * @param type the type of the room
+   * @return the rooms of that type
    */
-  public ArrayList<Room> getRoomOfType(String type)
+  public ArrayList<Room> getRoomsOfType(String type)
   {
     ArrayList<Room> roomsType = new ArrayList<Room>();
     for (int i = 0; i < rooms.size(); i++)
@@ -65,10 +67,10 @@ public class RoomList
   }
 
   /**
-   * Gets booked rooms of type.
+   * Gets booked rooms of type provided.
    *
-   * @param type the type
-   * @return the booked rooms of type
+   * @param type the type of the room
+   * @return the booked rooms of the type given
    */
   public ArrayList<Room> getBookedRoomsOfType(String type)
   {
@@ -87,10 +89,10 @@ public class RoomList
   }
 
   /**
-   * Gets price of room type.
+   * Gets the price of that room type.
    *
-   * @param type the type
-   * @return the price of room type
+   * @param type the type of the room
+   * @return the price of that room type
    */
   public double getPriceOfRoomType(String type)
   {

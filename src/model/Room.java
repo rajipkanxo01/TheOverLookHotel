@@ -1,7 +1,9 @@
 package model;
 
 /**
- * The type Room.
+ * A class that is used to store the price,smoking area, availability, type of the room and availability of the room.
+ * @author Rodrigo Reyes
+ * @version 1.0.0
  */
 public class Room
 {
@@ -14,9 +16,9 @@ public class Room
   /**
    * Instantiates a new Room.
    *
-   * @param price      the price
-   * @param smoking    the smoking
-   * @param available  the available
+   * @param price      the price of the room
+   * @param smoking    whether the room has a smoking area
+   * @param available  the availability of the room
    * @param roomNumber the room number
    */
   public Room(double price, boolean smoking, boolean available, int roomNumber,String type)
@@ -39,7 +41,7 @@ public class Room
   }
 
   /**
-   * Gets room number.
+   * Gets the room number.
    *
    * @return the room number
    */
@@ -49,9 +51,9 @@ public class Room
   }
 
   /**
-   * Gets price.
+   * Gets the price of the room.
    *
-   * @return the price
+   * @return the price of the room.
    */
   public double getPrice()
   {
@@ -59,7 +61,7 @@ public class Room
   }
 
   /**
-   * If smoking boolean.
+   * If room has smoking area.
    *
    * @return boolean as true or false if smoking or not
    */
@@ -69,9 +71,9 @@ public class Room
   }
 
   /**
-   * Sets smoking.
+   * Sets if room needs smoking area.
    *
-   * @param smoking the smoking
+   * @param smoking the smoking area
    */
   public void setSmoking(Boolean smoking)
   {
@@ -79,9 +81,9 @@ public class Room
   }
 
   /**
-   * Change availability.
+   * Change the availability.
    *
-   * @param available the available
+   * @param available the availability of the room
    */
   public void changeAvailability(Boolean available)
   {
@@ -89,9 +91,9 @@ public class Room
   }
 
   /**
-   * If available boolean.
+   * Gets the availability of the room.
    *
-   * @return the boolean
+   * @return true or false depending on the availability of the room
    */
   public boolean ifAvailable()
   {
@@ -99,9 +101,9 @@ public class Room
   }
 
   /**
-   * Gets type.
+   * Gets the  type of the room.
    *
-   * @return the type
+   * @return the type of the room
    */
   public String getType()
   {
@@ -109,9 +111,9 @@ public class Room
   }
 
   /**
-   * Sets type.
+   * Sets the type of the room.
    *
-   * @param type the type
+   * @param type returns the type of the room
    */
   public void setType(String type)
   {

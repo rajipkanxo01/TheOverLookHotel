@@ -1,15 +1,20 @@
 package model;
 
+/**
+ * A class that is used to create a new Room of type DoubleBedRoom that inherits the methods of Room
+ * @author Rodrigo Reyes
+ * @version 1.0.0
+ */
 public class DoubleBedRoom extends Room
 {
   /**
-   * Instantiates a new Single room.
+   * Instantiates a new Double Bed Room.
    *
-   * @param price      the price
-   * @param smoking    the smoking
-   * @param available  the available
+   * @param price      the price of the room
+   * @param smoking    if smoking area needed
+   * @param available  the availability of the room
    * @param roomNumber the room number
-   * @param type       the type
+   * @param type       the type of the room
    */
   public DoubleBedRoom(double price, boolean smoking, boolean available,
       int roomNumber, String type)
