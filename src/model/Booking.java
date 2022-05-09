@@ -1,5 +1,7 @@
 package model;
 
+import java.time.LocalDate;
+
 public class Booking
 {
   private boolean extraBed;
@@ -8,6 +10,7 @@ public class Booking
   private Room room;
   private Guest guest;
   private DateInterval dateInterval;
+  private LocalDate arrivalDate;
 
 
 
@@ -20,7 +23,7 @@ public class Booking
     this.smokes = smokes;
     this.room = room;
     this.guest = guest;
-    this.dateInterval = dateInterval;
+
   }
 
   /**
@@ -72,15 +75,6 @@ public class Booking
     return room;
   }
 
-  /**
-   * This method sets the room of the current object to the room passed in as a
-   * parameter.
-   * @param room The Room object.
-   */
-  public void setRoom(Room room)
-  {
-    this.room = room;
-  }
 
   /**
    * This method returns the guest variable.
@@ -96,28 +90,9 @@ public class Booking
    * This method sets the guest variable to the guest variable passed in.
    * @param guest The guest object
    */
-  public void setGuest(Guest guest)
+  public void changeGuest(Guest guest)
   {
     this.guest = guest;
-  }
-
-  /**
-   * Returns the date interval of this event.
-   *
-   * @return The dateInterval variable is being returned.
-   */
-  public DateInterval getDateInterval()
-  {
-    return dateInterval;
-  }
-
-  /**
-   * Sets the date interval for the report
-   * @param dateInterval The date interval to use for the report.
-   */
-  public void setDateInterval(DateInterval dateInterval)
-  {
-    this.dateInterval = dateInterval;
   }
 
 }
