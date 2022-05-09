@@ -18,7 +18,7 @@ public class SingleRoom extends Room
    * @param type       the type of the room
    */
   public SingleRoom(double price, boolean smoking, boolean available,
-      int roomNumber, String type)
+      String roomNumber, String type)
   {
     super(price, smoking, available, roomNumber,type);
   }

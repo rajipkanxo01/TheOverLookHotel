@@ -48,6 +48,11 @@ public class HotelManager
     return allRooms;
   }
 
+  /**
+   * This function adds all the rooms to the room list and then writes the room
+   * list to the room file
+   *
+   */
   public void addRooms()
   {
     RoomList rooms = new RoomList();

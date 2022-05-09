@@ -95,7 +95,7 @@ public class RoomList
    * @param type the type of the room
    * @return the price of that room type
    */
-  public String getPriceOfRoomType(String type)
+  public double getPriceOfRoomType(String type)
   {
     for (int i = 0; i < rooms.size(); i++)
     {
@@ -104,6 +104,6 @@ public class RoomList
         return rooms.get(i).getPrice();
       }
     }
-    return null;
+    return 0;
   }
 }
