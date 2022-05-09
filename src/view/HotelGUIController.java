@@ -3,12 +3,10 @@ package view;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import org.w3c.dom.Text;
 
-import java.time.LocalDate;
 
 /**
- * @author
+ * @author Pramesh Shrestha, Rajib Paudyal, Rodrigo Reyes
  * @version 1.0.0
  */
 
@@ -38,6 +36,9 @@ public class HotelGUIController
 
   // Check out tab private fields
 
+
+  // room status method
+
   /**
    * The function is called when the user clicks the "Next" button on the "Room"
    * tab. It sets the "Create Booking" tab as the selected tab and sets the arrival
@@ -47,7 +48,7 @@ public class HotelGUIController
    * @param actionEvent The event that triggered the action.
    * @author Rajib Paudyal
    */
-  public void next(ActionEvent actionEvent)
+  public void roomNext(ActionEvent actionEvent)
   {
     SingleSelectionModel<Tab> selectionModelNextButton = tabPane.getSelectionModel();
     selectionModelNextButton.select(createBooking);
@@ -55,11 +56,13 @@ public class HotelGUIController
     createDepartureDate.setValue(roomDepartureDate.getValue());
   }
 
+  //  create booking tab methods
+
   /**
    * It clears all the text fields and the date picker
    *
-   * @author Rajib Paudyal
    * @param actionEvent The action event that triggered the action.
+   * @author Rajib Paudyal
    */
   public void clear(ActionEvent actionEvent)
   {
@@ -69,7 +72,19 @@ public class HotelGUIController
     createAddress.clear();
     createNationality.clear();
     createDateOfBirth.getEditor().clear();
-    createNumberOfGuest.cancelEdit();
+    createNumberOfGuest.getEditor().clear();
+  }
+
+  /**
+   * When user clicks a "back" button, the program will switch to "room status" tab
+   *
+   * @param actionEvent The event that triggered the action.
+   * @author Rajib Paudyal
+   */
+  public void createBack(ActionEvent actionEvent)
+  {
+    SingleSelectionModel<Tab> selectionModelCreateBackButton = tabPane.getSelectionModel();
+    selectionModelCreateBackButton.select(roomStatus);
   }
 
   /**
@@ -86,17 +101,7 @@ public class HotelGUIController
     selectionModelGoToCheckIn.select(checkInTab);
   }
 
-  /**
-   * When user clicks a "back" button, the program will switch to "room status" tab
-   *
-   * @param actionEvent The event that triggered the action.
-   * @author Rajib Paudyal
-   */
-  public void createBack(ActionEvent actionEvent)
-  {
-    SingleSelectionModel<Tab> selectionModelCreateBackButton = tabPane.getSelectionModel();
-    selectionModelCreateBackButton.select(roomStatus);
-  }
+  // check in tab methods
 
   /**
    * When the user clicks the "Check In" button, the tab pane will switch to the

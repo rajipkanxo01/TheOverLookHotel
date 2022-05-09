@@ -89,7 +89,7 @@
                               <TableColumn prefWidth="87.20001220703125" text="Smoking" />
                           </columns>
                         </TableView>
-                        <Button layoutX="687.0" layoutY="354.0" mnemonicParsing="false" onAction="#next" prefHeight="26.0" prefWidth="61.0" text="Next" />
+                        <Button layoutX="687.0" layoutY="354.0" mnemonicParsing="false" onAction="#roomNext" prefHeight="26.0" prefWidth="61.0" text="Next" />
                      </children>
                   </AnchorPane>
             </content>

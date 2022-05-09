@@ -27,7 +27,7 @@ public class Booking
   }
 
   /**
-   * > This method returns a boolean value that indicates whether or not the guest
+   *  This method returns a boolean value that indicates whether or not the guest
    * needs an extra bed
    * @return The boolean value of extraBed.
    */
