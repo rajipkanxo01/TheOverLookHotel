@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class GuestList
+public class GuestList implements Serializable
 {
   /**
    * This class deals with adding and removing of guests.
@@ -16,10 +17,10 @@ public class GuestList
   /**
    * Creating a new GuestList object with a guestNumber.
    *
-   * @param guestNumber number of guest
+   *
    */
 
-  public GuestList(int guestNumber)
+  public GuestList()
   {
     guestList = new ArrayList<>();
   }

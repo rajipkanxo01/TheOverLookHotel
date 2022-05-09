@@ -35,15 +35,15 @@ public class HotelManager
     }
     catch (FileNotFoundException e)
     {
-      System.out.println("File not found");
+      System.err.println("File not found");
     }
     catch (IOException e)
     {
-      System.out.println("IO Error reading file");
+      System.err.println("IO Error reading file");
     }
     catch (ClassNotFoundException e)
     {
-      System.out.println("Class Not Found");
+      System.err.println("Class Not Found");
     }
     return allRooms;
   }
@@ -51,7 +51,6 @@ public class HotelManager
   /**
    * This function adds all the rooms to the room list and then writes the room
    * list to the room file
-   *
    */
   public void addRooms()
   {
@@ -90,7 +89,6 @@ public class HotelManager
       rooms.addRoom(new Room(169, false, true, "DR-B" + i, "Double Room"));
     }
 
-
     // adding room object to file
     try
     {
@@ -104,7 +102,29 @@ public class HotelManager
     {
       System.err.println("IO Exception Error");
     }
+  }
 
+  /**
+   * This function adds a guest to the guest list and writes to the binary file
+   *
+   * @param guest The guest object to be added to the guest list.
+   */
+  public void addGuest(Guest guest)
+  {
+    GuestList guests = new GuestList();
+    guests.addGuest(guest);
+    try
+    {
+      MyFileHandler.writeToBinaryFile(guestFileName, guests);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.err.println("File Not Found");
+    }
+    catch (IOException e)
+    {
+      System.err.println("IO Exception Error");
+    }
   }
 
 }
