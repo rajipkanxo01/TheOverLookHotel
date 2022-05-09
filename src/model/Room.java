@@ -10,7 +10,7 @@ public class Room
   private double price;
   private boolean smoking;
   private boolean available;
-  private int roomNumber;
+  private String roomNumber;
   private String type;
 
   /**
@@ -21,7 +21,7 @@ public class Room
    * @param available  the availability of the room
    * @param roomNumber the room number
    */
-  public Room(double price, boolean smoking, boolean available, int roomNumber,String type)
+  public Room(double price, boolean smoking, boolean available, String roomNumber,String type)
   {
     this.price = price;
     this.smoking = smoking;
@@ -35,7 +35,7 @@ public class Room
    *
    * @param roomNumber the room number
    */
-  public void setRoomNumber(int roomNumber)
+  public void setRoomNumber(String roomNumber)
   {
     this.roomNumber = roomNumber;
   }
@@ -45,7 +45,7 @@ public class Room
    *
    * @return the room number
    */
-  public int getRoomNumber()
+  public String getRoomNumber()
   {
     return roomNumber;
   }

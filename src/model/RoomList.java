@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * A class that is used to add into an Arraylist all the rooms
+ *
  * @author Rodrigo Reyes
  * @version 1.0.0
  */
@@ -35,11 +36,11 @@ public class RoomList
    * @param roomNumber the room number
    * @return the room information by the number given
    */
-  public Room getRoomByNumber(int roomNumber)
+  public Room getRoomByNumber(String roomNumber)
   {
     for (int i = 0; i < rooms.size(); i++)
     {
-      if (rooms.get(i).getRoomNumber() == roomNumber)
+      if (rooms.get(i).getRoomNumber().equals(roomNumber))
       {
         return rooms.get(i);
       }
@@ -94,7 +95,7 @@ public class RoomList
    * @param type the type of the room
    * @return the price of that room type
    */
-  public double getPriceOfRoomType(String type)
+  public String getPriceOfRoomType(String type)
   {
     for (int i = 0; i < rooms.size(); i++)
     {
@@ -103,6 +104,6 @@ public class RoomList
         return rooms.get(i).getPrice();
       }
     }
-    return 0;
+    return null;
   }
 }
