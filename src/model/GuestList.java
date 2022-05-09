@@ -12,7 +12,6 @@ public class GuestList
    */
 
   private ArrayList<Guest> guestList;
-  private int guestNumber;
 
   /**
    * Creating a new GuestList object with a guestNumber.
@@ -23,7 +22,6 @@ public class GuestList
   public GuestList(int guestNumber)
   {
     guestList = new ArrayList<>();
-    this.guestNumber = guestNumber;
   }
 
   /**
@@ -33,10 +31,7 @@ public class GuestList
    */
   public void addGuest(Guest guest)
   {
-    if (guestList.size() > guestNumber)
-    {
-      guestList.add(guest);
-    }
+    guestList.add(guest);
   }
 
   /**
