@@ -1,9 +1,10 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
-public class DateInterval
+public class DateInterval implements Serializable
 {
   /**
    * class that is used to store the arrival and departure

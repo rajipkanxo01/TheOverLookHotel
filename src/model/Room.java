@@ -1,17 +1,23 @@
 package model;
 
+import java.io.Serializable;
+import java.time.LocalDate;
+
 /**
  * A class that is used to store the price,smoking area, availability, type of the room and availability of the room.
+ *
  * @author Rodrigo Reyes
  * @version 1.0.0
  */
-public class Room
+public class Room implements Serializable
 {
   private double price;
   private boolean smoking;
   private boolean available;
   private String roomNumber;
   private String type;
+  private LocalDate bookStartDate;
+  private LocalDate bookEndDate;
 
   /**
    * Instantiates a new Room.
@@ -21,7 +27,8 @@ public class Room
    * @param available  the availability of the room
    * @param roomNumber the room number
    */
-  public Room(double price, boolean smoking, boolean available, String roomNumber,String type)
+  public Room(double price, boolean smoking, boolean available,
+      String roomNumber, String type)
   {
     this.price = price;
     this.smoking = smoking;
@@ -81,23 +88,46 @@ public class Room
   }
 
   /**
-   * Change the availability.
+   * This function changes the availability of a room
    *
-   * @param available the availability of the room
+   * @param available     true if the room is available, false if it is not
+   * @param arrivalDate   The date the guest will arrive
+   * @param departureDate The date the guest is leaving the hotel
    */
-  public void changeAvailability(Boolean available)
+  public void changeAvailability(Boolean available, LocalDate arrivalDate,
+      LocalDate departureDate)
   {
+    bookEndDate = departureDate;
+    bookStartDate = departureDate;
     this.available = available;
+
   }
 
   /**
-   * Gets the availability of the room.
+   * If the arrival date is after the end date of the booking, return false.
+   * Otherwise, return true
    *
-   * @return true or false depending on the availability of the room
+   * @param arrivalDate   The date the user wants to arrive
+   * @param departureDate The date the guest is leaving
+   * @return A boolean value.
    */
-  public boolean ifAvailable()
+  public boolean ifAvailable(LocalDate arrivalDate, LocalDate departureDate)
   {
-    return available;
+    if (available)
+    {
+      return true;
+    }
+    else
+    {
+      if ((arrivalDate.isAfter(bookEndDate)))
+      {
+        return false;
+      }
+      else
+      {
+        return true;
+      }
+    }
   }
 
   /**
@@ -120,5 +150,11 @@ public class Room
     this.type = type;
   }
 
-
+  public String toString()
+  {
+    return "Room{" + "price=" + price + ", smoking=" + smoking + ", available="
+        + available + ", roomNumber='" + roomNumber + '\'' + ", type='" + type
+        + '\'' + ", bookStartDate=" + bookStartDate + ", bookEndDate="
+        + bookEndDate + '}';
+  }
 }

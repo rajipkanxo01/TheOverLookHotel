@@ -1,5 +1,7 @@
 package model;
 
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -8,7 +10,7 @@ import java.util.ArrayList;
  * @author Rodrigo Reyes
  * @version 1.0.0
  */
-public class RoomList
+public class RoomList implements Serializable
 {
   private ArrayList<Room> rooms;
 
@@ -73,14 +75,15 @@ public class RoomList
    * @param type the type of the room
    * @return the booked rooms of the type given
    */
-  public ArrayList<Room> getBookedRoomsOfType(String type)
+  public ArrayList<Room> getBookedRoomsOfType(String type,
+      LocalDate arrivalDate, LocalDate departureDate)
   {
     ArrayList<Room> roomsType = new ArrayList<Room>();
     for (int i = 0; i < rooms.size(); i++)
     {
       if (rooms.get(i).getType().equals(type))
       {
-        if (rooms.get(i).ifAvailable())
+        if (rooms.get(i).ifAvailable(arrivalDate, departureDate))
         {
           roomsType.add(rooms.get(i));
         }
@@ -105,5 +108,10 @@ public class RoomList
       }
     }
     return 0;
+  }
+
+  @Override public String toString()
+  {
+    return "RoomList{" + "rooms=" + rooms + '}';
   }
 }
