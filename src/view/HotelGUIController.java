@@ -5,6 +5,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.util.Callback;
+import model.Guest;
+import model.HotelModelManager;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -18,6 +20,7 @@ import java.util.ResourceBundle;
 public class HotelGUIController implements Initializable
 {
 
+  private HotelModelManager manager;
   // Room status tab private fields
   @FXML DatePicker roomArrivalDate;
   @FXML DatePicker roomDepartureDate;
@@ -40,10 +43,6 @@ public class HotelGUIController implements Initializable
   @FXML Tab checkInTab;
 
   // Check out tab private fields
-
-
-
-
 
   public void initialize(URL url, ResourceBundle resourceBundle)
   {
@@ -127,6 +126,7 @@ public class HotelGUIController implements Initializable
   {
     SingleSelectionModel<Tab> selectionCheckInBackButton = tabPane.getSelectionModel();
     selectionCheckInBackButton.select(createBooking);
+
   }
 
 

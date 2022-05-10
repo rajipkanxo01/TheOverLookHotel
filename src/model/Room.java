@@ -108,6 +108,15 @@ public class Room implements Serializable
     }
   }
 
+
+  /**
+   * This function changes the value of the variable available to true.
+   */
+  public void changeAvailabilityAtCheckOut()
+  {
+      available = true;
+  }
+
   /**
    * If the arrival date is after the end date of the booking, return false.
    * Otherwise, return true
