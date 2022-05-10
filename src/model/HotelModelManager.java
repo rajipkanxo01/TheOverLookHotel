@@ -250,7 +250,7 @@ public class HotelModelManager implements Serializable
     return allBookings;
   }
 
-  // check-In methods starts from here
+  // check-In tab methods starts from here
 
   // search for booking
   public Booking searchBooking(String firstName, String lastName,
@@ -258,13 +258,16 @@ public class HotelModelManager implements Serializable
   {
     try
     {
-
       BookingList allBookings = (BookingList) MyFileHandler.readFromBinaryFile(
           bookingFileName);
 
       for (int i = 0; i < allBookings.getTotalNumberOfBookings(); i++)
       {
-
+        if (allBookings.getBookingByIndex(i)
+            .equals(allBookings.getBooking(firstName,lastName,phoneNumber)))
+        {
+          return allBookings.getBookingByIndex(i);
+        }
       }
     }
     catch (FileNotFoundException e)

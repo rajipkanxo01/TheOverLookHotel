@@ -98,9 +98,9 @@ public class Booking implements Serializable
 
   @Override public String toString()
   {
-    return "Booking{" + "extraBed=" + extraBed + ", numberOfGuest="
+    return "extraBed=" + extraBed + ", numberOfGuest="
         + numberOfGuest + ", smokes=" + smokes + ", room=" + room + ", guest="
-        + guest;
+        + guest + "\n";
   }
 
   public boolean equals(Object obj)

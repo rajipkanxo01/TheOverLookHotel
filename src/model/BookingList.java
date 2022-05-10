@@ -73,9 +73,9 @@ public class BookingList implements Serializable
 
     for (int i = 0; i < bookingList.size(); i++)
     {
-      if (bookingList.get(i).getGuest().getFirstName().equals(firstName)
-          && bookingList.get(i).getGuest().equals(lastName) && bookingList.get(
-          i).getGuest().equals(phoneNumber))
+      if ((bookingList.get(i).getGuest().getFirstName().equals(firstName))
+          && (bookingList.get(i).getGuest().getLastName().equals(lastName))
+          && (bookingList.get(i).getGuest().getPhone().equals(phoneNumber)))
       {
         return bookingList.get(i);
       }
@@ -90,7 +90,7 @@ public class BookingList implements Serializable
    */
   public String toString()
   {
-    return "BookingList{" + "bookingList=" + bookingList + '}';
+    return "bookingList=" + bookingList + "\n";
   }
 
 }
