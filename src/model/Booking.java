@@ -11,9 +11,6 @@ public class Booking implements Serializable
   private Room room;
   private Guest guest;
   private DateInterval dateInterval;
-  private LocalDate arrivalDate;
-
-
 
   // This is a constructor. It is used to create an object of the Booking class and initialize the fields.
   public Booking(boolean extraBed, int numberOfGuest, boolean smokes, Room room,
@@ -28,8 +25,9 @@ public class Booking implements Serializable
   }
 
   /**
-   *  This method returns a boolean value that indicates whether or not the guest
+   * This method returns a boolean value that indicates whether or not the guest
    * needs an extra bed
+   *
    * @return The boolean value of extraBed.
    */
   public boolean ifExtraBed()
@@ -37,9 +35,9 @@ public class Booking implements Serializable
     return extraBed;
   }
 
-
   /**
    * This method returns the number of guests that are expected to check in
+   *
    * @return The number of guests.
    */
   public int getNumberOfGuest()
@@ -49,6 +47,7 @@ public class Booking implements Serializable
 
   /**
    * This method sets the number of guests that are expected to check in for the reservation
+   *
    * @param numberOfGuest The number of guests expected.
    */
   public void setNumberOfGuest(int numberOfGuest)
@@ -59,6 +58,7 @@ public class Booking implements Serializable
   /**
    * This method returns true if the guest smokes, and false if the guest does
    * not smoke.
+   *
    * @return The boolean value of the smokes variable.
    */
   public boolean ifGuestSmokes()
@@ -66,9 +66,9 @@ public class Booking implements Serializable
     return smokes;
   }
 
-
   /**
    * This method returns the room that is booked.
+   *
    * @return The room object.
    */
   public Room getRoom()
@@ -76,9 +76,9 @@ public class Booking implements Serializable
     return room;
   }
 
-
   /**
    * This method returns the guest variable.
+   *
    * @return The Guest object.
    */
   public Guest getGuest()
@@ -86,9 +86,9 @@ public class Booking implements Serializable
     return guest;
   }
 
-
   /**
    * This method sets the guest variable to the guest variable passed in.
+   *
    * @param guest The guest object
    */
   public void changeGuest(Guest guest)
@@ -100,7 +100,18 @@ public class Booking implements Serializable
   {
     return "Booking{" + "extraBed=" + extraBed + ", numberOfGuest="
         + numberOfGuest + ", smokes=" + smokes + ", room=" + room + ", guest="
-        + guest + ", dateInterval=" + dateInterval + ", arrivalDate="
-        + arrivalDate + '}';
+        + guest;
+  }
+
+  public boolean equals(Object obj)
+  {
+    if (!(obj instanceof Booking))
+    {
+      return false;
+    }
+    Booking others = (Booking) obj;
+    return extraBed == others.extraBed && numberOfGuest == others.numberOfGuest
+        && smokes == others.smokes && room.equals(others.room) && guest.equals(
+        others.guest);
   }
 }

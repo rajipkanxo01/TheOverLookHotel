@@ -11,10 +11,17 @@ public class TestClass
     manager.addRooms();
     RoomList temp = manager.getAllRooms();
     manager.createBooking(false, 2, false, temp.getRoom(3),
-        new Guest("Raji", "Paudyal", "Horsens", "1234", "Nepal", LocalDate.now()),
-        LocalDate.now(), LocalDate.now());
+        new Guest("Rajib", "Paudyal", "Horsens", "1234", "Nepal",
+            LocalDate.now()), LocalDate.now(), LocalDate.now());
 
-    Booking abc = manager.searchBooking("Rajib","Paudyal", "1234");
-    System.out.println(abc.getRoom().getRoomNumber() + " , " + abc.getGuest().getFirstName() + " " + abc.getGuest().getLastName() + abc.  ) ;
+    manager.createBooking(false, 2, false, temp.getRoom(3),
+        new Guest("Pramesh", "Shrestha", "Horsens", "1234", "Nepal",
+            LocalDate.now()), LocalDate.now(), LocalDate.now());
+
+
+
+    System.out.println(manager.getAllBookings());
+
+
   }
 }
