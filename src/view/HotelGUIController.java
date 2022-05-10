@@ -2,15 +2,20 @@ package view;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.util.Callback;
 
+import java.net.URL;
+import java.time.LocalDate;
+import java.util.ResourceBundle;
 
 /**
  * @author Pramesh Shrestha, Rajib Paudyal, Rodrigo Reyes
  * @version 1.0.0
  */
 
-public class HotelGUIController
+public class HotelGUIController implements Initializable
 {
 
   // Room status tab private fields
@@ -37,6 +42,13 @@ public class HotelGUIController
   // Check out tab private fields
 
 
+
+
+
+  public void initialize(URL url, ResourceBundle resourceBundle)
+  {
+
+  }
   // room status method
 
   /**
@@ -116,4 +128,6 @@ public class HotelGUIController
     SingleSelectionModel<Tab> selectionCheckInBackButton = tabPane.getSelectionModel();
     selectionCheckInBackButton.select(createBooking);
   }
+
+
 }

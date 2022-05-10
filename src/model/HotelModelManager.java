@@ -4,8 +4,9 @@ import utils.MyFileHandler;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serializable;
 
-public class HotelManager
+public class HotelModelManager implements Serializable
 {
   /**
    * @author Pramesh Shrestha, Rajib Paudyal, Rodtigo Reyes
@@ -14,7 +15,7 @@ public class HotelManager
   private String roomFileName;
   private String guestFileName;
 
-  public HotelManager(String roomFileName, String guestFileName)
+  public HotelModelManager(String roomFileName, String guestFileName)
   {
     this.roomFileName = roomFileName;
     this.guestFileName = guestFileName;
@@ -48,6 +49,8 @@ public class HotelManager
     return allRooms;
   }
 
+
+
   /**
    * This function adds all the rooms to the room list and then writes the room
    * list to the room file
@@ -74,7 +77,7 @@ public class HotelManager
     // adding single rooms to first floor(A)
     for (int i = 1; i <= 10; i++)
     {
-      rooms.addRoom(new Room(129, false, true, "SR-A" + i, "Single Room"));
+      rooms.addRoom(new Room(129 , false, true, "SR-A" + i, "Single Room"));
     }
 
     // adding double rooms to first floor(A)
@@ -100,8 +103,13 @@ public class HotelManager
     }
     catch (IOException e)
     {
-      System.err.println("IO Exception Error");
+      e.printStackTrace();
     }
+    //    catch (IOException e)
+//    {
+//      System.err.println("IO Exception Error");
+//      e.getStackTrace()
+//    }
   }
 
   /**

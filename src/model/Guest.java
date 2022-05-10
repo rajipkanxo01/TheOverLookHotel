@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Guest
+public class Guest implements Serializable
 {
   /**
    * A class that is used to store the first name,last name, address, phone number, nationality and date of birth of a guest.

@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Booking
+public class Booking implements Serializable
 {
   private boolean extraBed;
   private int numberOfGuest;

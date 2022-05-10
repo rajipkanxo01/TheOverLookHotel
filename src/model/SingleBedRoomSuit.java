@@ -1,11 +1,13 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  * A class that is used to create a new Room of type SingleBedRoomSuit that inherits the methods of Room
  * @author Rodrigo Reyes
  * @version 1.0.0
  */
-public class SingleBedRoomSuit extends Room
+public class SingleBedRoomSuit extends Room implements Serializable
 {
   /**
    * Instantiates a new Single Bed Room Suit.
