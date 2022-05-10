@@ -5,6 +5,7 @@ import utils.MyFileHandler;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
+import java.time.LocalDate;
 
 public class HotelModelManager implements Serializable
 {
@@ -49,8 +50,6 @@ public class HotelModelManager implements Serializable
     return allRooms;
   }
 
-
-
   /**
    * This function adds all the rooms to the room list and then writes the room
    * list to the room file
@@ -77,7 +76,7 @@ public class HotelModelManager implements Serializable
     // adding single rooms to first floor(A)
     for (int i = 1; i <= 10; i++)
     {
-      rooms.addRoom(new Room(129 , false, true, "SR-A" + i, "Single Room"));
+      rooms.addRoom(new Room(129, false, true, "SR-A" + i, "Single Room"));
     }
 
     // adding double rooms to first floor(A)
@@ -105,11 +104,6 @@ public class HotelModelManager implements Serializable
     {
       e.printStackTrace();
     }
-    //    catch (IOException e)
-//    {
-//      System.err.println("IO Exception Error");
-//      e.getStackTrace()
-//    }
   }
 
   /**
@@ -133,6 +127,16 @@ public class HotelModelManager implements Serializable
     {
       System.err.println("IO Exception Error");
     }
+  }
+
+  public RoomList getAllAvailableRooms (LocalDate arrivalDate, LocalDate departureDate) {
+    RoomList allRooms = getAllRooms();
+    RoomList allAvailableRooms = new RoomList();
+    for (int i = 0; i < allAvailableRooms.getTotalNumberOfRooms(); i++)
+    {
+
+    }
+    return allAvailableRooms;
   }
 
 }

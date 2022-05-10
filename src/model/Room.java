@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.sql.Struct;
 import java.time.LocalDate;
 
 /**
@@ -32,7 +33,7 @@ public class Room implements Serializable
   {
     this.price = price;
     this.smoking = smoking;
-    this.available = available;
+    this.available = true;
     this.roomNumber = roomNumber;
     this.type = type;
   }
@@ -90,17 +91,21 @@ public class Room implements Serializable
   /**
    * This function changes the availability of a room
    *
-   * @param available     true if the room is available, false if it is not
    * @param arrivalDate   The date the guest will arrive
    * @param departureDate The date the guest is leaving the hotel
    */
-  public void changeAvailability(Boolean available, LocalDate arrivalDate,
-      LocalDate departureDate)
+  public void changeAvailability(LocalDate arrivalDate, LocalDate departureDate)
   {
-    bookEndDate = departureDate;
-    bookStartDate = departureDate;
-    this.available = available;
-
+    if (available)
+    {
+      bookEndDate = departureDate;
+      bookStartDate = arrivalDate;
+      available = false;
+    }
+    else
+    {
+      available = true;
+    }
   }
 
   /**
@@ -113,21 +118,15 @@ public class Room implements Serializable
    */
   public boolean ifAvailable(LocalDate arrivalDate, LocalDate departureDate)
   {
-    if (available)
+    if ((arrivalDate.isAfter(bookEndDate)))
     {
-      return true;
+     available = true;
     }
     else
     {
-      if ((arrivalDate.isAfter(bookEndDate)))
-      {
-        return false;
-      }
-      else
-      {
-        return true;
-      }
+      available =  false;
     }
+    return available;
   }
 
   /**
