@@ -110,6 +110,19 @@ public class RoomList implements Serializable
     return 0;
   }
 
+  /**
+   * This function returns the total number of rooms in the hotel.
+   *
+   * @return The number of rooms in the hotel.
+   */
+  public int getTotalNumberOfRooms () {
+    return rooms.size();
+  }
+
+//  public Room getRoom () {
+//
+//  }
+
   @Override public String toString()
   {
     return "RoomList{" + "rooms=" + rooms + '}';
