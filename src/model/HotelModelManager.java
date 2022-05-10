@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class HotelModelManager implements Serializable
 {
@@ -57,6 +58,7 @@ public class HotelModelManager implements Serializable
   public void addRooms()
   {
     RoomList rooms = new RoomList();
+
 
     // adding 3 single bedroom suite
     for (int i = 1; i <= 3; i++)
@@ -129,12 +131,18 @@ public class HotelModelManager implements Serializable
     }
   }
 
-  public RoomList getAllAvailableRooms (LocalDate arrivalDate, LocalDate departureDate) {
+  public RoomList getAllAvailableRooms(LocalDate arrivalDate,
+      LocalDate departureDate)
+  {
     RoomList allRooms = getAllRooms();
     RoomList allAvailableRooms = new RoomList();
-    for (int i = 0; i < allAvailableRooms.getTotalNumberOfRooms(); i++)
+    for (int i = 0; i < allRooms.getTotalNumberOfRooms(); i++)
     {
+      if (allRooms.getRoom(i).ifAvailable(arrivalDate, departureDate))
+      {
+        allAvailableRooms.addRoom(allRooms.getRoom(i));
 
+      }
     }
     return allAvailableRooms;
   }

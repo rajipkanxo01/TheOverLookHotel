@@ -15,7 +15,7 @@ public class RoomList implements Serializable
   private ArrayList<Room> rooms;
 
   /**
-   * Constructor that Instantiates a new Room list.
+   * Constructor that Instantiates a new Room list.l
    */
   public RoomList()
   {
@@ -119,9 +119,9 @@ public class RoomList implements Serializable
     return rooms.size();
   }
 
-//  public Room getRoom () {
-//
-//  }
+  public Room getRoom (int index) {
+    return rooms.get(index);
+  }
 
   @Override public String toString()
   {
