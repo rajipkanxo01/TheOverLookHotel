@@ -2,6 +2,7 @@ package model;
 
 import utils.MyFileHandler;
 
+import java.awt.print.Book;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
@@ -23,6 +24,9 @@ public class HotelModelManager implements Serializable
     this.guestFileName = guestFileName;
   }
 
+
+
+  // get All Rooms
   /**
    * This method reads the binary file containing all the rooms and returns a
    * RoomList object containing all the rooms
@@ -51,6 +55,8 @@ public class HotelModelManager implements Serializable
     return allRooms;
   }
 
+
+  // add Rooms
   /**
    * This function adds all the rooms to the room list and then writes the room
    * list to the room file
@@ -58,7 +64,6 @@ public class HotelModelManager implements Serializable
   public void addRooms()
   {
     RoomList rooms = new RoomList();
-
 
     // adding 3 single bedroom suite
     for (int i = 1; i <= 3; i++)
@@ -108,6 +113,8 @@ public class HotelModelManager implements Serializable
     }
   }
 
+
+  // add Guest
   /**
    * This function adds a guest to the guest list and writes to the binary file
    *
@@ -131,6 +138,20 @@ public class HotelModelManager implements Serializable
     }
   }
 
+
+
+
+  // get All Available Rooms
+  /**
+   * "Get all the rooms that are available for the given arrival and departure
+   * dates."
+   * The method calls getAllAvailableRooms. It takes two parameters:
+   * arrivalDate and departureDate. It returns a RoomList object
+   *
+   * @param arrivalDate   The date the guest is arriving
+   * @param departureDate The date the guest is leaving the hotel.
+   * @return A list of all available rooms.
+   */
   public RoomList getAllAvailableRooms(LocalDate arrivalDate,
       LocalDate departureDate)
   {
@@ -141,10 +162,88 @@ public class HotelModelManager implements Serializable
       if (allRooms.getRoom(i).ifAvailable(arrivalDate, departureDate))
       {
         allAvailableRooms.addRoom(allRooms.getRoom(i));
-
       }
     }
     return allAvailableRooms;
   }
 
+  //  public int getAllAvailableRoomsByType(String type, LocalDate arrivalDate,
+  //      LocalDate departureDate)
+  //  {
+  //    RoomList allRooms = getAllRooms();
+  //   RoomList allAvailableRoomsByType = new RoomList();
+  //    int count = 0;
+  //    for (int i = 0; i < allRooms.getTotalNumberOfRooms(); i++)
+  //    {
+  //      if (allRooms.getRoom(i).getType().equals(type))
+  //      {
+  //        if (allRooms.getRoom(i).ifAvailable(arrivalDate, departureDate))
+  //        {
+  //          count++;
+  //        }
+  //      }
+  //
+  //    }
+  //    return count;
+
+
+
+  // getBookedRooms
+  /**
+   * Get all the rooms that are booked between the given dates.
+   *
+   * @param arrivalDate   The date the guest is arriving
+   * @param departureDate The date the guest is leaving the hotel.
+   * @return A list of all the rooms that are booked.
+   */
+  public RoomList getBookedRooms(LocalDate arrivalDate, LocalDate departureDate)
+  {
+    RoomList allRooms = getAllRooms();
+    RoomList allBookedRooms = new RoomList();
+    for (int i = 0; i < allRooms.getTotalNumberOfRooms(); i++)
+    {
+      if (!(allRooms.getRoom(i).ifAvailable(arrivalDate, departureDate)))
+      {
+        allBookedRooms.addRoom(allRooms.getRoom(i));
+      }
+    }
+    return allBookedRooms;
+  }
+
+
+
+  //create booking
+  /**
+   * This method creates a new booking and writes it to the binary file
+   *
+   * @param extraBed      boolean
+   * @param numberOfGuest The number of guests that will be staying in the room.
+   * @param smoking       boolean
+   * @param room          The room that the guest wants to book.
+   * @param guest         The guest who is making the booking
+   * @param arrivalDate   The date the guest will arrive
+   * @param departureDate The date the guest is leaving the hotel.
+   */
+  public void createBooking(boolean extraBed, int numberOfGuest,
+      boolean smoking, Room room, Guest guest, LocalDate arrivalDate,
+      LocalDate departureDate)
+  {
+    Booking newBooking = new Booking(extraBed, numberOfGuest, smoking, room,
+        guest, new DateInterval(arrivalDate, departureDate));
+    RoomList allRooms = getAllRooms();
+    allRooms.getRoomByRoomNumber(room.getRoomNumber())
+        .changeAvailability(arrivalDate, departureDate);
+    try
+    {
+      MyFileHandler.writeToBinaryFile(roomFileName, newBooking);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.err.println("File Not Found");
+    }
+    catch (IOException e)
+    {
+      System.err.println("IO Exception Error");
+    }
+  }
 }

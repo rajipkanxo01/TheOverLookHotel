@@ -50,6 +50,7 @@ public class RoomList implements Serializable
     return null;
   }
 
+
   /**
    * Gets the rooms of that type.
    *
@@ -115,12 +116,39 @@ public class RoomList implements Serializable
    *
    * @return The number of rooms in the hotel.
    */
-  public int getTotalNumberOfRooms () {
+  public int getTotalNumberOfRooms()
+  {
     return rooms.size();
   }
 
-  public Room getRoom (int index) {
+
+  /**
+   * This function returns the room at the given index of rooms list.
+   *
+   * @param index The index of the room you want to get.
+   * @return The room at the given index.
+   */
+  public Room getRoom(int index)
+  {
     return rooms.get(index);
+  }
+
+  /**
+   * Return the room with the given room number, or null if no such room exists.
+   *
+   * @param roomNumber The room number of the room you want to get.
+   * @return The room object that matches the room number.
+   */
+  public Room getRoomByRoomNumber(String roomNumber)
+  {
+    for (int i = 0; i < rooms.size(); i++)
+    {
+      if (rooms.get(i).getRoomNumber().equals(roomNumber))
+      {
+        return rooms.get(i);
+      }
+    }
+    return null;
   }
 
   @Override public String toString()
