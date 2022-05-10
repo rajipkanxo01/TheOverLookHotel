@@ -155,6 +155,6 @@ public class Room implements Serializable
     return "Room{" + "price=" + price + ", smoking=" + smoking + ", available="
         + available + ", roomNumber='" + roomNumber + '\'' + ", type='" + type
         + '\'' + ", bookStartDate=" + bookStartDate + ", bookEndDate="
-        + bookEndDate + '}';
+        + bookEndDate + "}\n";
   }
 }
