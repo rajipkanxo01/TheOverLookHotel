@@ -96,4 +96,11 @@ public class Booking implements Serializable
     this.guest = guest;
   }
 
+  @Override public String toString()
+  {
+    return "Booking{" + "extraBed=" + extraBed + ", numberOfGuest="
+        + numberOfGuest + ", smokes=" + smokes + ", room=" + room + ", guest="
+        + guest + ", dateInterval=" + dateInterval + ", arrivalDate="
+        + arrivalDate + '}';
+  }
 }

@@ -17,16 +17,18 @@ public class HotelModelManager implements Serializable
    */
   private String roomFileName;
   private String guestFileName;
+  private String bookingFileName;
 
-  public HotelModelManager(String roomFileName, String guestFileName)
+  public HotelModelManager(String roomFileName, String guestFileName,
+      String bookingFileName)
   {
     this.roomFileName = roomFileName;
     this.guestFileName = guestFileName;
+    this.bookingFileName = bookingFileName;
   }
 
-
-
   // get All Rooms
+
   /**
    * This method reads the binary file containing all the rooms and returns a
    * RoomList object containing all the rooms
@@ -55,8 +57,8 @@ public class HotelModelManager implements Serializable
     return allRooms;
   }
 
-
   // add Rooms
+
   /**
    * This function adds all the rooms to the room list and then writes the room
    * list to the room file
@@ -113,8 +115,8 @@ public class HotelModelManager implements Serializable
     }
   }
 
-
   // add Guest
+
   /**
    * This function adds a guest to the guest list and writes to the binary file
    *
@@ -138,10 +140,25 @@ public class HotelModelManager implements Serializable
     }
   }
 
-
-
+  // update room in file
+  public void updateRoom(RoomList room)
+  {
+    try
+    {
+      MyFileHandler.writeToBinaryFile(roomFileName, room);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.err.println("File Not Found");
+    }
+    catch (IOException e)
+    {
+      System.err.println("IO Exception Error");
+    }
+  }
 
   // get All Available Rooms
+
   /**
    * "Get all the rooms that are available for the given arrival and departure
    * dates."
@@ -186,9 +203,8 @@ public class HotelModelManager implements Serializable
   //    }
   //    return count;
 
-
-
   // getBookedRooms
+
   /**
    * Get all the rooms that are booked between the given dates.
    *
@@ -210,9 +226,8 @@ public class HotelModelManager implements Serializable
     return allBookedRooms;
   }
 
-
-
   //create booking
+
   /**
    * This method creates a new booking and writes it to the binary file
    *
@@ -233,9 +248,10 @@ public class HotelModelManager implements Serializable
     RoomList allRooms = getAllRooms();
     allRooms.getRoomByRoomNumber(room.getRoomNumber())
         .changeAvailability(arrivalDate, departureDate);
+    updateRoom(allRooms);
     try
     {
-      MyFileHandler.writeToBinaryFile(roomFileName, newBooking);
+      MyFileHandler.writeToBinaryFile(bookingFileName, newBooking);
     }
     catch (FileNotFoundException e)
     {
@@ -245,5 +261,42 @@ public class HotelModelManager implements Serializable
     {
       System.err.println("IO Exception Error");
     }
+  }
+
+  // check-In methods starts from here
+
+  // search for booking
+  public Booking searchBooking(String firstName, String lastName,
+      String phoneNumber)
+  {
+    try
+    {
+
+      Booking allBookings = (Booking) MyFileHandler.readFromBinaryFile(
+          bookingFileName);
+      for (int i = 0; i < getAllRooms().getTotalNumberOfRooms(); i++)
+      {
+        if (allBookings.getGuest().getFirstName().equals(firstName)
+            && allBookings.getGuest().getLastName().equals(lastName)
+            && allBookings.getGuest().getPhone().equals(phoneNumber))
+          ;
+        {
+
+        }
+      }
+    }
+    catch (FileNotFoundException e)
+    {
+      System.err.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.err.println("IO Error reading file");
+    }
+    catch (ClassNotFoundException e)
+    {
+      System.err.println("Class Not Found");
+    }
+    return null;
   }
 }
