@@ -18,6 +18,7 @@ public class TestClass
 
 //    manager.createBooking(true,5,false,temp.getRoom(0),guest1,LocalDate.now(),LocalDate.now());
 //    manager.createBooking(true,2,false,temp.getRoom(2),guest2,LocalDate.now(),LocalDate.now());
+//    System.out.println(manager.getAllBookings());
 
     System.out.println(manager.searchBooking("Rajib","Paudyal","1234"));
 

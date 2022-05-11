@@ -187,43 +187,45 @@ public class HotelModelManager implements Serializable
 
   //create booking
 
+
   /**
-   * This method creates a new booking and writes it to the binary file
+   * It creates a new booking and adds it to the list of bookings
    *
-   * @param extraBed      boolean
-   * @param numberOfGuest The number of guests that will be staying in the room.
-   * @param smoking       boolean
-   * @param room          The room that the guest wants to book.
-   * @param guest         The guest who is making the booking
-   * @param arrivalDate   The date the guest will arrive
+   * @param extraBed If the guest needs an extra bed.
+   * @param numberOfGuest The number of guests in the booking.
+   * @param smoking If the guest needs smoking room
+   * @param room The room that the guest wants to book.
+   * @param firstName The first name of the guest
+   * @param lastName The last name of the guest
+   * @param address The address of the guest
+   * @param phone The phone number of the guest
+   * @param nationality The nationality of the guest
+   * @param dateOfBirth The date of birth of the guest.
+   * @param arrivalDate The date the guest arrives
    * @param departureDate The date the guest is leaving the hotel.
    */
-  public void createBooking(boolean extraBed, int numberOfGuest,
-      boolean smoking, Room room, Guest guest, LocalDate arrivalDate,
-      LocalDate departureDate)
+  public void createBooking(boolean extraBed,int numberOfGuest,boolean smoking,Room room,
+      String firstName,String lastName, String address, String phone, String nationality,
+      LocalDate dateOfBirth,LocalDate arrivalDate, LocalDate departureDate)
   {
-    BookingList bookings = new BookingList();
-    Booking newBooking = new Booking(extraBed, numberOfGuest, smoking, room,
-        guest, new DateInterval(arrivalDate, departureDate));
-    bookings = getAllBookings();
-    bookings.addBooking(newBooking);
+    Guest guest = new Guest(firstName, lastName,address,phone,nationality,dateOfBirth);
+    DateInterval dateInterval = new DateInterval(arrivalDate, departureDate);
 
-    RoomList allRooms = getAllRooms();
-    allRooms.getRoomByRoomNumber(room.getRoomNumber())
-        .changeAvailability(arrivalDate, departureDate);
-    updateRoom(allRooms);
+    Booking booking = new Booking(extraBed,numberOfGuest,smoking,room,guest,dateInterval);
+    BookingList bookingList = getAllBookings();
+    bookingList.addBooking(booking);
+
     try
     {
-      MyFileHandler.writeToBinaryFile(bookingFileName, bookings);
-
+      MyFileHandler.writeToBinaryFile(bookingFileName, bookingList);
     }
     catch (FileNotFoundException e)
     {
-      System.err.println("File Not Found");
+      System.out.println("File not found");
     }
     catch (IOException e)
     {
-      System.err.println("IO Exception Error");
+      System.out.println("IO Error reading file");
     }
   }
 
