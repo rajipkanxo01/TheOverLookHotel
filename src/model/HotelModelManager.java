@@ -416,6 +416,21 @@ public class HotelModelManager implements Serializable
  //   saveGuest(guests);
   //}
 
+  public void createCheckOut(String roomNumber)
+  {
+    GuestList guests = getAllCheckedIn();
+    ArrayList<Guest> tempGuest = new ArrayList();
+    for (int i = 0; i < guests.getNumberOfGuest(); i++)
+    {
+      if (guests.getGuestByIndex(i).getRoomNumber().equals(roomNumber))
+      {
+        tempGuest.add(guests.getGuestByIndex(i));
+      }
+    }
+    guests.removeGuestList(tempGuest);
+    saveGuest(guests);
+  }
+
 
 
 
@@ -447,4 +462,5 @@ public class HotelModelManager implements Serializable
       System.err.println("IO Exception Error");
     }
   }
+
 }
