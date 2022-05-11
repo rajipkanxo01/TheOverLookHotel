@@ -19,8 +19,6 @@ public class GuestList implements Serializable
 
   /**
    * Creating a new GuestList object with a guestNumber.
-   *
-   *
    */
 
   public GuestList()
@@ -72,30 +70,11 @@ public class GuestList implements Serializable
    */
   public void removeGuestList(ArrayList<Guest> guest)
   {
-    for (int i = 0; i <guestList.size() ; i++)
+    for (int i = 0; i < guest.size(); i++)
     {
-
       guestList.remove(guest.get(i));
     }
 
-  }
-
-  /**
-   * Remove guest by room number from the GuestList.
-   *
-   * @param roomNumber the room number
-   */
-  public void removeGuestByRoomNumber(String roomNumber)
-  {
-   ArrayList<Guest> tempGuest = new ArrayList();
-    for (int i = 0; i < guestList.size(); i++)
-    {
-      if (guestList.get(i).getRoomNumber().equals(roomNumber))
-      {
-        tempGuest.add(guestList.get(i));
-      }
-    }
-    removeGuestList(tempGuest);
   }
 
 
@@ -106,7 +85,8 @@ public class GuestList implements Serializable
    * @param index The index of the guest you want to get.
    * @return The guest at the index.
    */
-  public Guest getGuestByIndex(int index) {
+  public Guest getGuestByIndex(int index)
+  {
     return guestList.get(index);
   }
 

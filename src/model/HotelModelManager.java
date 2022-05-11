@@ -406,22 +406,13 @@ public class HotelModelManager implements Serializable
 
   //Create check-out
 
-//  public void createCheckOut(String firstName, String lastName, String address,
-//      String phone,LocalDate departureDate,String roomNumber)
-//  {
-//    GuestList guests = new GuestList();
-//    Guest guests = searchCheckIn(firstName,lastName,phone);
-//    for (int i = 0; i < guestList.size(); i++)
-//    {
-//      if (guestList.get(i).getRoomNumber().equals(roomNumber))
-//      {
-//        tempGuest.add(guestList.get(i));
-//      }
-//    }
-//    removeGuestList(tempGuest);
-//    System.out.println(guestList);
-//  }
 
+  /**
+   * This function takes in a room number and removes all guests from the guest
+   * list that are checked into that room
+   *
+   * @param roomNumber The room number of the guest that is checking out.
+   */
   public void createCheckOut(String roomNumber)
   {
     GuestList guests = getAllCheckedIn();
@@ -436,9 +427,6 @@ public class HotelModelManager implements Serializable
     guests.removeGuestList(tempGuest);
     saveGuest(guests);
   }
-
-
-
 
 
 
