@@ -519,29 +519,6 @@ public class HotelModelManager implements Serializable
     }
   }
 
-  // save guests to the binary file
-  //
-  //  /**
-  //   * "Save the guest list to a file."
-  //   * The function is called saveGuest and it takes one parameter, a GuestList
-  //   * object
-  //   *
-  //   * @param guests The GuestList object to be saved
-  //   */
-  //  public void saveGuest(GuestList guests)
-  //  {
-  //    try
-  //    {
-  //      MyFileHandler.writeToBinaryFile(guestFileName, guests);
-  //    }
-  //    catch (FileNotFoundException e)
-  //    {
-  //      System.out.println("File not found");
-  //    }
-  //    catch (IOException e)
-  //    {
-  //      System.out.println("IO Error writing to file");
-  //    }
-  //  }
+
 
 }
