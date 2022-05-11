@@ -78,7 +78,7 @@ public class DateInterval implements Serializable
    */
   public int getNumberOfNight(LocalDate arrivalDate, LocalDate departureDate)
   {
-    return (int) ChronoUnit.DAYS.between(arrivalDate, departureDate);
+    return (int) (ChronoUnit.DAYS.between(arrivalDate, departureDate));
   }
 
   /**

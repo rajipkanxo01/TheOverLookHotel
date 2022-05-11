@@ -10,46 +10,22 @@ public class TestClass
     HotelModelManager manager = new HotelModelManager("rooms.bin", "guests.bin",
         "bookings.bin");
     manager.addRooms();
-    RoomList temp = manager.getAllRooms();
-    String room1 = temp.getRoom(2).getRoomNumber();
-    //    String room2 = temp.getRoom(0).getRoomNumber();
-    String room3 = temp.getRoom(1).getRoomNumber();
+    Room room1 = manager.getAllRooms().getRoom(0);
+    //    manager.createBooking(false, 2, true, room1, "Pramesh", "Shrestha",
+    //        "Kolding", "420" , "Danish" , LocalDate.parse("2019-01-01") , LocalDate.now() , LocalDate.parse("2022-05-12"));
+    //    manager.getAllBookings();
+    //    System.out.println(manager.searchBooking("Pramesh" , "Shrestha" , "420"));
+    //    manager.createCheckIn("Pramesh", "Shrestha", "Kolding", "420", "Danish",
+    //        LocalDate.parse("2019-01-01"), LocalDate.now(), room1.getRoomNumber());
+    //    manager.createCheckIn("Rodrigo", "Reyes", "Horsens", "404", "Nepali",
+    //        LocalDate.parse("2014-01-01"), LocalDate.now(), room1.getRoomNumber());
 
-    //    manager.createBooking(true,5,false,temp.getRoom(0),"Rajib", "Paudyal", "Horsens", "1234", "Nepal",
-    //        LocalDate.now(),LocalDate.now(),LocalDate.now());
-    //    manager.createBooking(true,2,false,temp.getRoom(2),"Pramesh", "Shrestha", "Kolding", "5678", "Nepal",
-    //        LocalDate.now(),LocalDate.now(),LocalDate.now());
-    //    System.out.println(manager.getAllBookings());
-    //    manager.createCheckIn("Pramesh", "Shrestha", "Kolding", "5678", "Nepal",
-    //                LocalDate.now(),LocalDate.now(),room);
-    //    System.out.println(manager.getAllBookings());
-    //    manager.createCheckIn("Rajib", "Paudyal", "Horsens", "1234", "Nepal",
-    //              LocalDate.now(),LocalDate.now(), room2);
+    //    System.out.println(manager.searchCheckIn("Pramesh" , "Shrestha" , "420"));
     //    System.out.println(manager.getAllCheckedIn());
-    //   System.out.println(manager.searchCheckIn("Rajib", "Paudyal","1234"));
 
-    ArrayList<Guest> guests = new ArrayList<>();
-    Guest guest1 = new Guest("Rodrigo", "Reyes", "Norregade", "71889516",
-        "French", LocalDate.now(), LocalDate.now(), room3);
-    Guest guest2 = new Guest("Pramesh", "Reyes", "Norregade", "71889516",
-        "French", LocalDate.now(), LocalDate.now(), room3);
-
-    guests.add(guest1);
-    guests.add(guest2);
-//        manager.createBooking(true, 5, false, temp.getRoom(3), "Rodrigo", "Reyes",
-//            "Horsens", "71889516", "Nepal", LocalDate.now(), LocalDate.now(),
-//            LocalDate.now());
-//    System.out.println( manager.searchBooking("Rodrigo", "Reyes" ,"71889516"));
-
-//            manager.createCheckIn("Rodrigo", "Reyes", "Norregade", "71889516", "French",
-//                                LocalDate.now(),LocalDate.now(),room3);
-//            manager.createCheckIn("Pramesh", "Reyes", "Norregade", "71889516", "French",
-//                LocalDate.now(),LocalDate.now(),room3);
-
-   manager.createCheckOut(room3);
-
-    System.out.println(manager.getAllCheckedIn());
-//    System.out.println(manager.getAllBookings());
-
+    manager.createCheckOut(room1.getRoomNumber());
+    System.out.println(
+        manager.calculatePrice(LocalDate.now(), LocalDate.parse("2022-05-12"),
+            room1.getRoomNumber(), 5 ));
   }
 }

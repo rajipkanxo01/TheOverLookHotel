@@ -58,30 +58,18 @@ public class BookingList implements Serializable
     return allBookings;
   }
 
+
+
   /**
-   * This function returns a booking object if the first name, last name and
-   * phone number of the guest matches the booking
+   * Remove a booking from the booking list.
    *
-   * @param firstName   The first name of the guest
-   * @param lastName    The last name of the guest
-   * @param phoneNumber The phone number of the guest
-   * @return The booking object is being returned.
+   * @param booking The booking to be removed from the booking list.
    */
-//  public Booking getBooking(String firstName, String lastName,
-//    String phoneNumber)
-//{
-//
-//  for (int i = 0; i < bookingList.size(); i++)
-//  {
-//    if ((bookingList.get(i).getGuest().getFirstName().equals(firstName))
-//        && (bookingList.get(i).getGuest().getLastName().equals(lastName))
-//        && (bookingList.get(i).getGuest().getPhone().equals(phoneNumber)))
-//    {
-//      return bookingList.get(i);
-//    }
-//  }
-//  return null;
-//}
+  public void removeBooking(Booking booking)
+  {
+    bookingList.remove(booking);
+  }
+
 
   /**
    * The toString() function returns a string representation of the object

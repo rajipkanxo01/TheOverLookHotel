@@ -2,18 +2,16 @@ package model;
 
 import utils.MyFileHandler;
 
-import java.awt.print.Book;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class HotelModelManager implements Serializable
 {
   /**
-   * @author Pramesh Shrestha, Rajib Paudyal, Rodtigo Reyes
+   * @author Pramesh Shrestha, Rajib Paudyal, Rodrigo Reyes
    * @version 1.0.0
    */
   private String roomFileName;
@@ -263,30 +261,48 @@ public class HotelModelManager implements Serializable
     return allBookings;
   }
 
-  //saveBooking
 
+
+  // removes the booking according to first name , last name , phone
   /**
-   * "Save the guest list to a file."
-   * The function is called saveGuest and it takes one parameter, a GuestList
-   * object
+   * Delete a booking from the list of bookings.
    *
-   * @param guests The GuestList object to be saved
+   * @param firstName The first name of the customer
+   * @param lastName The last name of the person who made the booking.
+   * @param phone The phone number of the customer
    */
-  public void saveGuest(GuestList guests)
+  public void deleteBookings(String firstName, String lastName, String phone)
+  {
+    BookingList allBookings = getAllBookings();
+    allBookings.removeBooking(searchBooking(firstName, lastName, phone));
+    saveBookings(allBookings);
+  }
+
+
+  // saves booking to the booking file
+  /**
+   * This function takes in a booking object and adds it to the list of all
+   * bookings
+   *
+   * @param booking The booking object that is to be saved.
+   */
+  public void saveBookings(BookingList booking)
   {
     try
     {
-      MyFileHandler.writeToBinaryFile(guestFileName, guests);
+      MyFileHandler.writeToBinaryFile(bookingFileName, booking);
     }
     catch (FileNotFoundException e)
     {
-      System.out.println("File not found");
+      System.err.println("File Not Found");
     }
     catch (IOException e)
     {
-      System.out.println("IO Error writing to file");
+      System.err.println("IO Exception Error");
     }
   }
+
+
 
   // check-In tab methods starts from here
 
@@ -308,26 +324,21 @@ public class HotelModelManager implements Serializable
     return null;
   }
 
-
-
-
-  //Check-In methods
-
   //Create-Check-In
+
   /**
    * "Create a new check-in by adding a new guest to the guest list."
-   *
    * The function is a bit long, but it's not complicated. It's just a bunch of
    * parameters
    *
-   * @param firstName The first name of the guest
-   * @param lastName The last name of the guest.
-   * @param address The address of the guest.
-   * @param phone String
+   * @param firstName   The first name of the guest
+   * @param lastName    The last name of the guest.
+   * @param address     The address of the guest.
+   * @param phone       String
    * @param nationality String
    * @param dateOfBirth The date of birth of the guest.
    * @param checkInDate The date the guest checked in.
-   * @param roomNumber The room number of the room the guest is checking into.
+   * @param roomNumber  The room number of the room the guest is checking into.
    */
   public void createCheckIn(String firstName, String lastName, String address,
       String phone, String nationality, LocalDate dateOfBirth,
@@ -339,8 +350,6 @@ public class HotelModelManager implements Serializable
             checkInDate, roomNumber));
     saveGuest(guests);
   }
-
-
 
   //allCheckedIns
 
@@ -374,15 +383,14 @@ public class HotelModelManager implements Serializable
     return checkedIn;
   }
 
-
-
   // search check in
+
   /**
    * Search for a check made by guest using first name, last name, and phone number, and return the
    * guest if found, otherwise return null.
    *
-   * @param firstName The first name of the guest
-   * @param lastName The last name of the guest.
+   * @param firstName   The first name of the guest
+   * @param lastName    The last name of the guest.
    * @param phoneNumber The phone number of the guest.
    * @return A guest object.
    */
@@ -406,7 +414,6 @@ public class HotelModelManager implements Serializable
 
   //Create check-out
 
-
   /**
    * This function takes in a room number and removes all guests from the guest
    * list that are checked into that room
@@ -416,6 +423,7 @@ public class HotelModelManager implements Serializable
   public void createCheckOut(String roomNumber)
   {
     GuestList guests = getAllCheckedIn();
+    RoomList allRoooms = getAllRooms();
     ArrayList<Guest> tempGuest = new ArrayList();
     for (int i = 0; i < guests.getNumberOfGuest(); i++)
     {
@@ -424,11 +432,36 @@ public class HotelModelManager implements Serializable
         tempGuest.add(guests.getGuestByIndex(i));
       }
     }
+    allRoooms.getRoomByRoomNumber(roomNumber).changeAvailabilityAtCheckOut();
     guests.removeGuestList(tempGuest);
     saveGuest(guests);
   }
 
+  // calculate price for nights stayed
 
+  /**
+   * "Calculate the price of a room for a given number of nights, given a discount
+   * percentage."
+   * The function is doing too many things. It's calculating the number of nights,
+   * getting the price of the room, and calculating the final price
+   *
+   * @param arrivalDate     The date the guest is arriving
+   * @param departureDate   The date the guest is leaving the hotel.
+   * @param roomNumber      The room number of the room that the customer wants to book.
+   * @param discountPercent The percentage of the discount.
+   * @return The price of the room after the discount has been applied.
+   */
+  public double calculatePrice(LocalDate arrivalDate, LocalDate departureDate,
+      String roomNumber, double discountPercent)
+  {
+    DateInterval dateInterval = new DateInterval(arrivalDate, departureDate);
+    int numberOfNights = dateInterval.getNumberOfNight(arrivalDate,
+        departureDate);
+    RoomList allRooms = getAllRooms();
+    double price = allRooms.getRoomByRoomNumber(roomNumber).getPrice();
+    double initialPrice = numberOfNights * price;
+    return initialPrice - ((initialPrice) * ((discountPercent) / 100));
+  }
 
   // guest methods
 
@@ -454,6 +487,31 @@ public class HotelModelManager implements Serializable
     catch (IOException e)
     {
       System.err.println("IO Exception Error");
+    }
+  }
+
+  // save guests to the binary file
+
+  /**
+   * "Save the guest list to a file."
+   * The function is called saveGuest and it takes one parameter, a GuestList
+   * object
+   *
+   * @param guests The GuestList object to be saved
+   */
+  public void saveGuest(GuestList guests)
+  {
+    try
+    {
+      MyFileHandler.writeToBinaryFile(guestFileName, guests);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error writing to file");
     }
   }
 
