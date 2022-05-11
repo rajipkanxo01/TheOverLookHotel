@@ -406,15 +406,21 @@ public class HotelModelManager implements Serializable
 
   //Create check-out
 
- // public void createCheckOut(String firstName, String lastName, String address,
- //     String phone,LocalDate departureDate)
- // {
+//  public void createCheckOut(String firstName, String lastName, String address,
+//      String phone,LocalDate departureDate,String roomNumber)
+//  {
+//    GuestList guests = new GuestList();
 //    Guest guests = searchCheckIn(firstName,lastName,phone);
- //   guests.addGuest(
-  //      new Guest(firstName, lastName, address, phone, nationality, dateOfBirth,
-     //       checkInDate, roomNumber));
- //   saveGuest(guests);
-  //}
+//    for (int i = 0; i < guestList.size(); i++)
+//    {
+//      if (guestList.get(i).getRoomNumber().equals(roomNumber))
+//      {
+//        tempGuest.add(guestList.get(i));
+//      }
+//    }
+//    removeGuestList(tempGuest);
+//    System.out.println(guestList);
+//  }
 
   public void createCheckOut(String roomNumber)
   {

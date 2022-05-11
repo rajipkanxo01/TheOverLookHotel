@@ -33,11 +33,21 @@ public class TestClass
     ArrayList<Guest> guestList = new ArrayList<>();
     GuestList guestList2 = new GuestList();
     guestList.add(guest1);
-
+    System.out.println(guestList);
 
     guestList2.removeGuestByRoomNumber(room3);
+    for (int i = 0; i < guestList.size(); i++)
+    {
+      if (guestList.get(i).getRoomNumber().equals(room3))
+      {
+        guestList.remove(i);
+      }
+
+    }
     System.out.println(guestList);
-    System.out.println(manager.getAllCheckedIn());
+
+
+//    System.out.println(manager.getAllCheckedIn());
 
 
   }
