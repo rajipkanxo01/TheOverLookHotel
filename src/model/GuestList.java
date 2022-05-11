@@ -63,6 +63,16 @@ public class GuestList implements Serializable
   }
 
   /**
+   * This function returns the guest at the given index.
+   *
+   * @param index The index of the guest you want to get.
+   * @return The guest at the index.
+   */
+  public Guest getGuestByIndex(int index) {
+    return guestList.get(index);
+  }
+
+  /**
    * The function returns a string that contains information of all guests in the
    * guest list
    *

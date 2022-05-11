@@ -73,7 +73,8 @@ public class HotelModelManager implements Serializable
     // adding 3 single bedroom suite
     for (int i = 1; i <= 3; i++)
     {
-      rooms.addRoom(new Room(256, false, true, "SBS-C" + i, "Single Bedroom Suite"));
+      rooms.addRoom(
+          new Room(256, false, true, "SBS-C" + i, "Single Bedroom Suite"));
     }
 
     // adding 3-Single Bedroom Suite
@@ -187,31 +188,33 @@ public class HotelModelManager implements Serializable
 
   //create booking
 
-
   /**
    * It creates a new booking and adds it to the list of bookings
    *
-   * @param extraBed If the guest needs an extra bed.
+   * @param extraBed      If the guest needs an extra bed.
    * @param numberOfGuest The number of guests in the booking.
-   * @param smoking If the guest needs smoking room
-   * @param room The room that the guest wants to book.
-   * @param firstName The first name of the guest
-   * @param lastName The last name of the guest
-   * @param address The address of the guest
-   * @param phone The phone number of the guest
-   * @param nationality The nationality of the guest
-   * @param dateOfBirth The date of birth of the guest.
-   * @param arrivalDate The date the guest arrives
+   * @param smoking       If the guest needs smoking room
+   * @param room          The room that the guest wants to book.
+   * @param firstName     The first name of the guest
+   * @param lastName      The last name of the guest
+   * @param address       The address of the guest
+   * @param phone         The phone number of the guest
+   * @param nationality   The nationality of the guest
+   * @param dateOfBirth   The date of birth of the guest.
+   * @param arrivalDate   The date the guest arrives
    * @param departureDate The date the guest is leaving the hotel.
    */
-  public void createBooking(boolean extraBed,int numberOfGuest,boolean smoking,Room room,
-      String firstName,String lastName, String address, String phone, String nationality,
-      LocalDate dateOfBirth,LocalDate arrivalDate, LocalDate departureDate)
+  public void createBooking(boolean extraBed, int numberOfGuest,
+      boolean smoking, Room room, String firstName, String lastName,
+      String address, String phone, String nationality, LocalDate dateOfBirth,
+      LocalDate arrivalDate, LocalDate departureDate)
   {
-    Guest guest = new Guest(firstName, lastName,address,phone,nationality,dateOfBirth);
+    Guest guest = new Guest(firstName, lastName, address, phone, nationality,
+        dateOfBirth);
     DateInterval dateInterval = new DateInterval(arrivalDate, departureDate);
 
-    Booking booking = new Booking(extraBed,numberOfGuest,smoking,room,guest,dateInterval);
+    Booking booking = new Booking(extraBed, numberOfGuest, smoking, room, guest,
+        dateInterval);
     BookingList bookingList = getAllBookings();
     bookingList.addBooking(booking);
 
@@ -230,6 +233,7 @@ public class HotelModelManager implements Serializable
   }
 
   //getAllBookings
+
   /**
    * It reads the binary file containing all the bookings and returns the list of
    * bookings
@@ -263,7 +267,6 @@ public class HotelModelManager implements Serializable
 
   /**
    * "Save the guest list to a file."
-   *
    * The function is called saveGuest and it takes one parameter, a GuestList
    * object
    *
@@ -292,11 +295,12 @@ public class HotelModelManager implements Serializable
       String phoneNumber)
   {
     BookingList bookingList = getAllBookings();
-    for(int i = 0; i < bookingList.getTotalNumberOfBookings(); i++)
+    for (int i = 0; i < bookingList.getTotalNumberOfBookings(); i++)
     {
-      if(bookingList.getBookingByIndex(i).getGuest().getFirstName().equals(firstName) &&
-          bookingList.getBookingByIndex(i).getGuest().getLastName().equals(lastName)&&
-          bookingList.getBookingByIndex(i).getGuest().getPhone().equals(phoneNumber))
+      if (bookingList.getBookingByIndex(i).getGuest().getFirstName()
+          .equals(firstName) && bookingList.getBookingByIndex(i).getGuest()
+          .getLastName().equals(lastName) && bookingList.getBookingByIndex(i)
+          .getGuest().getPhone().equals(phoneNumber))
       {
         return bookingList.getBookingByIndex(i);
       }
@@ -304,19 +308,42 @@ public class HotelModelManager implements Serializable
     return null;
   }
 
+
+
+
   //Check-In methods
 
   //Create-Check-In
-  public void createCheckIn(String firstName, String lastName,String address,String phone,String nationality,LocalDate dateOfBirth,
-      LocalDate checkInDate,String roomNumber)
+  /**
+   * "Create a new check-in by adding a new guest to the guest list."
+   *
+   * The function is a bit long, but it's not complicated. It's just a bunch of
+   * parameters
+   *
+   * @param firstName The first name of the guest
+   * @param lastName The last name of the guest.
+   * @param address The address of the guest.
+   * @param phone String
+   * @param nationality String
+   * @param dateOfBirth The date of birth of the guest.
+   * @param checkInDate The date the guest checked in.
+   * @param roomNumber The room number of the room the guest is checking into.
+   */
+  public void createCheckIn(String firstName, String lastName, String address,
+      String phone, String nationality, LocalDate dateOfBirth,
+      LocalDate checkInDate, String roomNumber)
   {
     GuestList guests = getAllCheckedIn();
-    guests.addGuest(new Guest(firstName,lastName,phone,address,nationality,dateOfBirth,checkInDate,roomNumber));
+    guests.addGuest(
+        new Guest(firstName, lastName, address, phone, nationality, dateOfBirth,
+            checkInDate, roomNumber));
     saveGuest(guests);
   }
 
 
+
   //allCheckedIns
+
   /**
    * This function reads the guest file and returns a list of all guests who are
    * checked in
@@ -349,6 +376,31 @@ public class HotelModelManager implements Serializable
 
 
 
+  // search check in
+  /**
+   * Search for a check made by guest using first name, last name, and phone number, and return the
+   * guest if found, otherwise return null.
+   *
+   * @param firstName The first name of the guest
+   * @param lastName The last name of the guest.
+   * @param phoneNumber The phone number of the guest.
+   * @return A guest object.
+   */
+  public Guest searchCheckIn(String firstName, String lastName,
+      String phoneNumber)
+  {
+    GuestList allGuests = getAllCheckedIn();
+    for (int i = 0; i < allGuests.getNumberOfGuest(); i++)
+    {
+      if (allGuests.getGuestByIndex(i).getFirstName().equals(firstName)
+          && allGuests.getGuestByIndex(i).getLastName().equals(lastName)
+          && allGuests.getGuestByIndex(i).getPhone().equals(phoneNumber))
+      {
+        return allGuests.getGuestByIndex(i);
+      }
+    }
+    return null;
+  }
 
   // guest methods
 
