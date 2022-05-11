@@ -3,6 +3,9 @@ package model;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * The type Guest list.
+ */
 public class GuestList implements Serializable
 {
   /**
@@ -61,6 +64,41 @@ public class GuestList implements Serializable
       }
     }
   }
+
+  /**
+   * Remove guest list.
+   *
+   * @param guest the guest
+   */
+  public void removeGuestList(ArrayList<Guest> guest)
+  {
+    for (int i = 0; i <guestList.size() ; i++)
+    {
+
+      guestList.remove(guest.get(i));
+    }
+
+  }
+
+  /**
+   * Remove guest by room number from the GuestList.
+   *
+   * @param roomNumber the room number
+   */
+  public void removeGuestByRoomNumber(String roomNumber)
+  {
+   ArrayList<Guest> tempGuest = new ArrayList();
+    for (int i = 0; i < guestList.size(); i++)
+    {
+      if (guestList.get(i).getRoomNumber().equals(roomNumber))
+      {
+        tempGuest.add(guestList.get(i));
+      }
+    }
+    removeGuestList(tempGuest);
+  }
+
+
 
   /**
    * This function returns the guest at the given index.

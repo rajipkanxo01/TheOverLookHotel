@@ -402,6 +402,25 @@ public class HotelModelManager implements Serializable
     return null;
   }
 
+  //Check-Out methods
+
+  //Create check-out
+
+ // public void createCheckOut(String firstName, String lastName, String address,
+ //     String phone,LocalDate departureDate)
+ // {
+//    Guest guests = searchCheckIn(firstName,lastName,phone);
+ //   guests.addGuest(
+  //      new Guest(firstName, lastName, address, phone, nationality, dateOfBirth,
+     //       checkInDate, roomNumber));
+ //   saveGuest(guests);
+  //}
+
+
+
+
+
+
   // guest methods
 
   // add Guest

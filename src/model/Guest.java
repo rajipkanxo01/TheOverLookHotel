@@ -176,6 +176,16 @@ public class Guest implements Serializable
   }
 
   /**
+   * This function returns the room Number for that guest
+   *
+   * @return the room number
+   */
+  public String getRoomNumber()
+  {
+    return roomNumber;
+  }
+
+  /**
    * This function returns the date of birth of the person.
    *
    * @return The date of birth of the person.
