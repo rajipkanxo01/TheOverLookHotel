@@ -229,6 +229,13 @@ public class HotelModelManager implements Serializable
     }
   }
 
+  //getAllBookings
+  /**
+   * It reads the binary file containing all the bookings and returns the list of
+   * bookings
+   *
+   * @return A BookingList object.
+   */
   public BookingList getAllBookings()
   {
     BookingList allBookings = new BookingList();
@@ -250,6 +257,32 @@ public class HotelModelManager implements Serializable
       System.err.println("Class Not Found");
     }
     return allBookings;
+  }
+
+  //saveBooking
+
+  /**
+   * "Save the guest list to a file."
+   *
+   * The function is called saveGuest and it takes one parameter, a GuestList
+   * object
+   *
+   * @param guests The GuestList object to be saved
+   */
+  public void saveGuest(GuestList guests)
+  {
+    try
+    {
+      MyFileHandler.writeToBinaryFile(guestFileName, guests);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error writing to file");
+    }
   }
 
   // check-In tab methods starts from here
@@ -276,18 +309,43 @@ public class HotelModelManager implements Serializable
   //Create-Check-In
   public void createCheckIn(String firstName, String lastName,String address,String phone,String nationality,LocalDate dateOfBirth,
       LocalDate checkInDate,String roomNumber)
-
   {
-    Guest guest = new Guest(firstName,lastName,address,phone,nationality,dateOfBirth,checkInDate,roomNumber);
-
-
-
-    GuestList guestList=
-
-
+    GuestList guests = getAllCheckedIn();
+    guests.addGuest(new Guest(firstName,lastName,phone,address,nationality,dateOfBirth,checkInDate,roomNumber));
+    saveGuest(guests);
   }
 
 
+  //allCheckedIns
+  /**
+   * This function reads the guest file and returns a list of all guests who are
+   * checked in
+   *
+   * @return A list of all the guests that are checked in.
+   */
+  public GuestList getAllCheckedIn()
+  {
+    BookingList bookingList = new BookingList();
+    GuestList checkedIn = new GuestList();
+    try
+    {
+      checkedIn = (GuestList) MyFileHandler.readFromBinaryFile(guestFileName);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.out.println("File not found");
+    }
+    catch (IOException e)
+    {
+      System.out.println("IO Error reading file");
+    }
+    catch (ClassNotFoundException e)
+    {
+      System.out.println("Class Not Found");
+    }
+
+    return checkedIn;
+  }
 
 
 
