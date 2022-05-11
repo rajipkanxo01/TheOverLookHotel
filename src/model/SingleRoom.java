@@ -25,10 +25,6 @@ public class SingleRoom extends Room implements Serializable
     super(price, smoking, available, roomNumber,type);
   }
 
-  public void setType(String type)
-  {
-    super.setType(type);
-  }
   public String getType()
   {
     return super.getType();

@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class HotelModelManager implements Serializable
 {
@@ -72,8 +73,7 @@ public class HotelModelManager implements Serializable
     // adding 3 single bedroom suite
     for (int i = 1; i <= 3; i++)
     {
-      rooms.addRoom(
-          new Room(256, false, true, "SBS-C" + i, "Single Bedroom Suite"));
+      rooms.addRoom(new Room(256, false, true, "SBS-C" + i, "Single Bedroom Suite"));
     }
 
     // adding 3-Single Bedroom Suite
@@ -270,6 +270,27 @@ public class HotelModelManager implements Serializable
     }
     return null;
   }
+
+  //Check-In methods
+
+  //Create-Check-In
+  public void createCheckIn(String firstName, String lastName,String address,String phone,String nationality,LocalDate dateOfBirth,
+      LocalDate checkInDate,String roomNumber)
+
+  {
+    Guest guest = new Guest(firstName,lastName,address,phone,nationality,dateOfBirth,checkInDate,roomNumber);
+
+
+
+    GuestList guestList=
+
+
+  }
+
+
+
+
+
 
   // guest methods
 
