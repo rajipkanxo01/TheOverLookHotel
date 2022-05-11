@@ -256,31 +256,15 @@ public class HotelModelManager implements Serializable
   public Booking searchBooking(String firstName, String lastName,
       String phoneNumber)
   {
-    try
+    BookingList bookingList = getAllBookings();
+    for(int i = 0; i < bookingList.getTotalNumberOfBookings(); i++)
     {
-      BookingList allBookings = (BookingList) MyFileHandler.readFromBinaryFile(
-          bookingFileName);
-
-      for (int i = 0; i < allBookings.getTotalNumberOfBookings(); i++)
+      if(bookingList.getBookingByIndex(i).getGuest().getFirstName().equals(firstName) &&
+          bookingList.getBookingByIndex(i).getGuest().getLastName().equals(lastName)&&
+          bookingList.getBookingByIndex(i).getGuest().getPhone().equals(phoneNumber))
       {
-        if (allBookings.getBookingByIndex(i)
-            .equals(allBookings.getBooking(firstName,lastName,phoneNumber)))
-        {
-          return allBookings.getBookingByIndex(i);
-        }
+        return bookingList.getBookingByIndex(i);
       }
-    }
-    catch (FileNotFoundException e)
-    {
-      System.err.println("File not found");
-    }
-    catch (IOException e)
-    {
-      System.err.println("IO Error reading file");
-    }
-    catch (ClassNotFoundException e)
-    {
-      System.err.println("Class Not Found");
     }
     return null;
   }

@@ -67,21 +67,21 @@ public class BookingList implements Serializable
    * @param phoneNumber The phone number of the guest
    * @return The booking object is being returned.
    */
-  public Booking getBooking(String firstName, String lastName,
-      String phoneNumber)
-  {
-
-    for (int i = 0; i < bookingList.size(); i++)
-    {
-      if ((bookingList.get(i).getGuest().getFirstName().equals(firstName))
-          && (bookingList.get(i).getGuest().getLastName().equals(lastName))
-          && (bookingList.get(i).getGuest().getPhone().equals(phoneNumber)))
-      {
-        return bookingList.get(i);
-      }
-    }
-    return null;
-  }
+//  public Booking getBooking(String firstName, String lastName,
+//    String phoneNumber)
+//{
+//
+//  for (int i = 0; i < bookingList.size(); i++)
+//  {
+//    if ((bookingList.get(i).getGuest().getFirstName().equals(firstName))
+//        && (bookingList.get(i).getGuest().getLastName().equals(lastName))
+//        && (bookingList.get(i).getGuest().getPhone().equals(phoneNumber)))
+//    {
+//      return bookingList.get(i);
+//    }
+//  }
+//  return null;
+//}
 
   /**
    * The toString() function returns a string representation of the object
