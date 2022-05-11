@@ -17,7 +17,7 @@ public class HotelModelManager implements Serializable
   private String roomFileName;
   private String guestFileName;
   private String bookingFileName;
-  private BookingList allBookings;
+
 
   public HotelModelManager(String roomFileName, String guestFileName,
       String bookingFileName)
