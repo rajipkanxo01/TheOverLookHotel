@@ -423,7 +423,7 @@ public class HotelModelManager implements Serializable
   public void createCheckOut(String roomNumber)
   {
     GuestList guests = getAllCheckedIn();
-    RoomList allRoooms = getAllRooms();
+    RoomList allRooms = getAllRooms();
     ArrayList<Guest> tempGuest = new ArrayList();
     for (int i = 0; i < guests.getNumberOfGuest(); i++)
     {
@@ -432,7 +432,7 @@ public class HotelModelManager implements Serializable
         tempGuest.add(guests.getGuestByIndex(i));
       }
     }
-    allRoooms.getRoomByRoomNumber(roomNumber).changeAvailabilityAtCheckOut();
+    allRooms.getRoomByRoomNumber(roomNumber).changeAvailabilityAtCheckOut();
     guests.removeGuestList(tempGuest);
     saveGuest(guests);
   }
