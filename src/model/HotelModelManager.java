@@ -488,6 +488,7 @@ public class HotelModelManager implements Serializable
     RoomList allRooms = getAllRooms();
     double price = allRooms.getRoomByRoomNumber(roomNumber).getPrice();
     double initialPrice = numberOfNights * price;
+
     return initialPrice - ((initialPrice) * ((discountPercent) / 100));
   }
 
