@@ -16,6 +16,8 @@ public class Guest implements Serializable
   private String phone;
   private String nationality;
   private LocalDate dateOfBirth;
+  private LocalDate checkedInDate;
+  private String roomNumber;
 
   /**
    * initiates the Guest class
@@ -35,6 +37,31 @@ public class Guest implements Serializable
     this.phone = phone;
     this.nationality = nationality;
     this.dateOfBirth = dateOfBirth;
+  }
+
+  /**
+   * initiates the Guest class
+   *
+   * @param firstName   first name of guest
+   * @param lastName    last name of guest
+   * @param address     address of guest
+   * @param phone       phone number of guest
+   * @param nationality nationality of guest
+   * @param checkedInDate checked in date
+   * @param roomNumber   room number of guest
+   */
+
+  public Guest(String firstName, String lastName, String address, String phone,
+      String nationality, LocalDate dateOfBirth, LocalDate checkedInDate, String roomNumber)
+  {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.address = address;
+    this.phone = phone;
+    this.nationality = nationality;
+    this.dateOfBirth = dateOfBirth;
+    this.checkedInDate = checkedInDate;
+    this.roomNumber = roomNumber;
   }
 
   /**
