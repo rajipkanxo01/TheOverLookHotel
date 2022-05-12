@@ -200,6 +200,34 @@ public class HotelModelManager implements Serializable
     return allBookedRooms;
   }
 
+    /**
+     * This function updates the availability of a room by changing the
+     * availability of the room in the room list
+     *
+     * @param roomNumber The room number of the room to be updated
+     * @param arrivalDate The date the guest is arriving
+     * @param departureDate The date the guest is leaving the hotel
+     */
+    public void updateRoomAvailable(String roomNumber, LocalDate arrivalDate,
+      LocalDate departureDate)
+  {
+    RoomList roomList = getAllRooms();
+    roomList.getRoomByRoomNumber(roomNumber)
+        .changeAvailability(arrivalDate, departureDate);
+    try
+    {
+      MyFileHandler.writeToBinaryFile(roomFileName,roomList);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.err.println("File Not Found");
+    }
+    catch (IOException e)
+    {
+      System.err.println("IO Exception Error");
+    }
+  }
+
   // create booking tabs starts from here
 
   //create booking
@@ -225,22 +253,23 @@ public class HotelModelManager implements Serializable
       String address, String phone, String nationality, LocalDate dateOfBirth,
       LocalDate arrivalDate, LocalDate departureDate)
   {
+    // create guest object
     Guest guest = new Guest(firstName, lastName, address, phone, nationality,
         dateOfBirth);
+
     DateInterval dateInterval = new DateInterval(arrivalDate, departureDate);
     RoomList allRooms = getAllRooms();
 
+    // creating booking object , adding it to booking object and save it to file
     Booking booking = new Booking(extraBed, numberOfGuest, smoking, room, guest,
         dateInterval);
     BookingList bookingList = getAllBookings();
     bookingList.addBooking(booking);
-    allRooms.getRoomByRoomNumber(room.getRoomNumber())
-        .changeAvailability(arrivalDate, departureDate);
+
 
     try
     {
       MyFileHandler.writeToBinaryFile(bookingFileName, bookingList);
-      MyFileHandler.writeToBinaryFile(roomFileName, allRooms);
     }
     catch (FileNotFoundException e)
     {

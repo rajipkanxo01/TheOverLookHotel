@@ -15,6 +15,7 @@ import model.RoomList;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -54,6 +55,8 @@ public class HotelGUIController implements Initializable
   @FXML private TableColumn<Room, String> roomStatusColumnType;
   @FXML private TableView<Room> roomStatusTableView;
   @FXML private TabPane tabPane;
+  @FXML private Spinner<Integer> bookingNumberOfGuest;
+  @FXML private Label createBookingError;
 
   // Check In tab private fields
   @FXML private TextField checkInAddress;
@@ -85,17 +88,15 @@ public class HotelGUIController implements Initializable
   @FXML private TextField checkedOutInitialPrice;
   @FXML private TextField checkedOutNightsStayed;
 
-  // Create booking tab private fields
-
-  // Check in tab private fields
-
-  // Check out tab private fields
-
   public void initialize(URL url, ResourceBundle resourceBundle)
   {
+    // Configure the spinner with values 1 to 10
+    SpinnerValueFactory.IntegerSpinnerValueFactory spinnerValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(
+        0, 10, 0);
+    this.bookingNumberOfGuest.setValueFactory(spinnerValueFactory);
 
   }
-  //   // -------------------------- room status methods starts from here ------------------------------
+  // -------------------------- room status methods starts from here ------------------------------
 
   /**
    * The function is called when the user clicks the "Next" button on the "Room"
@@ -109,9 +110,11 @@ public class HotelGUIController implements Initializable
   {
     if (roomStatusTableView.getSelectionModel().getSelectedItem() != null)
     {
+      // change tab from room status to create booking
       SingleSelectionModel<Tab> selectionModelNextButton = tabPane.getSelectionModel();
       selectionModelNextButton.select(createBooking);
 
+      // get data from room status tab and set it to create booking tab
       bookingArrivalDate.setValue(roomArrivalDate.getValue());
       bookingDepartureDate.setValue(roomDepartureDate.getValue());
       bookingRoomType.setText(
@@ -136,6 +139,7 @@ public class HotelGUIController implements Initializable
    */
   @FXML private void createBack(ActionEvent actionEvent)
   {
+    // go back to room status tab
     SingleSelectionModel<Tab> selectionModelCreateBackButton = tabPane.getSelectionModel();
     selectionModelCreateBackButton.select(roomStatus);
   }
@@ -150,6 +154,7 @@ public class HotelGUIController implements Initializable
    */
   @FXML private void goToCheckIn(ActionEvent actionEvent)
   {
+    // go to check in tab
     SingleSelectionModel<Tab> selectionModelGoToCheckIn = tabPane.getSelectionModel();
     selectionModelGoToCheckIn.select(checkInTab);
   }
@@ -161,7 +166,6 @@ public class HotelGUIController implements Initializable
    */
   @FXML void searchAvailableRooms()
   {
-
     intitializeTable();
   }
 
@@ -192,12 +196,17 @@ public class HotelGUIController implements Initializable
    */
   @FXML private ObservableList<Room> getRoom()
   {
+
+    // getting arrival date, departure date and smoking value from gui
     LocalDate arrivalDate = roomArrivalDate.getValue();
     LocalDate departureDate = roomDepartureDate.getValue();
     boolean smoking = isSmoking.isSelected();
 
+    // search available rooms according to provided data
     RoomList allAvailableRooms = manager.getAllAvailableRooms(arrivalDate,
         departureDate, smoking);
+
+    // adding smoking and non smoking rooms to observable list
     ObservableList<Room> allNonSmokingRooms = FXCollections.observableArrayList();
     ObservableList<Room> allSmokingRooms = FXCollections.observableArrayList();
     for (int i = 0; i < allAvailableRooms.getTotalNumberOfRooms(); i++)
@@ -211,6 +220,8 @@ public class HotelGUIController implements Initializable
         allSmokingRooms.add(allAvailableRooms.getRoom(i));
       }
     }
+
+    // checking if smoking is selected or not
     if (isSmoking.isSelected())
     {
       return allSmokingRooms;
@@ -236,18 +247,91 @@ public class HotelGUIController implements Initializable
     bookingAddress.clear();
     bookingNationality.clear();
     bookingDateOfBirth.getEditor().clear();
+    bookingNumberOfGuest.getEditor().clear();
+    createBookingError.setText("");
   }
 
-  @FXML private void bookingSave(ActionEvent event)
+  /**
+   * It creates a booking from the information given in the fields
+   *
+   * @author Rajib Paudyal
+   */
+  @FXML private void bookingSave()
   {
+
+    // get information from fields and assign it to the variable
+    String bookingFirstNameText = bookingFirstName.getText();
+    String bookingLastNameText = bookingLastName.getText();
+    String bookingPhoneNumberText = bookingPhoneNumber.getText();
+    String bookingNationalityText = bookingNationality.getText();
+    String bookingAddressText = bookingAddress.getText();
+    LocalDate bookingDateOfBirthValue = bookingDateOfBirth.getValue();
+    boolean smokingSelected = bookingSmoking.isSelected();
+    boolean extraBedSelected = bookingExtraBed.isSelected();
+    Integer numberOfGuestValue = bookingNumberOfGuest.getValue();
+
+    // get room according to the room number given in field
+    RoomList allRooms = manager.getAllRooms();
+    Room room = allRooms.getRoomByRoomNumber(bookingRoomNumber.getText());
+
+    // get arrival and departure date
+    LocalDate arrivalDateValue = bookingArrivalDate.getValue();
+    LocalDate departureDateValue = bookingDepartureDate.getValue();
+
+    // if any field is empty, gives an error message
+    if (bookingFirstNameText.equals("") || bookingLastNameText.equals("")
+        || bookingPhoneNumberText.equals("") || bookingNationalityText.equals(
+        "") || bookingAddressText.equals("") || numberOfGuestValue == 0)
+    {
+      createBookingError.setText("Fields can't be empty.");
+    }
+    else
+    {
+      // create booking from the information given above
+      manager.createBooking(extraBedSelected, (int) numberOfGuestValue,
+          smokingSelected, room, bookingFirstNameText, bookingLastNameText,
+          bookingAddressText, bookingPhoneNumberText, bookingNationalityText,
+          bookingDateOfBirthValue, arrivalDateValue, departureDateValue);
+
+      // change available status of booked room
+      manager.updateRoomAvailable(bookingRoomNumber.getText(), arrivalDateValue,
+          departureDateValue);
+
+      // clear everything after booking is created
+      bookingClear();
+
+      // show dialog box when booking is done
+      Alert alert = new Alert(Alert.AlertType.INFORMATION);
+      alert.setTitle("TheOverLookHotel");
+      alert.setHeaderText("Booking Confirmed");
+      alert.setContentText("Your Booking is Confirmed. Enjoy Your Stay");
+      alert.showAndWait();
+    }
+
   }
 
-  @FXML private void bookingGoToCheckIn(ActionEvent event)
+  /**
+   * When the user clicks the "Go to Check-In" button in the Booking tab, the
+   * Check-In tab is selected
+   *
+   * @author Rajib Paudyal
+   */
+  @FXML private void bookingGoToCheckIn()
   {
+    SingleSelectionModel<Tab> selectionBookingToCheckIn = tabPane.getSelectionModel();
+    selectionBookingToCheckIn.select(checkInTab);
   }
 
-  @FXML private void bookingBack(ActionEvent event)
+  /**
+   * A function that is called when the user clicks the back button on the booking
+   * tab. It takes the user back to the room status tab.
+   *
+   * @author Rajib Paudyal
+   */
+  @FXML private void bookingBack()
   {
+    SingleSelectionModel<Tab> selectionBookingBack = tabPane.getSelectionModel();
+    selectionBookingBack.select(roomStatus);
   }
 
   // -------------------------- check in methods starts from here ------------------------------
@@ -264,7 +348,6 @@ public class HotelGUIController implements Initializable
   {
     SingleSelectionModel<Tab> selectionCheckInBackButton = tabPane.getSelectionModel();
     selectionCheckInBackButton.select(createBooking);
-
   }
 
   @FXML private void checkInSearch(ActionEvent event)
