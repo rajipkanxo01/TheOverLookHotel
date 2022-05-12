@@ -2,13 +2,11 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
@@ -24,222 +22,213 @@
 <?import javafx.scene.text.Font?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="486.0" prefWidth="763.0" style="-fx-background-color: #E8F9FD;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.HotelGUIController">
-   <children>
-      <HBox prefHeight="33.0" prefWidth="763.0" style="-fx-background-color: #2a5176;">
-         <children>
-            <ImageView fitHeight="40.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/logo2.png" />
-               </image>
-            </ImageView>
-            <Label prefHeight="35.0" prefWidth="226.0" text="The Overlook Hotel" textFill="WHITE">
-               <font>
-                  <Font name="System Bold" size="21.0" />
-               </font>
-            </Label>
-         </children>
-         <effect>
-            <InnerShadow />
-         </effect>
-      </HBox>
-      <MenuBar>
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
-                  <MenuItem mnemonicParsing="false" text="Close" />
-                  <MenuItem mnemonicParsing="false" text="Close" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-      <TabPane fx:id="tabPane" prefHeight="424.0" prefWidth="763.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab fx:id="roomStatus" text="Room Status">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Pane layoutX="14.0" layoutY="14.0" prefHeight="242.0" prefWidth="239.0" style="-fx-background-color: #F5F5F5; -fx-border-color: #000000;">
-                           <children>
-                              <Label layoutX="10.0" layoutY="12.0" text="Arrival Date" />
-                              <DatePicker fx:id="roomArrivalDate" layoutX="9.0" layoutY="29.0" prefHeight="26.0" prefWidth="185.0" />
-                              <DatePicker fx:id="roomDepartureDate" layoutX="8.0" layoutY="80.0" prefHeight="26.0" prefWidth="185.0" />
-                              <Label layoutX="9.0" layoutY="63.0" text="Departure Date" />
-                              <CheckBox layoutX="10.0" layoutY="170.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="88.0" text="Smoking" />
-                              <Button layoutX="165.0" layoutY="208.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="61.0" text="Search" />
-                              <ComboBox layoutX="9.0" layoutY="134.0" prefWidth="150.0" />
-                              <Label layoutX="10.0" layoutY="117.0" text="Price Range" />
-                           </children>
-                        </Pane>
-                        <TableView layoutX="301.0" layoutY="14.0" prefHeight="328.0" prefWidth="450.0">
-                          <columns>
-                            <TableColumn prefWidth="105.5999755859375" text="Room Number" />
-                            <TableColumn prefWidth="184.79995727539062" text="Room Type" />
-                              <TableColumn prefWidth="72.79998779296875" text="Price" />
-                              <TableColumn prefWidth="87.20001220703125" text="Smoking" />
-                          </columns>
-                        </TableView>
-                        <Button layoutX="687.0" layoutY="354.0" mnemonicParsing="false" onAction="#roomNext" prefHeight="26.0" prefWidth="61.0" text="Next" />
-                     </children>
-                  </AnchorPane>
-            </content>
-          </Tab>
-            <Tab fx:id="createBooking" text="Create Booking">
-                <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                        <children>
-                            <Pane layoutX="268.0" layoutY="10.0" prefHeight="348.0" prefWidth="482.0" style="-fx-background-color: #F5F5F5; -fx-border-color: #000000;">
-                                <children>
-                                    <Label layoutX="16.0" layoutY="2.0" text="First Name" />
-                                    <TextField fx:id="createLastName" layoutX="271.0" layoutY="23.0" prefHeight="25.0" prefWidth="198.0" />
-                                    <Label layoutX="14.0" layoutY="62.0" text="Phone Number" />
-                                    <TextField fx:id="createFirstName" layoutX="15.0" layoutY="23.0" prefHeight="25.0" prefWidth="218.0" />
-                                    <Label layoutX="271.0" layoutY="2.0" text="Last Name" />
-                                    <TextField fx:id="createPhoneNumber" layoutX="15.0" layoutY="79.0" prefHeight="25.0" prefWidth="219.0" />
-                                    <Label layoutX="14.0" layoutY="111.0" prefHeight="19.0" prefWidth="49.0" text="Address" />
-                                    <TextField fx:id="createAddress" layoutX="15.0" layoutY="130.0" prefHeight="25.0" prefWidth="447.0" />
-                                    <Label layoutX="14.0" layoutY="163.0" prefHeight="19.0" prefWidth="68.0" text="Nationality" />
-                                    <TextField fx:id="createNationality" layoutX="15.0" layoutY="182.0" prefHeight="25.0" prefWidth="216.0" />
-                                    <Label layoutX="14.0" layoutY="219.0" prefHeight="19.0" prefWidth="68.0" text="Date of Birth" />
-                                    <Label layoutX="271.0" layoutY="62.0" text="Number of Guest" />
-                                    <ComboBox layoutX="272.0" layoutY="182.0" prefWidth="150.0" />
-                                    <Label layoutX="273.0" layoutY="164.0" prefHeight="17.0" prefWidth="82.0" text="Type of Room" />
-                                    <CheckBox layoutX="269.0" layoutY="238.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="116.0" text="Smoking" />
-                                    <DatePicker fx:id="createDateOfBirth" layoutX="14.0" layoutY="238.0" prefHeight="25.0" prefWidth="207.0" />
-                                    <Spinner fx:id="createNumberOfGuest" layoutX="270.0" layoutY="79.0" prefHeight="25.0" prefWidth="197.0" />
-                                    <CheckBox layoutX="370.0" layoutY="238.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="116.0" text="Extra bed" />
-                                    <Button layoutX="419.0" layoutY="313.0" mnemonicParsing="false" text="Save" />
-                                    <Button layoutX="359.0" layoutY="313.0" mnemonicParsing="false" onAction="#clear" text="Clear" />
-                                    <Button layoutX="254.0" layoutY="313.0" mnemonicParsing="false" onAction="#goToCheckIn" text="Go To Check-In" />
-                                    <Button layoutX="206.0" layoutY="313.0" mnemonicParsing="false" onAction="#createBack" text="Back" />
-                                </children>
-                            </Pane>
-                            <Pane layoutX="13.0" layoutY="11.0" prefHeight="231.0" prefWidth="200.0" style="-fx-background-color: #F5F5F5; -fx-border-color: #000000;">
-                                <children>
-                                    <Label layoutX="7.0" layoutY="112.0" text="Room Type" />
-                                    <TextField layoutX="6.0" layoutY="133.0" prefHeight="25.0" prefWidth="174.0" />
-                                    <Label layoutX="7.0" layoutY="167.0" text="Room Number" />
-                                    <TextField layoutX="6.0" layoutY="188.0" prefHeight="25.0" prefWidth="174.0" />
-                                </children></Pane>
-                            <Label layoutX="21.0" layoutY="19.0" text="Arrival Date" />
-                            <DatePicker fx:id="createArrivalDate" layoutX="20.0" layoutY="36.0" prefHeight="26.0" prefWidth="185.0" />
-                            <DatePicker fx:id="createDepartureDate" layoutX="19.0" layoutY="87.0" prefHeight="26.0" prefWidth="185.0" />
-                            <Label layoutX="20.0" layoutY="70.0" text="Departure Date" />
-                        </children>
-                    </AnchorPane>
-                </content>
-            </Tab>
-            <Tab fx:id="checkInTab" text="Check-In">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Pane layoutX="14.0" layoutY="21.0" prefHeight="200.0" prefWidth="200.0" />
-                        <Pane layoutX="13.0" layoutY="13.0" prefHeight="234.0" prefWidth="200.0" style="-fx-background-color: #F5F5F5; -fx-border-color: #000000;">
-                           <children>
-                              <TextField layoutX="9.0" layoutY="25.0" prefHeight="11.0" prefWidth="140.0" />
-                              <Label layoutX="11.0" layoutY="6.0" text="First Name" />
-                              <Label layoutX="9.0" layoutY="61.0" text="Last Name" />
-                              <TextField layoutX="7.0" layoutY="80.0" prefHeight="11.0" prefWidth="140.0" />
-                              <Label layoutX="8.0" layoutY="118.0" text="Phone Number" />
-                              <TextField layoutX="7.0" layoutY="138.0" prefHeight="11.0" prefWidth="140.0" />
-                              <Button layoutX="74.0" layoutY="195.0" mnemonicParsing="false" text="Search" />
-                           </children>
-                        </Pane>
-                        <Pane layoutX="370.0" layoutY="61.0" prefHeight="200.0" prefWidth="200.0" />
-                        <Pane layoutX="270.0" layoutY="12.0" prefHeight="350.0" prefWidth="482.0" style="-fx-background-color: #F5F5F5; -fx-border-color: #000000;">
-                           <children>
-                              <Label layoutX="16.0" layoutY="2.0" text="First Name" />
-                              <TextField layoutX="271.0" layoutY="23.0" prefHeight="25.0" prefWidth="198.0" />
-                              <Label layoutX="14.0" layoutY="62.0" text="Phone Number" />
-                              <TextField layoutX="15.0" layoutY="23.0" prefHeight="25.0" prefWidth="218.0" />
-                              <Label layoutX="271.0" layoutY="2.0" text="Last Name" />
-                              <TextField layoutX="15.0" layoutY="79.0" prefHeight="25.0" prefWidth="219.0" />
-                              <Label layoutX="14.0" layoutY="111.0" prefHeight="19.0" prefWidth="49.0" text="Address" />
-                              <TextField layoutX="15.0" layoutY="130.0" prefHeight="25.0" prefWidth="450.0" />
-                              <Label layoutX="14.0" layoutY="163.0" prefHeight="19.0" prefWidth="68.0" text="Nationality" />
-                              <TextField layoutX="15.0" layoutY="182.0" prefHeight="25.0" prefWidth="216.0" />
-                              <Label layoutX="14.0" layoutY="219.0" prefHeight="19.0" prefWidth="68.0" text="Date of Birth" />
-                              <Label layoutX="271.0" layoutY="62.0" text="Number of Guest" />
-                              <DatePicker layoutX="14.0" layoutY="238.0" prefHeight="25.0" prefWidth="207.0" />
-                              <Spinner layoutX="270.0" layoutY="79.0" prefHeight="25.0" prefWidth="197.0" />
-                              <Label layoutX="271.0" layoutY="110.0" prefHeight="19.0" prefWidth="49.0" text="Zip Code" />
-                              <Button layoutX="354.0" layoutY="311.0" mnemonicParsing="false" text="Add" />
-                           </children>
-                        </Pane>
-                        <Button layoutX="569.0" layoutY="323.0" mnemonicParsing="false" onAction="#checkInBack" text="Back" />
-                        <Button layoutX="676.0" layoutY="322.0" minWidth="-Infinity" mnemonicParsing="false" text="Check-in" />
-                        <TableView layoutX="14.0" layoutY="262.0" prefHeight="59.0" prefWidth="200.0">
-                          <columns>
-                            <TableColumn prefWidth="97.59997367858887" text="Room Number" />
-                            <TableColumn prefWidth="102.40003204345703" text="Booked by" />
-                          </columns>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab text="Check-Out">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Pane layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0">
-                           <children>
-                              <Pane layoutX="-1.0" prefHeight="234.0" prefWidth="200.0" style="-fx-background-color: #F5F5F5; -fx-border-color: #000000;">
-                                 <children>
-                                    <TextField layoutX="9.0" layoutY="25.0" prefHeight="11.0" prefWidth="140.0" />
-                                    <Label layoutX="11.0" layoutY="6.0" text="First Name" />
-                                    <Label layoutX="9.0" layoutY="61.0" text="Last Name" />
-                                    <TextField layoutX="7.0" layoutY="80.0" prefHeight="11.0" prefWidth="140.0" />
-                                    <Label layoutX="8.0" layoutY="118.0" text="Phone Number" />
-                                    <TextField layoutX="7.0" layoutY="138.0" prefHeight="11.0" prefWidth="140.0" />
-                                    <Button layoutX="74.0" layoutY="195.0" mnemonicParsing="false" text="Search" />
-                                 </children>
-                              </Pane>
-                           </children>
-                        </Pane>
-                        <Pane layoutX="348.0" layoutY="32.0" prefHeight="200.0" prefWidth="200.0" />
-                        <Pane layoutX="268.0" layoutY="13.0" prefHeight="278.0" prefWidth="482.0" style="-fx-background-color: #F5F5F5; -fx-border-color: #000000;">
-                           <children>
-                              <DatePicker layoutX="17.0" layoutY="23.0" />
-                              <Label layoutX="17.0" layoutY="6.0" text="Check-In" />
-                              <DatePicker layoutX="248.0" layoutY="23.0" />
-                              <Label layoutX="251.0" layoutY="6.0" text="Check-Out" />
-                              <Label layoutX="14.0" layoutY="68.0" text="Number of nights stayed" />
-                              <TextField layoutX="14.0" layoutY="85.0" prefHeight="11.0" prefWidth="140.0" />
-                              <Label layoutX="246.0" layoutY="122.0" text="Discount" />
-                              <TextField layoutX="246.0" layoutY="139.0" prefHeight="11.0" prefWidth="140.0" />
-                              <Label layoutX="14.0" layoutY="123.0" text="Initial Price" />
-                              <TextField layoutX="14.0" layoutY="140.0" prefHeight="11.0" prefWidth="140.0" />
-                              <Label layoutX="14.0" layoutY="181.0" text="Final Price" />
-                              <TextField layoutX="14.0" layoutY="198.0" prefHeight="11.0" prefWidth="140.0" />
-                              <Button layoutX="403.0" layoutY="139.0" mnemonicParsing="false" text="Calculate" />
-                              <Button layoutX="399.0" layoutY="239.0" mnemonicParsing="false" text="Check-Out" />
-                           </children>
-                        </Pane>
-                        <TableView layoutX="14.0" layoutY="261.0" prefHeight="59.0" prefWidth="200.0">
-                           <columns>
-                              <TableColumn prefWidth="97.59997367858887" text="Room Number" />
-                              <TableColumn prefWidth="102.40003204345703" text="Checked- In" />
-                           </columns>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-        </tabs>
-      </TabPane>
-   </children>
-   <effect>
-      <InnerShadow />
-   </effect>
+    <children>
+        <HBox prefHeight="33.0" prefWidth="763.0" style="-fx-background-color: #2a5176;">
+            <children>
+                <ImageView fitHeight="40.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@../images/logo2.png" />
+                    </image>
+                </ImageView>
+                <Label prefHeight="35.0" prefWidth="226.0" text="The Overlook Hotel" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="21.0" />
+                    </font>
+                </Label>
+            </children>
+            <effect>
+                <InnerShadow />
+            </effect>
+        </HBox>
+        <MenuBar>
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Close" />
+                        <MenuItem mnemonicParsing="false" text="Close" />
+                        <MenuItem mnemonicParsing="false" text="Close" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Delete" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+        <TabPane fx:id="tabPane" prefHeight="424.0" prefWidth="763.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab fx:id="roomStatus" text="Room Status">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <Pane layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="239.0" style="-fx-background-color: #F5F5F5; -fx-border-color: #000000;">
+                                    <children>
+                                        <Label layoutX="10.0" layoutY="12.0" text="Arrival Date" />
+                                        <DatePicker fx:id="roomArrivalDate" layoutX="9.0" layoutY="29.0" prefHeight="26.0" prefWidth="185.0" />
+                                        <DatePicker fx:id="roomDepartureDate" layoutX="8.0" layoutY="80.0" prefHeight="26.0" prefWidth="185.0" />
+                                        <Label layoutX="9.0" layoutY="63.0" text="Departure Date" />
+                                        <CheckBox fx:id="isSmoking" layoutX="14.0" layoutY="121.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="88.0" text="Smoking" />
+                                        <Button layoutX="163.0" layoutY="158.0" mnemonicParsing="false" onAction="#searchAvailableRooms" prefHeight="26.0" prefWidth="61.0" text="Search" />
+                                    </children>
+                                </Pane>
+                                <TableView fx:id="roomStatusTableView" layoutX="301.0" layoutY="14.0" prefHeight="328.0" prefWidth="450.0">
+                                    <columns>
+                                        <TableColumn fx:id="roomStatusColumnNumber" prefWidth="118.39996337890625" text="Room Number" />
+                                        <TableColumn fx:id="roomStatusColumnType" prefWidth="202.39999389648438" text="Room Type" />
+                                        <TableColumn fx:id="roomStatusColumnPrice" prefWidth="129.60003662109375" text="Price" />
+                                    </columns>
+                                </TableView>
+                                <Button layoutX="687.0" layoutY="354.0" mnemonicParsing="false" onAction="#roomNext" prefHeight="26.0" prefWidth="61.0" text="Next" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="createBooking" text="Create Booking">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <Pane layoutX="268.0" layoutY="10.0" prefHeight="348.0" prefWidth="482.0" style="-fx-background-color: #F5F5F5; -fx-border-color: #000000;">
+                                    <children>
+                                        <Label layoutX="16.0" layoutY="2.0" text="First Name" />
+                                        <TextField fx:id="bookingLastName" layoutX="271.0" layoutY="23.0" prefHeight="25.0" prefWidth="198.0" />
+                                        <Label layoutX="14.0" layoutY="62.0" text="Phone Number" />
+                                        <TextField fx:id="bookingFirstName" layoutX="15.0" layoutY="23.0" prefHeight="25.0" prefWidth="218.0" />
+                                        <Label layoutX="271.0" layoutY="2.0" text="Last Name" />
+                                        <TextField fx:id="bookingPhoneNumber" layoutX="15.0" layoutY="79.0" prefHeight="25.0" prefWidth="219.0" />
+                                        <Label layoutX="14.0" layoutY="111.0" prefHeight="19.0" prefWidth="49.0" text="Address" />
+                                        <TextField fx:id="bookingAddress" layoutX="15.0" layoutY="130.0" prefHeight="25.0" prefWidth="447.0" />
+                                        <Label layoutX="274.0" layoutY="57.0" prefHeight="19.0" prefWidth="68.0" text="Nationality" />
+                                        <TextField fx:id="bookingNationality" layoutX="272.0" layoutY="76.0" prefHeight="25.0" prefWidth="206.0" />
+                                        <Label layoutX="14.0" layoutY="169.0" prefHeight="19.0" prefWidth="68.0" text="Date of Birth" />
+                                        <CheckBox fx:id="bookingSmoking" layoutX="269.0" layoutY="188.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="116.0" text="Smoking" />
+                                        <DatePicker fx:id="bookingDateOfBirth" layoutX="14.0" layoutY="188.0" prefHeight="25.0" prefWidth="207.0" />
+                                        <CheckBox fx:id="bookingExtraBed" layoutX="370.0" layoutY="188.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="116.0" text="Extra bed" />
+                                        <Button layoutX="419.0" layoutY="313.0" mnemonicParsing="false" onAction="#bookingSave" text="Save" />
+                                        <Button layoutX="359.0" layoutY="313.0" mnemonicParsing="false" onAction="#bookingClear" text="Clear" />
+                                        <Button layoutX="254.0" layoutY="313.0" mnemonicParsing="false" onAction="#bookingGoToCheckIn" text="Go To Check-In" />
+                                        <Button layoutX="206.0" layoutY="313.0" mnemonicParsing="false" onAction="#bookingBack" text="Back" />
+                                    </children>
+                                </Pane>
+                                <Pane layoutX="13.0" layoutY="11.0" prefHeight="231.0" prefWidth="200.0" style="-fx-background-color: #F5F5F5; -fx-border-color: #000000;">
+                                    <children>
+                                        <Label layoutX="7.0" layoutY="112.0" text="Room Type" />
+                                        <TextField fx:id="bookingRoomType" layoutX="6.0" layoutY="133.0" prefHeight="25.0" prefWidth="174.0" />
+                                        <Label layoutX="7.0" layoutY="167.0" text="Room Number" />
+                                        <TextField fx:id="bookingRoomNumber" layoutX="6.0" layoutY="188.0" prefHeight="25.0" prefWidth="174.0" />
+                                    </children>
+                                </Pane>
+                                <Label layoutX="21.0" layoutY="19.0" text="Arrival Date" />
+                                <DatePicker fx:id="bookingArrivalDate" layoutX="20.0" layoutY="36.0" prefHeight="26.0" prefWidth="185.0" />
+                                <DatePicker fx:id="bookingDepartureDate" layoutX="19.0" layoutY="87.0" prefHeight="26.0" prefWidth="185.0" />
+                                <Label layoutX="20.0" layoutY="70.0" text="Departure Date" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="checkInTab" text="Check-In">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <Pane layoutX="14.0" layoutY="21.0" prefHeight="200.0" prefWidth="200.0" />
+                                <Pane layoutX="13.0" layoutY="13.0" prefHeight="234.0" prefWidth="200.0" style="-fx-background-color: #F5F5F5; -fx-border-color: #000000;">
+                                    <children>
+                                        <TextField fx:id="checkInSearchFirstName" layoutX="9.0" layoutY="25.0" prefHeight="11.0" prefWidth="140.0" />
+                                        <Label layoutX="11.0" layoutY="6.0" text="First Name" />
+                                        <Label layoutX="9.0" layoutY="61.0" text="Last Name" />
+                                        <TextField fx:id="checkInSearchLastName" layoutX="7.0" layoutY="80.0" prefHeight="11.0" prefWidth="140.0" />
+                                        <Label layoutX="8.0" layoutY="118.0" text="Phone Number" />
+                                        <TextField fx:id="checkInSearchPhoneNumber" layoutX="7.0" layoutY="138.0" prefHeight="11.0" prefWidth="140.0" />
+                                        <Button layoutX="128.0" layoutY="195.0" mnemonicParsing="false" onAction="#checkInSearch" text="Search" />
+                                    </children>
+                                </Pane>
+                                <Pane layoutX="370.0" layoutY="61.0" prefHeight="200.0" prefWidth="200.0" />
+                                <Pane layoutX="270.0" layoutY="12.0" prefHeight="350.0" prefWidth="482.0" style="-fx-background-color: #F5F5F5; -fx-border-color: #000000;">
+                                    <children>
+                                        <Label layoutX="16.0" layoutY="2.0" text="First Name" />
+                                        <TextField fx:id="checkInLastName" layoutX="271.0" layoutY="23.0" prefHeight="25.0" prefWidth="198.0" />
+                                        <Label layoutX="14.0" layoutY="62.0" text="Phone Number" />
+                                        <TextField fx:id="checkInFirstName" layoutX="15.0" layoutY="23.0" prefHeight="25.0" prefWidth="218.0" />
+                                        <Label layoutX="271.0" layoutY="2.0" text="Last Name" />
+                                        <TextField fx:id="checkInPhoneNumber" layoutX="15.0" layoutY="79.0" prefHeight="25.0" prefWidth="219.0" />
+                                        <Label layoutX="14.0" layoutY="111.0" prefHeight="19.0" prefWidth="49.0" text="Address" />
+                                        <TextField fx:id="checkInAddress" layoutX="15.0" layoutY="130.0" prefHeight="25.0" prefWidth="450.0" />
+                                        <Label layoutX="272.0" layoutY="57.0" prefHeight="19.0" prefWidth="68.0" text="Nationality" />
+                                        <TextField fx:id="checkInNationality" layoutX="272.0" layoutY="76.0" prefHeight="25.0" prefWidth="195.0" />
+                                        <Label layoutX="14.0" layoutY="169.0" prefHeight="19.0" prefWidth="68.0" text="Date of Birth" />
+                                        <DatePicker fx:id="checkInDateOfBirth" layoutX="14.0" layoutY="188.0" prefHeight="25.0" prefWidth="207.0" />
+                                        <Button layoutX="354.0" layoutY="311.0" mnemonicParsing="false" onAction="#checkInAdd" text="Add" />
+                                    </children>
+                                </Pane>
+                                <Button layoutX="569.0" layoutY="323.0" mnemonicParsing="false" onAction="#checkInBack" text="Back" />
+                                <Button layoutX="676.0" layoutY="322.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#checkIn" text="Check-in" />
+                                <TableView fx:id="checkInTableView" layoutX="14.0" layoutY="262.0" prefHeight="59.0" prefWidth="200.0">
+                                    <columns>
+                                        <TableColumn fx:id="checkInNumberColumn" prefWidth="97.59997367858887" text="Room Number" />
+                                        <TableColumn fx:id="checkInBookedBy" prefWidth="102.40003204345703" text="Booked by" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab fx:id="checkOutTab" text="Check-Out">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <children>
+                                <Pane layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0">
+                                    <children>
+                                        <Pane layoutX="-1.0" prefHeight="234.0" prefWidth="200.0" style="-fx-background-color: #F5F5F5; -fx-border-color: #000000;">
+                                            <children>
+                                                <TextField fx:id="checkOutSearchFirstName" layoutX="9.0" layoutY="25.0" prefHeight="11.0" prefWidth="140.0" />
+                                                <Label layoutX="11.0" layoutY="6.0" text="First Name" />
+                                                <Label layoutX="9.0" layoutY="61.0" text="Last Name" />
+                                                <TextField fx:id="checkOutSearchLastName" layoutX="7.0" layoutY="80.0" prefHeight="11.0" prefWidth="140.0" />
+                                                <Label layoutX="8.0" layoutY="118.0" text="Phone Number" />
+                                                <TextField fx:id="checkOutSearchPhoneNumber" layoutX="7.0" layoutY="138.0" prefHeight="11.0" prefWidth="140.0" />
+                                                <Button layoutX="74.0" layoutY="195.0" mnemonicParsing="false" text="Search" />
+                                            </children>
+                                        </Pane>
+                                    </children>
+                                </Pane>
+                                <Pane layoutX="348.0" layoutY="32.0" prefHeight="200.0" prefWidth="200.0" />
+                                <Pane layoutX="268.0" layoutY="13.0" prefHeight="278.0" prefWidth="482.0" style="-fx-background-color: #F5F5F5; -fx-border-color: #000000;">
+                                    <children>
+                                        <DatePicker fx:id="checkedOutCheckInDate" layoutX="17.0" layoutY="23.0" />
+                                        <Label layoutX="17.0" layoutY="6.0" text="Check-In" />
+                                        <DatePicker fx:id="checkedOutCheckOutDate" layoutX="248.0" layoutY="23.0" />
+                                        <Label layoutX="251.0" layoutY="6.0" text="Check-Out" />
+                                        <Label layoutX="14.0" layoutY="68.0" text="Number of nights stayed" />
+                                        <TextField fx:id="checkedOutNightsStayed" layoutX="14.0" layoutY="85.0" prefHeight="11.0" prefWidth="140.0" />
+                                        <Label layoutX="246.0" layoutY="122.0" text="Discount" />
+                                        <TextField fx:id="checkedOutDiscountAmount" layoutX="246.0" layoutY="139.0" prefHeight="11.0" prefWidth="140.0" />
+                                        <Label layoutX="14.0" layoutY="123.0" text="Initial Price" />
+                                        <TextField fx:id="checkedOutInitialPrice" layoutX="14.0" layoutY="140.0" prefHeight="11.0" prefWidth="140.0" />
+                                        <Label layoutX="14.0" layoutY="181.0" text="Final Price" />
+                                        <TextField fx:id="checkedOutFinalPrice" layoutX="14.0" layoutY="198.0" prefHeight="11.0" prefWidth="140.0" />
+                                        <Button layoutX="403.0" layoutY="139.0" mnemonicParsing="false" onAction="#checkOutCalculate" text="Calculate" />
+                                        <Button layoutX="399.0" layoutY="239.0" mnemonicParsing="false" onAction="#checkOutSave" text="Check-Out" />
+                                    </children>
+                                </Pane>
+                                <TableView fx:id="checkOutTableView" layoutX="14.0" layoutY="261.0" prefHeight="59.0" prefWidth="200.0">
+                                    <columns>
+                                        <TableColumn fx:id="checkOutColumnNumber" prefWidth="97.59997367858887" text="Room Number" />
+                                        <TableColumn fx:id="checkOutCheckedIn" prefWidth="102.40003204345703" text="Checked- In" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+    <effect>
+        <InnerShadow />
+    </effect>
 </VBox>

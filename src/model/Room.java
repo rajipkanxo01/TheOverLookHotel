@@ -39,6 +39,31 @@ public class Room implements Serializable
   }
 
   /**
+   * initializes the room
+   *
+   * @param price         the price of the room
+   * @param smoking       whether the room has a smoking area
+   * @param available     the availability of the room
+   * @param roomNumber    the room number
+   * @param type          type of room
+   * @param bookStartDate room booked start date
+   * @param bookEndDate   room booked end date
+   */
+
+  public Room(double price, boolean smoking, boolean available,
+      String roomNumber, String type, LocalDate bookStartDate,
+      LocalDate bookEndDate)
+  {
+    this.price = price;
+    this.smoking = smoking;
+    this.available = available;
+    this.roomNumber = roomNumber;
+    this.type = type;
+    this.bookStartDate = bookStartDate;
+    this.bookEndDate = bookEndDate;
+  }
+
+  /**
    * Sets room number.
    *
    * @param roomNumber the room number
@@ -108,13 +133,12 @@ public class Room implements Serializable
     }
   }
 
-
   /**
    * This function changes the value of the variable available to true.
    */
   public void changeAvailabilityAtCheckOut()
   {
-      available = true;
+    available = true;
   }
 
   /**
@@ -129,11 +153,11 @@ public class Room implements Serializable
   {
     if ((arrivalDate.isAfter(bookEndDate)))
     {
-     available = true;
+      available = true;
     }
     else
     {
-      available =  false;
+      available = false;
     }
     return available;
   }

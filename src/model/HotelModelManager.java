@@ -80,33 +80,40 @@ public class HotelModelManager implements Serializable
     for (int i = 1; i <= 3; i++)
     {
       rooms.addRoom(
-          new Room(256, false, true, "SBS-C" + i, "Single Bedroom Suite"));
+          new Room(256, false, true, "SBS-C" + i, "Single Bedroom Suite",
+              LocalDate.MIN, LocalDate.MIN));
     }
 
     // adding 3-Single Bedroom Suite
-    rooms.addRoom(
-        new Room(339, true, true, "3SBS-C4", "3-Single Bedroom Suite"));
+    rooms.addRoom(new Room(339, true, true, "3SBS-C4", "3-Single Bedroom Suite",
+        LocalDate.MIN, LocalDate.MIN));
 
     // adding 2-Single Bedroom Suite
-    rooms.addRoom(
-        new Room(399, true, true, "2SBS-C5", "2-Single Bedroom Suite"));
+    rooms.addRoom(new Room(399, true, true, "2SBS-C5", "2-Single Bedroom Suite",
+        LocalDate.MIN, LocalDate.MIN));
 
     // adding single rooms to first floor(A)
     for (int i = 1; i <= 10; i++)
     {
-      rooms.addRoom(new Room(129, false, true, "SR-A" + i, "Single Room"));
+      rooms.addRoom(
+          new Room(129, false, true, "SR-A" + i, "Single Room", LocalDate.MIN,
+              LocalDate.MIN));
     }
 
     // adding double rooms to first floor(A)
     for (int i = 11; i <= 18; i++)
     {
-      rooms.addRoom(new Room(169, false, true, "DR-A" + i, "Double Room"));
+      rooms.addRoom(
+          new Room(169, false, true, "DR-A" + i, "Double Room", LocalDate.MIN,
+              LocalDate.MIN));
     }
 
     // adding double rooms to second floor (B)
     for (int i = 19; i <= 37; i++)
     {
-      rooms.addRoom(new Room(169, false, true, "DR-B" + i, "Double Room"));
+      rooms.addRoom(
+          new Room(169, false, true, "DR-B" + i, "Double Room", LocalDate.MIN,
+              LocalDate.MIN));
     }
 
     // adding room object to file
@@ -155,7 +162,7 @@ public class HotelModelManager implements Serializable
    * @return A list of all available rooms.
    */
   public RoomList getAllAvailableRooms(LocalDate arrivalDate,
-      LocalDate departureDate)
+      LocalDate departureDate, boolean smoking)
   {
     RoomList allRooms = getAllRooms();
     RoomList allAvailableRooms = new RoomList();
@@ -233,7 +240,7 @@ public class HotelModelManager implements Serializable
     try
     {
       MyFileHandler.writeToBinaryFile(bookingFileName, bookingList);
-      MyFileHandler.writeToBinaryFile(roomFileName,allRooms);
+      MyFileHandler.writeToBinaryFile(roomFileName, allRooms);
     }
     catch (FileNotFoundException e)
     {
@@ -244,7 +251,6 @@ public class HotelModelManager implements Serializable
       System.out.println("IO Error reading file");
     }
   }
-
 
   //getAllBookings
 
@@ -305,10 +311,7 @@ public class HotelModelManager implements Serializable
     }
   }
 
-
-
   // check-In tab methods starts from here
-
 
   // search for booking
   public Booking searchBooking(String firstName, String lastName,
@@ -327,7 +330,6 @@ public class HotelModelManager implements Serializable
     }
     return null;
   }
-
 
   //Create-Check-In
 
@@ -397,7 +399,6 @@ public class HotelModelManager implements Serializable
 
     return checkedIn;
   }
-
 
   // search check in
 

@@ -10,7 +10,7 @@ public class TestClass
     HotelModelManager manager = new HotelModelManager("rooms.bin", "guests.bin",
         "bookings.bin");
     manager.addRooms();
-    manager.addRooms();
+//    manager.addRooms();
     System.out.println(manager.getAllRooms());
   }
 }
