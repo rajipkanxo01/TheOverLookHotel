@@ -41,6 +41,7 @@ public class HotelGUIController implements Initializable
   @FXML private TextField bookingRoomNumber;
   @FXML private TextField bookingRoomType;
   @FXML private CheckBox bookingSmoking;
+  @FXML private Label roomStatusError;
 
   // Create Booking tab private fields
   @FXML private Tab createBooking;
@@ -102,15 +103,29 @@ public class HotelGUIController implements Initializable
    * and departure dates on the "Create Booking" tab to the arrival and departure
    * dates on the "Room" tab
    *
-   * @param actionEvent The event that triggered the action.
    * @author Rajib Paudyal
    */
-  @FXML private void roomNext(ActionEvent actionEvent)
+  @FXML private void roomNext()
   {
-    SingleSelectionModel<Tab> selectionModelNextButton = tabPane.getSelectionModel();
-    selectionModelNextButton.select(createBooking);
-    bookingArrivalDate.setValue(roomArrivalDate.getValue());
-    bookingDepartureDate.setValue(roomDepartureDate.getValue());
+    if (roomStatusTableView.getSelectionModel().getSelectedItem() != null)
+    {
+      SingleSelectionModel<Tab> selectionModelNextButton = tabPane.getSelectionModel();
+      selectionModelNextButton.select(createBooking);
+
+      bookingArrivalDate.setValue(roomArrivalDate.getValue());
+      bookingDepartureDate.setValue(roomDepartureDate.getValue());
+      bookingRoomType.setText(
+          roomStatusTableView.getSelectionModel().getSelectedItem().getType());
+      bookingRoomNumber.setText(
+          roomStatusTableView.getSelectionModel().getSelectedItem()
+              .getRoomNumber());
+      roomStatusError.setText("");
+
+    }
+    else
+    {
+      roomStatusError.setText("Select any room to continue");
+    }
   }
 
   /**
@@ -139,11 +154,24 @@ public class HotelGUIController implements Initializable
     selectionModelGoToCheckIn.select(checkInTab);
   }
 
+  /**
+   * This function searches the available room from binary file when search button is clicked
+   *
+   * @author Rajib Paudyal
+   */
   @FXML void searchAvailableRooms()
   {
+
     intitializeTable();
   }
 
+  /**
+   * The function intitializeTable() is called when the FXML file is loaded. It
+   * sets the cell value factory for each column in the table view to the
+   * appropriate property in the Room class
+   *
+   * @author Rajib Paudyal
+   */
   @FXML private void intitializeTable()
   {
     roomStatusColumnPrice.setCellValueFactory(
@@ -155,6 +183,13 @@ public class HotelGUIController implements Initializable
     roomStatusTableView.setItems(getRoom());
   }
 
+  /**
+   * It returns an ObservableList of Room objects that are available for the given
+   * arrival and departure dates and smoking preference
+   *
+   * @return The method is returning an ObservableList of Room objects.
+   * @author Rajib Paudyal
+   */
   @FXML private ObservableList<Room> getRoom()
   {
     LocalDate arrivalDate = roomArrivalDate.getValue();
@@ -191,10 +226,9 @@ public class HotelGUIController implements Initializable
   /**
    * It clears all the text fields and the date picker
    *
-   * @param actionEvent The action event that triggered the action.
    * @author Rajib Paudyal
    */
-  @FXML private void clear(ActionEvent actionEvent)
+  @FXML private void bookingClear()
   {
     bookingFirstName.clear();
     bookingLastName.clear();
@@ -205,10 +239,6 @@ public class HotelGUIController implements Initializable
   }
 
   @FXML private void bookingSave(ActionEvent event)
-  {
-  }
-
-  @FXML private void bookingClear(ActionEvent event)
   {
   }
 
