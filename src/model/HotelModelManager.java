@@ -519,6 +519,4 @@ public class HotelModelManager implements Serializable
     }
   }
 
-
-
 }
