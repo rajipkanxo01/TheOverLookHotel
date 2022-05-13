@@ -500,6 +500,8 @@ public class HotelGUIController implements Initializable
     checkOutTableView.setItems(guest);
   }
 
+
+
   @FXML private void checkOutSave(ActionEvent event)
   {
 
@@ -509,14 +511,38 @@ public class HotelGUIController implements Initializable
   {
   }
 
+  // -------------------------- All check-ins tab starts from here ------------------------------
+
+  /**
+   * When the user clicks the button, get all the check-ins from the database and
+   * display them in the table.
+   *
+   * @param event The event that triggered the action.
+   * @author Pramesh Shrestha
+   */
   public void getAllCheckIns(ActionEvent event)
   {
   }
 
+  // -------------------------- All Bookings tab starts from here ------------------------------
+
+
+  /**
+   * This function displays all bookings.
+   *
+   * @param event The event that triggered the method.
+   * @author Rajiv Paudyal
+   */
   public void displayAllBookings(ActionEvent event)
   {
   }
 
+  /**
+   * When the user clicks the remove button, remove the selected row from the
+   * table.
+   *
+   * @param event The event that triggered the method.
+   */
   public void removeBookingFromTable(ActionEvent event)
   {
   }
