@@ -88,6 +88,27 @@ public class HotelGUIController implements Initializable
   @FXML private TextField checkedOutInitialPrice;
   @FXML private TextField checkedOutNightsStayed;
 
+  // All Check-In tab private fields
+  @FXML private Tab allCheckInsTab;
+  @FXML private TableColumn<?, ?> allCheckInCheckedInDates;
+  @FXML private TableColumn<?, ?> allCheckInCheckedOutDates;
+  @FXML private TableColumn<?, ?> allCheckInFirstName;
+  @FXML private TableColumn<?, ?> allCheckInLastName;
+  @FXML private TableColumn<?, ?> allCheckInPhoneNumber;
+  @FXML private TableColumn<?, ?> allCheckInRoomNumber;
+  @FXML private TableView<?> allCheckInTableView;
+
+  //All Bookings tab private fields
+
+  @FXML private TableColumn<?, ?> allBookingsCheckInDate;
+  @FXML private TableColumn<?, ?> allBookingsCheckOutDate;
+  @FXML private TableColumn<?, ?> allBookingsFirstName;
+  @FXML private TableColumn<?, ?> allBookingsLastName;
+  @FXML private TableColumn<?, ?> allBookingsPhoneNumber;
+  @FXML private TableColumn<?, ?> allBookingsRoomNumber;
+  @FXML private TableView<?> allBookingsTableView;
+
+
   public void initialize(URL url, ResourceBundle resourceBundle)
   {
     // Configure the spinner with values 1 to 10
@@ -485,6 +506,18 @@ public class HotelGUIController implements Initializable
   }
 
   @FXML private void checkOutCalculate(ActionEvent event)
+  {
+  }
+
+  public void getAllCheckIns(ActionEvent event)
+  {
+  }
+
+  public void displayAllBookings(ActionEvent event)
+  {
+  }
+
+  public void removeBookingFromTable(ActionEvent event)
   {
   }
 }
