@@ -1,5 +1,6 @@
 package view;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -73,13 +74,13 @@ public class HotelGUIController implements Initializable
   @FXML private TableView<?> checkInTableView;
 
   // Check Out tab private fields
-  @FXML private TableColumn<Guest, LocalDate> checkOutCheckedIn;
-  @FXML private TableColumn<?, ?> checkOutColumnNumber;
+  @FXML private TableColumn<Guest, String> checkOutCheckedIn;
+  @FXML private TableColumn<Guest, String> checkOutColumnNumber;
   @FXML private TextField checkOutSearchFirstName;
   @FXML private TextField checkOutSearchLastName;
   @FXML private TextField checkOutSearchPhoneNumber;
   @FXML private Tab checkOutTab;
-  @FXML private TableView<?> checkOutTableView;
+  @FXML private TableView<Guest> checkOutTableView;
   @FXML private DatePicker checkedOutCheckInDate;
   @FXML private DatePicker checkedOutCheckOutDate;
   @FXML private TextField checkedOutDiscountAmount;
@@ -365,8 +366,25 @@ public class HotelGUIController implements Initializable
   }
 
   // -------------------------- check out methods starts from here ------------------------------
+
+  @FXML private void searchCheckIn(ActionEvent event)
+  {
+    Guest guest1 = manager.searchCheckIn(checkOutSearchFirstName.getText(),
+        checkOutSearchLastName.getText(),checkOutSearchPhoneNumber.getText());
+
+    checkOutColumnNumber.setCellValueFactory(cellData -> new SimpleStringProperty(
+        cellData.getValue().getRoomNumber()));
+    checkOutCheckedIn.setCellValueFactory(cellData -> new SimpleStringProperty(
+        cellData.getValue().getCheckInDate().toString()));
+
+    ObservableList<Guest> guest = FXCollections.observableArrayList();
+    guest.add(new Guest(guest1.getRoomNumber(),guest1.getCheckInDate()));
+    checkOutTableView.setItems(guest);
+  }
+
   @FXML private void checkOutSave(ActionEvent event)
   {
+
   }
 
   @FXML private void checkOutCalculate(ActionEvent event)

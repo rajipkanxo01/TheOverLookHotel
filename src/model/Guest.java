@@ -65,6 +65,18 @@ public class Guest implements Serializable
   }
 
   /**
+   * Instantiates a new Guest.
+   *
+   * @param roomNumber          the room number
+   * @param checkedInDateString the checked in date string
+   */
+  public Guest(String roomNumber, LocalDate checkedInDateString)
+  {
+
+    this.checkedInDate = checkedInDateString;
+    this.roomNumber = roomNumber;
+  }
+  /**
    * This function returns the first name of the person.
    *
    * @return The first name of the person.
@@ -193,6 +205,16 @@ public class Guest implements Serializable
   public LocalDate getDateOfBirth()
   {
     return dateOfBirth;
+  }
+
+  /**
+   * Gets check in date.
+   *
+   * @return the check in date
+   */
+  public LocalDate getCheckInDate()
+  {
+    return checkedInDate;
   }
 
   /**
