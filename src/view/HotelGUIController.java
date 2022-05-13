@@ -24,7 +24,8 @@ import java.util.ResourceBundle;
 public class HotelGUIController implements Initializable
 {
 
-  private HotelModelManager manager;
+  private HotelModelManager manager = new HotelModelManager("rooms.bin", "guests.bin" , "bookings.bin");
+
 
   // Room status tab private fields
   @FXML private TextField bookingAddress;
