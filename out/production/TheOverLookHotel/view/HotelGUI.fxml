@@ -22,7 +22,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="486.0" prefWidth="763.0" style="-fx-background-color: #E8F9FD;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.HotelGUIController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="486.0" prefWidth="763.0" style="-fx-background-color: #E8F9FD;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.HotelGUIController">
     <children>
         <HBox prefHeight="33.0" prefWidth="763.0" style="-fx-background-color: #2a5176;">
             <children>
@@ -210,7 +210,7 @@
                                                 <TextField fx:id="checkOutSearchLastName" layoutX="7.0" layoutY="80.0" prefHeight="11.0" prefWidth="140.0" />
                                                 <Label layoutX="8.0" layoutY="118.0" text="Phone Number" />
                                                 <TextField fx:id="checkOutSearchPhoneNumber" layoutX="7.0" layoutY="138.0" prefHeight="11.0" prefWidth="140.0" />
-                                                <Button layoutX="74.0" layoutY="195.0" mnemonicParsing="false" text="Search" />
+                                                <Button layoutX="74.0" layoutY="195.0" mnemonicParsing="false" onAction="#searchCheckIn" text="Search" />
                                             </children>
                                         </Pane>
                                     </children>
