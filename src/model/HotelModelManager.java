@@ -33,6 +33,11 @@ public class HotelModelManager implements Serializable
     this.bookingFileName = bookingFileName;
   }
 
+  public HotelModelManager()
+  {
+
+  }
+
   // Room status methods starts from here
 
   // get All Rooms
@@ -200,15 +205,15 @@ public class HotelModelManager implements Serializable
     return allBookedRooms;
   }
 
-    /**
-     * This function updates the availability of a room by changing the
-     * availability of the room in the room list
-     *
-     * @param roomNumber The room number of the room to be updated
-     * @param arrivalDate The date the guest is arriving
-     * @param departureDate The date the guest is leaving the hotel
-     */
-    public void updateRoomAvailable(String roomNumber, LocalDate arrivalDate,
+  /**
+   * This function updates the availability of a room by changing the
+   * availability of the room in the room list
+   *
+   * @param roomNumber    The room number of the room to be updated
+   * @param arrivalDate   The date the guest is arriving
+   * @param departureDate The date the guest is leaving the hotel
+   */
+  public void updateRoomAvailable(String roomNumber, LocalDate arrivalDate,
       LocalDate departureDate)
   {
     RoomList roomList = getAllRooms();
@@ -216,7 +221,7 @@ public class HotelModelManager implements Serializable
         .changeAvailability(arrivalDate, departureDate);
     try
     {
-      MyFileHandler.writeToBinaryFile(roomFileName,roomList);
+      MyFileHandler.writeToBinaryFile(roomFileName, roomList);
     }
     catch (FileNotFoundException e)
     {
@@ -265,7 +270,6 @@ public class HotelModelManager implements Serializable
         dateInterval);
     BookingList bookingList = getAllBookings();
     bookingList.addBooking(booking);
-
 
     try
     {

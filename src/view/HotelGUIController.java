@@ -26,8 +26,7 @@ import java.util.ResourceBundle;
 public class HotelGUIController implements Initializable
 {
 
-  private HotelModelManager manager = new HotelModelManager("rooms.bin",
-      "guests.bin", "bookings.bin");
+  private HotelModelManager manager;
 
   // Room status tab private fields
   @FXML private TextField bookingAddress;
@@ -94,6 +93,9 @@ public class HotelGUIController implements Initializable
     SpinnerValueFactory.IntegerSpinnerValueFactory spinnerValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(
         0, 10, 0);
     this.bookingNumberOfGuest.setValueFactory(spinnerValueFactory);
+
+    // creates hotel manager object
+    HotelModelManager manager = new HotelModelManager();
 
   }
   // -------------------------- room status methods starts from here ------------------------------
