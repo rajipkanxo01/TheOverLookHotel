@@ -22,7 +22,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="486.0" prefWidth="763.0" style="-fx-background-color: #E8F9FD;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.HotelGUIController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="486.0" prefWidth="763.0" style="-fx-background-color: #E8F9FD;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.HotelGUIController">
     <children>
         <HBox prefHeight="33.0" prefWidth="763.0" style="-fx-background-color: #2a5176;">
             <children>
@@ -155,15 +155,15 @@
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                             <children>
                                 <Pane layoutX="14.0" layoutY="21.0" prefHeight="200.0" prefWidth="200.0" />
-                                <Pane layoutX="13.0" layoutY="13.0" prefHeight="234.0" prefWidth="200.0" style="-fx-background-color: #F5F5F5; -fx-border-color: #000000;">
+                                <Pane layoutX="13.0" layoutY="13.0" prefHeight="234.0" prefWidth="226.0" style="-fx-background-color: #F5F5F5; -fx-border-color: #000000;">
                                     <children>
-                                        <TextField fx:id="checkInSearchFirstName" layoutX="9.0" layoutY="25.0" prefHeight="11.0" prefWidth="140.0" />
+                                        <TextField fx:id="checkInSearchFirstName" layoutX="9.0" layoutY="25.0" prefHeight="25.0" prefWidth="166.0" />
                                         <Label layoutX="11.0" layoutY="6.0" text="First Name" />
                                         <Label layoutX="9.0" layoutY="61.0" text="Last Name" />
-                                        <TextField fx:id="checkInSearchLastName" layoutX="7.0" layoutY="80.0" prefHeight="11.0" prefWidth="140.0" />
+                                        <TextField fx:id="checkInSearchLastName" layoutX="7.0" layoutY="80.0" prefHeight="25.0" prefWidth="168.0" />
                                         <Label layoutX="8.0" layoutY="118.0" text="Phone Number" />
-                                        <TextField fx:id="checkInSearchPhoneNumber" layoutX="7.0" layoutY="138.0" prefHeight="11.0" prefWidth="140.0" />
-                                        <Button layoutX="128.0" layoutY="195.0" mnemonicParsing="false" onAction="#checkInSearch" text="Search" />
+                                        <TextField fx:id="checkInSearchPhoneNumber" layoutX="7.0" layoutY="138.0" prefHeight="25.0" prefWidth="168.0" />
+                                        <Button layoutX="14.0" layoutY="195.0" mnemonicParsing="false" onAction="#checkInSearch" text="Search" />
                                     </children>
                                 </Pane>
                                 <Pane layoutX="370.0" layoutY="61.0" prefHeight="200.0" prefWidth="200.0" />
@@ -180,16 +180,20 @@
                                         <Label layoutX="272.0" layoutY="57.0" prefHeight="19.0" prefWidth="68.0" text="Nationality" />
                                         <TextField fx:id="checkInNationality" layoutX="272.0" layoutY="76.0" prefHeight="25.0" prefWidth="195.0" />
                                         <Label layoutX="14.0" layoutY="169.0" prefHeight="19.0" prefWidth="68.0" text="Date of Birth" />
-                                        <DatePicker fx:id="checkInDateOfBirth" layoutX="14.0" layoutY="188.0" prefHeight="25.0" prefWidth="207.0" />
-                                        <Button layoutX="354.0" layoutY="311.0" mnemonicParsing="false" onAction="#checkInAdd" text="Add" />
+                                        <DatePicker fx:id="checkInDateOfBirth" layoutX="14.0" layoutY="188.0" prefHeight="25.0" prefWidth="189.0" />
+                                        <Button layoutX="354.0" layoutY="311.0" mnemonicParsing="false" onAction="#checkInClear" text="Clear" />
+                              <TextField fx:id="checkInRoomNumber" layoutX="16.0" layoutY="261.0" prefHeight="25.0" prefWidth="157.0" />
+                              <Label layoutX="20.0" layoutY="237.0" text="Room Number" />
+                              <Label layoutX="272.0" layoutY="169.0" prefHeight="19.0" prefWidth="68.0" text="Check - In" />
+                              <DatePicker fx:id="checkInCheckedInDate" layoutX="271.0" layoutY="188.0" prefHeight="25.0" prefWidth="189.0" />
                                     </children>
                                 </Pane>
                                 <Button layoutX="569.0" layoutY="323.0" mnemonicParsing="false" onAction="#checkInBack" text="Back" />
                                 <Button layoutX="676.0" layoutY="322.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#checkIn" text="Check-in" />
-                                <TableView fx:id="checkInTableView" layoutX="14.0" layoutY="262.0" prefHeight="59.0" prefWidth="200.0">
+                                <TableView fx:id="checkInTableView" layoutX="14.0" layoutY="262.0" prefHeight="86.0" prefWidth="233.0">
                                     <columns>
-                                        <TableColumn fx:id="checkInNumberColumn" prefWidth="97.59997367858887" text="Room Number" />
-                                        <TableColumn fx:id="checkInBookedBy" prefWidth="102.40003204345703" text="Booked by" />
+                                        <TableColumn fx:id="checkInNumberColumn" prefWidth="88.66665363311768" text="Room Number" />
+                                        <TableColumn fx:id="checkInBookedBy" prefWidth="143.33335622151694" text="Booked by" />
                                     </columns>
                                 </TableView>
                             </children>

@@ -240,7 +240,7 @@ public class Guest implements Serializable
   {
     return "Name: " + firstName + " " + lastName + " ,Address: " + address
         + " ,Phone Number: " + phone + " ,Nationality: " + nationality
-        + " Date of birth: " + dateOfBirth + "\n";
+        + " ,Date of birth: " + dateOfBirth + " ,Checked-in Date: " + checkedInDate + "\n";
   }
 
 

@@ -138,7 +138,6 @@ public class HotelGUIController implements Initializable
    * When user clicks a "back" button, the program will switch to "room status" tab
    *
    * @param actionEvent The event that triggered the action.
-   * @author Rajib Paudyal
    */
   @FXML private void createBack(ActionEvent actionEvent)
   {
@@ -153,7 +152,6 @@ public class HotelGUIController implements Initializable
    *
    * @param actionEvent This is the event that is triggered when the button is
    *                    clicked.
-   * @author Rajib Paudyal
    */
   @FXML private void goToCheckIn(ActionEvent actionEvent)
   {
@@ -165,7 +163,6 @@ public class HotelGUIController implements Initializable
   /**
    * This function searches the available room from binary file when search button is clicked
    *
-   * @author Rajib Paudyal
    */
   @FXML void searchAvailableRooms()
   {
@@ -177,7 +174,6 @@ public class HotelGUIController implements Initializable
    * sets the cell value factory for each column in the table view to the
    * appropriate property in the Room class
    *
-   * @author Rajib Paudyal
    */
   @FXML private void intitializeTable()
   {
@@ -195,7 +191,6 @@ public class HotelGUIController implements Initializable
    * arrival and departure dates and smoking preference
    *
    * @return The method is returning an ObservableList of Room objects.
-   * @author Rajib Paudyal
    */
   @FXML private ObservableList<Room> getRoom()
   {
@@ -257,7 +252,6 @@ public class HotelGUIController implements Initializable
   /**
    * It creates a booking from the information given in the fields
    *
-   * @author Rajib Paudyal
    */
   @FXML private void bookingSave()
   {
@@ -317,7 +311,6 @@ public class HotelGUIController implements Initializable
    * When the user clicks the "Go to Check-In" button in the Booking tab, the
    * Check-In tab is selected
    *
-   * @author Rajib Paudyal
    */
   @FXML private void bookingGoToCheckIn()
   {
@@ -329,7 +322,6 @@ public class HotelGUIController implements Initializable
    * A function that is called when the user clicks the back button on the booking
    * tab. It takes the user back to the room status tab.
    *
-   * @author Rajib Paudyal
    */
   @FXML private void bookingBack()
   {
@@ -358,9 +350,17 @@ public class HotelGUIController implements Initializable
     String firstName = checkInSearchFirstName.getText();
     String lastName = checkInSearchLastName.getText();
     String phoneNumber = checkInSearchPhoneNumber.getText();
+    boolean booked = false;
+
+    checkInNumberColumn.setCellValueFactory(new PropertyValueFactory<Booking, String>("roomNumber"));
+    checkInBookedBy.setCellValueFactory(new PropertyValueFactory<Booking, String>("fullName"));
+    ObservableList<Booking> booking = FXCollections.observableArrayList();
+
+    Booking bookingBy = manager.searchBooking(firstName, lastName, phoneNumber);
+    booking.add(bookingBy);
+    checkInTableView.setItems(booking);
 
     BookingList bookingList = manager.getAllBookings();
-
 
     for (int i = 0; i < bookingList.getTotalNumberOfBookings(); i++)
     {
@@ -380,9 +380,11 @@ public class HotelGUIController implements Initializable
             bookingList.getBookingByIndex(i).getGuest().getAddress());
         checkInDateOfBirth.setValue(
             bookingList.getBookingByIndex(i).getGuest().getDateOfBirth());
+        booked = true;
         break;
       }
-      else
+    }
+      if(!booked)
       {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText(null);
@@ -390,7 +392,7 @@ public class HotelGUIController implements Initializable
             "No booking found under " + firstName + " " + lastName + "'s name.");
         alert.showAndWait();
       }
-    }
+
   }
 
 
@@ -403,7 +405,6 @@ public class HotelGUIController implements Initializable
    */
   @FXML private void checkIn(ActionEvent event)
   {
-
     String firstName = checkInFirstName.getText().trim();
     String lastName = checkInLastName.getText().trim();
     String phoneNumber = checkInPhoneNumber.getText().trim();
