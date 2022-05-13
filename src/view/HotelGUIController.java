@@ -9,10 +9,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import model.Guest;
-import model.HotelModelManager;
-import model.Room;
-import model.RoomList;
+import model.*;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -60,18 +57,20 @@ public class HotelGUIController implements Initializable
 
   // Check In tab private fields
   @FXML private TextField checkInAddress;
-  @FXML private TableColumn<?, ?> checkInBookedBy;
+  @FXML private TableColumn<Booking, String> checkInBookedBy;
   @FXML private DatePicker checkInDateOfBirth;
   @FXML private TextField checkInFirstName;
   @FXML private TextField checkInLastName;
   @FXML private TextField checkInNationality;
-  @FXML private TableColumn<?, ?> checkInNumberColumn;
+  @FXML private TableColumn<Booking, String> checkInNumberColumn;
   @FXML private TextField checkInPhoneNumber;
   @FXML private TextField checkInSearchFirstName;
   @FXML private TextField checkInSearchLastName;
   @FXML private TextField checkInSearchPhoneNumber;
+  @FXML private DatePicker checkInCheckedInDate;
+  @FXML private TextField checkInRoomNumber;
   @FXML private Tab checkInTab;
-  @FXML private TableView<?> checkInTableView;
+  @FXML private TableView<Booking> checkInTableView;
 
   // Check Out tab private fields
   @FXML private TableColumn<Guest, String> checkOutCheckedIn;
@@ -345,7 +344,7 @@ public class HotelGUIController implements Initializable
    *
    * @param actionEvent This is the event that is triggered when the button is
    *                    clicked.
-   * @author Rajib Paudyal
+   * @author Pramesh Shrestha
    */
   @FXML private void checkInBack(ActionEvent actionEvent)
   {
@@ -355,15 +354,111 @@ public class HotelGUIController implements Initializable
 
   @FXML private void checkInSearch(ActionEvent event)
   {
+    String firstName = checkInSearchFirstName.getText();
+    String lastName = checkInSearchLastName.getText();
+    String phoneNumber = checkInSearchPhoneNumber.getText();
+
+    BookingList bookingList = manager.getAllBookings();
+
+
+    for (int i = 0; i < bookingList.getTotalNumberOfBookings(); i++)
+    {
+      if (bookingList.getBookingByIndex(i).getGuest().getFirstName()
+          .equals(firstName) && bookingList.getBookingByIndex(i).getGuest()
+          .getLastName().equals(lastName) && bookingList.getBookingByIndex(i)
+          .getGuest().getPhone().equals(phoneNumber))
+      {
+        checkInFirstName.setText(firstName);
+        checkInLastName.setText(lastName);
+        checkInPhoneNumber.setText(phoneNumber);
+        checkInNationality.setText(
+            bookingList.getBookingByIndex(i).getGuest().getNationality());
+        checkInRoomNumber.setText(
+            bookingList.getBookingByIndex(i).getRoomNumber());
+        checkInAddress.setText(
+            bookingList.getBookingByIndex(i).getGuest().getAddress());
+        checkInDateOfBirth.setValue(
+            bookingList.getBookingByIndex(i).getGuest().getDateOfBirth());
+        break;
+      }
+      else
+      {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.setContentText(
+            "No booking found under " + firstName + " " + lastName + "'s name.");
+        alert.showAndWait();
+      }
+    }
   }
 
-  @FXML private void checkInAdd(ActionEvent event)
-  {
-  }
 
+  /**
+   * The function checks if the user has left any fields blank, if they have it
+   * alerts the user with a warning message, if not it creates a check in and then
+   * clears all the text fields
+   *
+   * @param event The event that triggered the method.
+   */
   @FXML private void checkIn(ActionEvent event)
   {
+
+    String firstName = checkInFirstName.getText().trim();
+    String lastName = checkInLastName.getText().trim();
+    String phoneNumber = checkInPhoneNumber.getText().trim();
+    String nationality = checkInNationality.getText().trim();
+    String address = checkInAddress.getText().trim();
+    String roomNumber = checkInRoomNumber.getText().trim();
+    LocalDate dateOfBirth = checkInDateOfBirth.getValue();
+    LocalDate checkInDate = checkInCheckedInDate.getValue();
+
+
+    //If any field is left out it alerts the user with a warning message
+    if(firstName.equals("") || lastName.equals("") || phoneNumber.equals("") ||
+        nationality.equals("") || address.equals("") || dateOfBirth == null ||
+        checkInDate == null || roomNumber.equals(""))
+    {
+      Alert alert = new Alert(Alert.AlertType.WARNING);
+      alert.setHeaderText(null);
+      alert.setContentText("All fields required.");
+      alert.showAndWait();
+    }
+    //creates check in and then clears all the text fields
+    else
+    {
+      manager.createCheckIn(firstName,lastName,address,phoneNumber,nationality,dateOfBirth,checkInDate,roomNumber);
+      Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+      alert.setHeaderText("Checked in");
+      alert.setContentText("Guest successfully checked-in");
+      alert.showAndWait();
+
+      checkInFirstName.clear();
+      checkInLastName.clear();
+      checkInPhoneNumber.clear();
+      checkInNationality.clear();
+      checkInAddress.clear();
+      checkInDateOfBirth.getEditor().clear();
+      checkedOutCheckInDate.getEditor().clear();
+    }
   }
+
+  /**
+   * It clears all the text fields in the check in tab
+   *
+   * @param event The event that triggered the action.
+   */
+  @FXML private void checkInClear(ActionEvent event)
+  {
+    checkInFirstName.clear();
+    checkInLastName.clear();
+    checkInPhoneNumber.clear();
+    checkInNationality.clear();
+    checkInAddress.clear();
+    checkInRoomNumber.clear();
+    checkInDateOfBirth.getEditor().clear();
+    checkedOutCheckInDate.getEditor().clear();
+  }
+
 
   // -------------------------- check out methods starts from here ------------------------------
 

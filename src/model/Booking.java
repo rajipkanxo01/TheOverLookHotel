@@ -11,6 +11,8 @@ public class Booking implements Serializable
   private Room room;
   private Guest guest;
   private DateInterval dateInterval;
+  private String roomNumber;
+  private String fullName;
 
   // This is a constructor. It is used to create an object of the Booking class and initialize the fields.
   public Booking(boolean extraBed, int numberOfGuest, boolean smokes, Room room,
@@ -21,7 +23,25 @@ public class Booking implements Serializable
     this.smokes = smokes;
     this.room = room;
     this.guest = guest;
+    fullName = guest.getFullName();
 
+  }
+
+  /**
+   * This function gets the room number from the room object and returns it
+   *
+   * @return The room number of the room object.
+   */
+  public String getRoomNumber()
+  {
+    roomNumber = room.getRoomNumber();
+    return roomNumber;
+  }
+
+  public String getFullName()
+  {
+    fullName = guest.getFullName();
+    return fullName;
   }
 
   /**

@@ -12,6 +12,7 @@ public class Guest implements Serializable
    */
   private String firstName;
   private String lastName;
+  private String fullName;
   private String address;
   private String phone;
   private String nationality;
@@ -37,6 +38,7 @@ public class Guest implements Serializable
     this.phone = phone;
     this.nationality = nationality;
     this.dateOfBirth = dateOfBirth;
+    fullName = firstName + " " + lastName;
   }
 
   /**
@@ -62,6 +64,7 @@ public class Guest implements Serializable
     this.dateOfBirth = dateOfBirth;
     this.checkedInDate = checkedInDate;
     this.roomNumber = roomNumber;
+
   }
 
   /**
@@ -215,6 +218,16 @@ public class Guest implements Serializable
   public LocalDate getCheckInDate()
   {
     return checkedInDate;
+  }
+
+  /**
+   * This function returns the full name of the person.
+   *
+   * @return The full name of the person.
+   */
+  public String getFullName()
+  {
+    return fullName;
   }
 
   /**
