@@ -250,6 +250,10 @@ public class HotelModelManager implements Serializable
     BookingList bookingList = getAllBookings();
     bookingList.addBooking(booking);
 
+    // change availability status of room
+    updateRoomAvailable(room.getRoomNumber(), arrivalDate, departureDate);
+
+    // updates booking in booking file name
     updateBooking(bookingList);
   }
 
@@ -286,30 +290,26 @@ public class HotelModelManager implements Serializable
 
   // removes the booking according to first name , last name , phone
 
-  /**
-   * Delete a booking from the list of bookings.
-   *
-   * @param firstName The first name of the customer
-   * @param lastName  The last name of the person who made the booking.
-   * @param phone     The phone number of the customer
-   */
   public void deleteBookings(String firstName, String lastName, String phone)
   {
     BookingList allBookings = getAllBookings();
-    allBookings.removeBooking(searchBooking(firstName, lastName, phone));
 
-    try
+    BookingList bookings = new BookingList();
+    for (int i = 0; i < allBookings.getTotalNumberOfBookings(); i++)
     {
-      MyFileHandler.writeToBinaryFile(bookingFileName, allBookings);
+      if (!(allBookings.getBookingByIndex(i).getGuest().getFirstName()
+          .equals(firstName) && allBookings.getBookingByIndex(i).getGuest()
+          .getLastName().equals(lastName) && allBookings.getBookingByIndex(i)
+          .getGuest().getPhone().equals(phone)))
+      {
+        bookings.addBooking(allBookings.getBookingByIndex(i));
+        getAllRooms().getRoomByRoomNumber(
+                allBookings.getBookingByIndex(i).getRoomNumber())
+            .changeAvailabilityAtCheckOut();
+      }
     }
-    catch (FileNotFoundException e)
-    {
-      System.err.println("File Not Found");
-    }
-    catch (IOException e)
-    {
-      System.err.println("IO Exception Error");
-    }
+
+    updateBooking(bookings);
   }
 
   // updates booking in the file

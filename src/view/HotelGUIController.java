@@ -142,7 +142,15 @@ public class HotelGUIController implements Initializable
       bookingRoomNumber.setText(
           roomStatusTableView.getSelectionModel().getSelectedItem()
               .getRoomNumber());
+
       roomStatusError.setText("");
+
+      // refresh table and clear everything
+      roomArrivalDate.getEditor().clear();
+      roomDepartureDate.getEditor().clear();
+      isSmoking.setSelected(false);
+      roomStatusTableView.getItems().clear();
+
 
     }
     else
@@ -269,6 +277,10 @@ public class HotelGUIController implements Initializable
     createBookingError.setText("");
     bookingSmoking.setSelected(false);
     bookingExtraBed.setSelected(false);
+    bookingArrivalDate.getEditor().clear();
+    bookingDepartureDate.getEditor().clear();
+    bookingRoomType.clear();
+    bookingRoomNumber.clear();
   }
 
   /**
@@ -313,9 +325,9 @@ public class HotelGUIController implements Initializable
           bookingAddressText, bookingPhoneNumberText, bookingNationalityText,
           bookingDateOfBirthValue, arrivalDateValue, departureDateValue);
 
-      // change available status of booked room
-      manager.updateRoomAvailable(bookingRoomNumber.getText().trim(),
-          arrivalDateValue, departureDateValue);
+//      // change available status of booked room
+//      manager.updateRoomAvailable(bookingRoomNumber.getText().trim(),
+//          arrivalDateValue, departureDateValue);
 
       // clear everything after booking is created
       bookingClear();
@@ -537,10 +549,9 @@ public class HotelGUIController implements Initializable
   /**
    * This function displays all bookings.
    *
-   * @param event The event that triggered the method.
    * @author Rajiv Paudyal
    */
-  public void displayAllBookings(ActionEvent event)
+  public void displayAllBookings()
   {
     allBookingsRoomNumber.setCellValueFactory(
         new PropertyValueFactory<>("roomNumber"));
@@ -573,5 +584,19 @@ public class HotelGUIController implements Initializable
    */
   public void removeBookingFromTable(ActionEvent event)
   {
+    // selects booking from the table and deletes it from file
+    Booking selectedBooking = allBookingsTableView.getSelectionModel()
+        .getSelectedItem();
+    manager.deleteBookings(selectedBooking.getFirstName(),
+        selectedBooking.getLastName(), selectedBooking.getPhone());
+
+    // updates the table
+    displayAllBookings();
+
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    alert.setTitle("The OverLook Hotel");
+    alert.setContentText("Booking Removed");
+    alert.showAndWait();
+
   }
 }
