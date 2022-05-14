@@ -100,8 +100,8 @@ public class HotelGUIController implements Initializable
 
   //All Bookings tab private fields
 
-  @FXML private TableColumn<Booking, LocalDate> allBookingsCheckInDate;
-  @FXML private TableColumn<Booking, LocalDate> allBookingsCheckOutDate;
+  @FXML private TableColumn<Booking, LocalDate> allBookingsArrivalDate;
+  @FXML private TableColumn<Booking, LocalDate> allBookingsDepartureDate;
   @FXML private TableColumn<Booking, String> allBookingsFirstName;
   @FXML private TableColumn<Booking, String> allBookingsLastName;
   @FXML private TableColumn<Booking, String> allBookingsPhoneNumber;
@@ -143,7 +143,6 @@ public class HotelGUIController implements Initializable
           roomStatusTableView.getSelectionModel().getSelectedItem()
               .getRoomNumber());
       roomStatusError.setText("");
-
 
     }
     else
@@ -291,7 +290,8 @@ public class HotelGUIController implements Initializable
 
     // get room according to the room number given in field
     RoomList allRooms = manager.getAllRooms();
-    Room room = allRooms.getRoomByRoomNumber(bookingRoomNumber.getText().trim());
+    Room room = allRooms.getRoomByRoomNumber(
+        bookingRoomNumber.getText().trim());
 
     // get arrival and departure date
     LocalDate arrivalDateValue = bookingArrivalDate.getValue();
@@ -303,7 +303,7 @@ public class HotelGUIController implements Initializable
         "") || bookingAddressText.equals("") || numberOfGuestValue == 0)
     {
       createBookingError.setText("Fields can't be empty.");
-//      bookingClear();
+      //      bookingClear();
     }
     else
     {
@@ -314,8 +314,8 @@ public class HotelGUIController implements Initializable
           bookingDateOfBirthValue, arrivalDateValue, departureDateValue);
 
       // change available status of booked room
-      manager.updateRoomAvailable(bookingRoomNumber.getText().trim(), arrivalDateValue,
-          departureDateValue);
+      manager.updateRoomAvailable(bookingRoomNumber.getText().trim(),
+          arrivalDateValue, departureDateValue);
 
       // clear everything after booking is created
       bookingClear();
@@ -491,8 +491,10 @@ public class HotelGUIController implements Initializable
 
   @FXML private void searchCheckIn(ActionEvent event)
   {
-    Guest guest1 = manager.searchCheckIn(checkOutSearchFirstName.getText().trim(),
-        checkOutSearchLastName.getText().trim(), checkOutSearchPhoneNumber.getText().trim());
+    Guest guest1 = manager.searchCheckIn(
+        checkOutSearchFirstName.getText().trim(),
+        checkOutSearchLastName.getText().trim(),
+        checkOutSearchPhoneNumber.getText().trim());
 
     checkOutColumnNumber.setCellValueFactory(
         cellData -> new SimpleStringProperty(
@@ -540,7 +542,27 @@ public class HotelGUIController implements Initializable
    */
   public void displayAllBookings(ActionEvent event)
   {
+    allBookingsRoomNumber.setCellValueFactory(
+        new PropertyValueFactory<>("roomNumber"));
+    allBookingsFirstName.setCellValueFactory(
+        new PropertyValueFactory<>("firstName"));
+    allBookingsLastName.setCellValueFactory(
+        new PropertyValueFactory<>("lastName"));
+    allBookingsPhoneNumber.setCellValueFactory(
+        new PropertyValueFactory<>("phone"));
+    allBookingsArrivalDate.setCellValueFactory(
+        new PropertyValueFactory<>("arrivalDate"));
+    allBookingsDepartureDate.setCellValueFactory(
+        new PropertyValueFactory<>("departureDate"));
 
+    ObservableList<Booking> bookings = FXCollections.observableArrayList();
+    BookingList allBookings = manager.getAllBookings();
+    for (int i = 0; i < allBookings.getTotalNumberOfBookings(); i++)
+    {
+      bookings.add(allBookings.getBookingByIndex(i));
+    }
+
+    allBookingsTableView.setItems(bookings);
   }
 
   /**

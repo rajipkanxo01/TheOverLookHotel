@@ -258,8 +258,8 @@
                               <TableColumn fx:id="allBookingsFirstName" prefWidth="132.0" text="First Name" />
                               <TableColumn fx:id="allBookingsLastName" prefWidth="111.0" text="Last Name" />
                               <TableColumn fx:id="allBookingsPhoneNumber" prefWidth="118.0" text="Phone Number" />
-                              <TableColumn fx:id="allBookingsCheckInDate" prefWidth="126.0" text="Check-in Date" />
-                              <TableColumn fx:id="allBookingsCheckOutDate" prefWidth="129.0" text="Check-out Date" />
+                              <TableColumn fx:id="allBookingsArrivalDate" prefWidth="126.0" text="Arrival Date" />
+                              <TableColumn fx:id="allBookingsDepartureDate" prefWidth="129.0" text="Departure Date" />
                            </columns>
                         </TableView>
                         <Button layoutX="393.0" layoutY="335.0" mnemonicParsing="false" onAction="#displayAllBookings" text="Get All Bookings" />
