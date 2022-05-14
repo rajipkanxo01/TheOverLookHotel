@@ -24,8 +24,8 @@ import java.util.ResourceBundle;
 public class HotelGUIController implements Initializable
 {
 
-  private HotelModelManager manager = new HotelModelManager("rooms.bin", "guests.bin" , "bookings.bin");
-
+  private HotelModelManager manager = new HotelModelManager("rooms.bin",
+      "guests.bin", "bookings.bin");
 
   // Room status tab private fields
   @FXML private TextField bookingAddress;
@@ -100,14 +100,13 @@ public class HotelGUIController implements Initializable
 
   //All Bookings tab private fields
 
-  @FXML private TableColumn<?, ?> allBookingsCheckInDate;
-  @FXML private TableColumn<?, ?> allBookingsCheckOutDate;
-  @FXML private TableColumn<?, ?> allBookingsFirstName;
-  @FXML private TableColumn<?, ?> allBookingsLastName;
-  @FXML private TableColumn<?, ?> allBookingsPhoneNumber;
-  @FXML private TableColumn<?, ?> allBookingsRoomNumber;
-  @FXML private TableView<?> allBookingsTableView;
-
+  @FXML private TableColumn<Booking, LocalDate> allBookingsCheckInDate;
+  @FXML private TableColumn<Booking, LocalDate> allBookingsCheckOutDate;
+  @FXML private TableColumn<Booking, String> allBookingsFirstName;
+  @FXML private TableColumn<Booking, String> allBookingsLastName;
+  @FXML private TableColumn<Booking, String> allBookingsPhoneNumber;
+  @FXML private TableColumn<Booking, String> allBookingsRoomNumber;
+  @FXML private TableView<Booking> allBookingsTableView;
 
   public void initialize(URL url, ResourceBundle resourceBundle)
   {
@@ -115,9 +114,6 @@ public class HotelGUIController implements Initializable
     SpinnerValueFactory.IntegerSpinnerValueFactory spinnerValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(
         0, 10, 0);
     this.bookingNumberOfGuest.setValueFactory(spinnerValueFactory);
-
-    // creates hotel manager object
-    HotelModelManager manager = new HotelModelManager();
 
   }
   // -------------------------- room status methods starts from here ------------------------------
@@ -147,6 +143,7 @@ public class HotelGUIController implements Initializable
           roomStatusTableView.getSelectionModel().getSelectedItem()
               .getRoomNumber());
       roomStatusError.setText("");
+
 
     }
     else
@@ -183,7 +180,6 @@ public class HotelGUIController implements Initializable
 
   /**
    * This function searches the available room from binary file when search button is clicked
-   *
    */
   @FXML void searchAvailableRooms()
   {
@@ -194,17 +190,21 @@ public class HotelGUIController implements Initializable
    * The function intitializeTable() is called when the FXML file is loaded. It
    * sets the cell value factory for each column in the table view to the
    * appropriate property in the Room class
-   *
    */
   @FXML private void intitializeTable()
   {
     roomStatusColumnPrice.setCellValueFactory(
         new PropertyValueFactory<Room, Double>("price"));
+    roomStatusColumnPrice.setStyle("-fx-alignment: CENTER;");
+
     roomStatusColumnType.setCellValueFactory(
         new PropertyValueFactory<Room, String>("type"));
+    roomStatusColumnType.setStyle("-fx-alignment: CENTER;");
+
     roomStatusColumnNumber.setCellValueFactory(
         new PropertyValueFactory<Room, String>("roomNumber"));
     roomStatusTableView.setItems(getRoom());
+    roomStatusTableView.setStyle("-fx-alignment: CENTER;");
   }
 
   /**
@@ -268,21 +268,21 @@ public class HotelGUIController implements Initializable
     bookingDateOfBirth.getEditor().clear();
     bookingNumberOfGuest.getEditor().clear();
     createBookingError.setText("");
+    isSmoking.setSelected(false);
   }
 
   /**
    * It creates a booking from the information given in the fields
-   *
    */
   @FXML private void bookingSave()
   {
 
     // get information from fields and assign it to the variable
-    String bookingFirstNameText = bookingFirstName.getText();
-    String bookingLastNameText = bookingLastName.getText();
-    String bookingPhoneNumberText = bookingPhoneNumber.getText();
-    String bookingNationalityText = bookingNationality.getText();
-    String bookingAddressText = bookingAddress.getText();
+    String bookingFirstNameText = bookingFirstName.getText().trim();
+    String bookingLastNameText = bookingLastName.getText().trim();
+    String bookingPhoneNumberText = bookingPhoneNumber.getText().trim();
+    String bookingNationalityText = bookingNationality.getText().trim();
+    String bookingAddressText = bookingAddress.getText().trim();
     LocalDate bookingDateOfBirthValue = bookingDateOfBirth.getValue();
     boolean smokingSelected = bookingSmoking.isSelected();
     boolean extraBedSelected = bookingExtraBed.isSelected();
@@ -290,7 +290,7 @@ public class HotelGUIController implements Initializable
 
     // get room according to the room number given in field
     RoomList allRooms = manager.getAllRooms();
-    Room room = allRooms.getRoomByRoomNumber(bookingRoomNumber.getText());
+    Room room = allRooms.getRoomByRoomNumber(bookingRoomNumber.getText().trim());
 
     // get arrival and departure date
     LocalDate arrivalDateValue = bookingArrivalDate.getValue();
@@ -312,7 +312,7 @@ public class HotelGUIController implements Initializable
           bookingDateOfBirthValue, arrivalDateValue, departureDateValue);
 
       // change available status of booked room
-      manager.updateRoomAvailable(bookingRoomNumber.getText(), arrivalDateValue,
+      manager.updateRoomAvailable(bookingRoomNumber.getText().trim(), arrivalDateValue,
           departureDateValue);
 
       // clear everything after booking is created
@@ -331,7 +331,6 @@ public class HotelGUIController implements Initializable
   /**
    * When the user clicks the "Go to Check-In" button in the Booking tab, the
    * Check-In tab is selected
-   *
    */
   @FXML private void bookingGoToCheckIn()
   {
@@ -342,7 +341,6 @@ public class HotelGUIController implements Initializable
   /**
    * A function that is called when the user clicks the back button on the booking
    * tab. It takes the user back to the room status tab.
-   *
    */
   @FXML private void bookingBack()
   {
@@ -368,13 +366,19 @@ public class HotelGUIController implements Initializable
 
   @FXML private void checkInSearch(ActionEvent event)
   {
-    String firstName = checkInSearchFirstName.getText();
-    String lastName = checkInSearchLastName.getText();
-    String phoneNumber = checkInSearchPhoneNumber.getText();
+    String firstName = checkInSearchFirstName.getText().trim();
+    String lastName = checkInSearchLastName.getText().trim();
+    String phoneNumber = checkInSearchPhoneNumber.getText().trim();
     boolean booked = false;
 
-    checkInNumberColumn.setCellValueFactory(new PropertyValueFactory<Booking, String>("roomNumber"));
-    checkInBookedBy.setCellValueFactory(new PropertyValueFactory<Booking, String>("fullName"));
+    checkInNumberColumn.setCellValueFactory(
+        new PropertyValueFactory<Booking, String>("roomNumber"));
+    checkInNumberColumn.setStyle("-fx-alignment: CENTER;");
+
+    checkInBookedBy.setCellValueFactory(
+        new PropertyValueFactory<Booking, String>("fullName"));
+    checkInBookedBy.setStyle("-fx-alignment: CENTER;");
+
     ObservableList<Booking> booking = FXCollections.observableArrayList();
 
     Booking bookingBy = manager.searchBooking(firstName, lastName, phoneNumber);
@@ -405,17 +409,16 @@ public class HotelGUIController implements Initializable
         break;
       }
     }
-      if(!booked)
-      {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setHeaderText(null);
-        alert.setContentText(
-            "No booking found under " + firstName + " " + lastName + "'s name.");
-        alert.showAndWait();
-      }
+    if (!booked)
+    {
+      Alert alert = new Alert(Alert.AlertType.INFORMATION);
+      alert.setHeaderText(null);
+      alert.setContentText(
+          "No booking found under " + firstName + " " + lastName + "'s name.");
+      alert.showAndWait();
+    }
 
   }
-
 
   /**
    * The function checks if the user has left any fields blank, if they have it
@@ -435,11 +438,10 @@ public class HotelGUIController implements Initializable
     LocalDate dateOfBirth = checkInDateOfBirth.getValue();
     LocalDate checkInDate = checkInCheckedInDate.getValue();
 
-
     //If any field is left out it alerts the user with a warning message
-    if(firstName.equals("") || lastName.equals("") || phoneNumber.equals("") ||
-        nationality.equals("") || address.equals("") || dateOfBirth == null ||
-        checkInDate == null || roomNumber.equals(""))
+    if (firstName.equals("") || lastName.equals("") || phoneNumber.equals("")
+        || nationality.equals("") || address.equals("") || dateOfBirth == null
+        || checkInDate == null || roomNumber.equals(""))
     {
       Alert alert = new Alert(Alert.AlertType.WARNING);
       alert.setHeaderText(null);
@@ -449,7 +451,8 @@ public class HotelGUIController implements Initializable
     //creates check in and then clears all the text fields
     else
     {
-      manager.createCheckIn(firstName,lastName,address,phoneNumber,nationality,dateOfBirth,checkInDate,roomNumber);
+      manager.createCheckIn(firstName, lastName, address, phoneNumber,
+          nationality, dateOfBirth, checkInDate, roomNumber);
       Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
       alert.setHeaderText("Checked in");
       alert.setContentText("Guest successfully checked-in");
@@ -482,25 +485,26 @@ public class HotelGUIController implements Initializable
     checkedOutCheckInDate.getEditor().clear();
   }
 
-
   // -------------------------- check out methods starts from here ------------------------------
 
   @FXML private void searchCheckIn(ActionEvent event)
   {
-    Guest guest1 = manager.searchCheckIn(checkOutSearchFirstName.getText(),
-        checkOutSearchLastName.getText(),checkOutSearchPhoneNumber.getText());
+    Guest guest1 = manager.searchCheckIn(checkOutSearchFirstName.getText().trim(),
+        checkOutSearchLastName.getText().trim(), checkOutSearchPhoneNumber.getText().trim());
 
-    checkOutColumnNumber.setCellValueFactory(cellData -> new SimpleStringProperty(
-        cellData.getValue().getRoomNumber()));
+    checkOutColumnNumber.setCellValueFactory(
+        cellData -> new SimpleStringProperty(
+            cellData.getValue().getRoomNumber()));
+    checkOutColumnNumber.setStyle("-fx-alignment: CENTER;");
+
     checkOutCheckedIn.setCellValueFactory(cellData -> new SimpleStringProperty(
         cellData.getValue().getCheckInDate().toString()));
+    checkOutCheckedIn.setStyle("-fx-alignment: CENTER;");
 
     ObservableList<Guest> guest = FXCollections.observableArrayList();
-    guest.add(new Guest(guest1.getRoomNumber(),guest1.getCheckInDate()));
+    guest.add(new Guest(guest1.getRoomNumber(), guest1.getCheckInDate()));
     checkOutTableView.setItems(guest);
   }
-
-
 
   @FXML private void checkOutSave(ActionEvent event)
   {
@@ -526,7 +530,6 @@ public class HotelGUIController implements Initializable
 
   // -------------------------- All Bookings tab starts from here ------------------------------
 
-
   /**
    * This function displays all bookings.
    *
@@ -535,6 +538,7 @@ public class HotelGUIController implements Initializable
    */
   public void displayAllBookings(ActionEvent event)
   {
+
   }
 
   /**

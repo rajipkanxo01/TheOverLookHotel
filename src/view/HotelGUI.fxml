@@ -248,25 +248,6 @@
                         </AnchorPane>
                     </content>
                 </Tab>
-            <Tab fx:id="allCheckInsTab" text="All Check-ins">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView fx:id="allCheckInTableView" layoutX="29.0" layoutY="14.0" prefHeight="300.0" prefWidth="709.0" AnchorPane.bottomAnchor="81.0" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="14.0">
-                          <columns>
-                            <TableColumn fx:id="allCheckInRoomNumber" prefWidth="92.0" text="Room Number" />
-                            <TableColumn fx:id="allCheckInFirstName" prefWidth="132.0" text="First Name" />
-                              <TableColumn fx:id="allCheckInLastName" prefWidth="111.0" text="Last Name" />
-                              <TableColumn fx:id="allCheckInPhoneNumber" prefWidth="118.0" text="Phone Number" />
-                              <TableColumn fx:id="allCheckInCheckedInDates" prefWidth="126.0" text="Check-in Date" />
-                              <TableColumn fx:id="allCheckInCheckedOutDates" prefWidth="129.0" text="Check-out Date" />
-                          </columns>
-                        </TableView>
-                        <Button layoutX="328.0" layoutY="336.0" mnemonicParsing="false" onAction="#getAllCheckIns" text="Get All Check-ins" />
-                     </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
             <Tab fx:id="allBookingsTabs" text="All Bookings">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -283,6 +264,25 @@
                         </TableView>
                         <Button layoutX="393.0" layoutY="335.0" mnemonicParsing="false" onAction="#displayAllBookings" text="Get All Bookings" />
                         <Button layoutX="266.0" layoutY="335.0" mnemonicParsing="false" onAction="#removeBookingFromTable" text="Remove Booking" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab fx:id="allCheckInsTab" text="All Check-ins">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="allCheckInTableView" layoutX="29.0" layoutY="14.0" prefHeight="300.0" prefWidth="709.0" AnchorPane.bottomAnchor="81.0" AnchorPane.leftAnchor="29.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="14.0">
+                          <columns>
+                            <TableColumn fx:id="allCheckInRoomNumber" prefWidth="92.0" text="Room Number" />
+                            <TableColumn fx:id="allCheckInFirstName" prefWidth="132.0" text="First Name" />
+                              <TableColumn fx:id="allCheckInLastName" prefWidth="111.0" text="Last Name" />
+                              <TableColumn fx:id="allCheckInPhoneNumber" prefWidth="118.0" text="Phone Number" />
+                              <TableColumn fx:id="allCheckInCheckedInDates" prefWidth="126.0" text="Check-in Date" />
+                              <TableColumn fx:id="allCheckInCheckedOutDates" prefWidth="129.0" text="Check-out Date" />
+                          </columns>
+                        </TableView>
+                        <Button layoutX="328.0" layoutY="336.0" mnemonicParsing="false" onAction="#getAllCheckIns" text="Get All Check-ins" />
                      </children>
                   </AnchorPane>
               </content>

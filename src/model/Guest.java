@@ -240,7 +240,7 @@ public class Guest implements Serializable
   {
     return "Name: " + firstName + " " + lastName + " ,Address: " + address
         + " ,Phone Number: " + phone + " ,Nationality: " + nationality
-        + " ,Date of birth: " + dateOfBirth + " ,Checked-in Date: " + checkedInDate + "\n";
+        + " ,Date of birth: " + dateOfBirth + "\n"; //" ,Checked-in Date: " + checkedInDate + "\n";
   }
 
 
@@ -253,16 +253,16 @@ public class Guest implements Serializable
    * @param obj The object to compare with Guest.
    * @return boolean.
    */
-  public boolean equals(Object obj)
-  {
-    if (!(obj instanceof Guest))
-    {
-      return false;
-    }
-    Guest others = (Guest) obj;
-    return firstName.equals(others.firstName) && lastName.equals(
-        others.lastName) && address.equals(others.address)
-        && nationality.equals(others.nationality) && phone.equals(others.phone)
-        && dateOfBirth.equals(others.dateOfBirth);
-  }
+//  public boolean equals(Object obj)
+//  {
+//    if (!(obj instanceof Guest))
+//    {
+//      return false;
+//    }
+//    Guest others = (Guest) obj;
+//    return firstName.equals(others.firstName) && lastName.equals(
+//        others.lastName) && address.equals(others.address)
+//        && nationality.equals(others.nationality) && phone.equals(others.phone)
+//        && dateOfBirth.equals(others.dateOfBirth);
+//  }
 }
