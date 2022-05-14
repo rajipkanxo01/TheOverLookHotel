@@ -33,8 +33,6 @@ public class HotelModelManager implements Serializable
     this.bookingFileName = bookingFileName;
   }
 
-
-
   // Room status methods starts from here
 
   // get All Rooms
@@ -67,9 +65,6 @@ public class HotelModelManager implements Serializable
     }
     return allRooms;
   }
-
-
-
 
   // add Rooms
 
@@ -136,9 +131,6 @@ public class HotelModelManager implements Serializable
     }
   }
 
-
-
-
   // get All Available Rooms
 
   /**
@@ -190,10 +182,8 @@ public class HotelModelManager implements Serializable
   //    return allBookedRooms;
   //  }
 
-
-
-
   // updates availability status of room in binary file
+
   /**
    * This function updates the availability of a room by changing the
    * availability of the room in the room list
@@ -221,10 +211,6 @@ public class HotelModelManager implements Serializable
       System.err.println("IO Exception Error");
     }
   }
-
-
-
-
 
   // create booking tabs starts from here
 
@@ -260,7 +246,7 @@ public class HotelModelManager implements Serializable
 
     // creating booking object , adding it to booking object and save it to file
     Booking booking = new Booking(extraBed, numberOfGuest, smoking, room, guest,
-        dateInterval);
+        arrivalDate, departureDate);
     BookingList bookingList = getAllBookings();
     bookingList.addBooking(booking);
 
@@ -370,8 +356,6 @@ public class HotelModelManager implements Serializable
     }
     return null;
   }
-
-
 
   //Create-Check-In
 

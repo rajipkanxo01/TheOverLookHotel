@@ -119,7 +119,7 @@
                                         <Button layoutX="359.0" layoutY="313.0" mnemonicParsing="false" onAction="#bookingClear" text="Clear" />
                                         <Button layoutX="254.0" layoutY="313.0" mnemonicParsing="false" onAction="#bookingGoToCheckIn" text="Go To Check-In" />
                                         <Button layoutX="206.0" layoutY="313.0" mnemonicParsing="false" onAction="#bookingBack" text="Back" />
-                              <Label fx:id="BookingNumberOfGuests" layoutX="277.0" layoutY="168.0" prefHeight="19.0" prefWidth="107.0" text="Nunber of Guests" />
+                              <Label fx:id="BookingNumberOfGuests" layoutX="277.0" layoutY="168.0" prefHeight="19.0" prefWidth="107.0" text="Number of Guests" />
                               <Spinner fx:id="bookingNumberOfGuest" layoutX="273.0" layoutY="188.0" prefHeight="25.0" prefWidth="189.0" />
                                     </children>
                                 </Pane>

@@ -268,7 +268,8 @@ public class HotelGUIController implements Initializable
     bookingDateOfBirth.getEditor().clear();
     bookingNumberOfGuest.getEditor().clear();
     createBookingError.setText("");
-    isSmoking.setSelected(false);
+    bookingSmoking.setSelected(false);
+    bookingExtraBed.setSelected(false);
   }
 
   /**
@@ -302,6 +303,7 @@ public class HotelGUIController implements Initializable
         "") || bookingAddressText.equals("") || numberOfGuestValue == 0)
     {
       createBookingError.setText("Fields can't be empty.");
+//      bookingClear();
     }
     else
     {

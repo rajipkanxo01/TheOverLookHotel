@@ -10,21 +10,46 @@ public class Booking implements Serializable
   private boolean smokes;
   private Room room;
   private Guest guest;
-  private DateInterval dateInterval;
+  private LocalDate arrivalDate;
+  private LocalDate departureDate;
   private String roomNumber;
   private String fullName;
 
   // This is a constructor. It is used to create an object of the Booking class and initialize the fields.
   public Booking(boolean extraBed, int numberOfGuest, boolean smokes, Room room,
-      Guest guest, DateInterval dateInterval)
+      Guest guest, LocalDate arrivalDate , LocalDate departureDate)
   {
     this.extraBed = extraBed;
     this.numberOfGuest = numberOfGuest;
     this.smokes = smokes;
     this.room = room;
     this.guest = guest;
+    this.arrivalDate = arrivalDate;
+    this.departureDate = departureDate;
     fullName = guest.getFullName();
+  }
 
+  public String getFirstName()
+  {
+    return guest.getFirstName();
+  }
+
+  public String getLastName()
+  {
+    return guest.getLastName();
+  }
+
+  public String getPhone()
+  {
+    return guest.getPhone();
+  }
+
+  public LocalDate getArrivalDate() {
+    return arrivalDate;
+  }
+
+  public LocalDate getDepartureDate () {
+    return departureDate;
   }
 
   /**
