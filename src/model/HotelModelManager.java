@@ -182,6 +182,22 @@ public class HotelModelManager implements Serializable
   //    return allBookedRooms;
   //  }
 
+  public void updateRoom(RoomList rooms)
+  {
+    try
+    {
+      MyFileHandler.writeToBinaryFile(roomFileName, rooms);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.err.println("File Not Found");
+    }
+    catch (IOException e)
+    {
+      System.err.println("IO Exception Error");
+    }
+  }
+
   // updates availability status of room in binary file
 
   /**
@@ -241,7 +257,6 @@ public class HotelModelManager implements Serializable
     Guest guest = new Guest(firstName, lastName, address, phone, nationality,
         dateOfBirth);
 
-    DateInterval dateInterval = new DateInterval(arrivalDate, departureDate);
     //    RoomList allRooms = getAllRooms();
 
     // creating booking object , adding it to booking object and save it to file
@@ -293,6 +308,11 @@ public class HotelModelManager implements Serializable
   public void deleteBookings(String firstName, String lastName, String phone)
   {
     BookingList allBookings = getAllBookings();
+    Booking searchedBooking = searchBooking(firstName, lastName, phone);
+    RoomList allRooms = getAllRooms();
+
+    allRooms.getRoomByRoomNumber(searchedBooking.getRoomNumber())
+        .changeAvailabilityAtCheckOut();
 
     BookingList bookings = new BookingList();
     for (int i = 0; i < allBookings.getTotalNumberOfBookings(); i++)
@@ -303,12 +323,11 @@ public class HotelModelManager implements Serializable
           .getGuest().getPhone().equals(phone)))
       {
         bookings.addBooking(allBookings.getBookingByIndex(i));
-        getAllRooms().getRoomByRoomNumber(
-                allBookings.getBookingByIndex(i).getRoomNumber())
-            .changeAvailabilityAtCheckOut();
+
       }
     }
 
+//    updateRoom(allRooms);
     updateBooking(bookings);
   }
 
@@ -470,6 +489,7 @@ public class HotelModelManager implements Serializable
     allRoooms.getRoomByRoomNumber(roomNumber).changeAvailabilityAtCheckOut();
     guests.removeGuestList(tempGuest);
 
+    updateRoom(allRoooms);
     updateGuest(guests);
 
   }

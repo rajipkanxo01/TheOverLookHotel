@@ -151,7 +151,6 @@ public class HotelGUIController implements Initializable
       isSmoking.setSelected(false);
       roomStatusTableView.getItems().clear();
 
-
     }
     else
     {
@@ -191,6 +190,7 @@ public class HotelGUIController implements Initializable
   @FXML void searchAvailableRooms()
   {
     intitializeTable();
+    roomStatusTableView.refresh();
   }
 
   /**
@@ -325,9 +325,9 @@ public class HotelGUIController implements Initializable
           bookingAddressText, bookingPhoneNumberText, bookingNationalityText,
           bookingDateOfBirthValue, arrivalDateValue, departureDateValue);
 
-//      // change available status of booked room
-//      manager.updateRoomAvailable(bookingRoomNumber.getText().trim(),
-//          arrivalDateValue, departureDateValue);
+      //      // change available status of booked room
+      //      manager.updateRoomAvailable(bookingRoomNumber.getText().trim(),
+      //          arrivalDateValue, departureDateValue);
 
       // clear everything after booking is created
       bookingClear();
@@ -580,13 +580,15 @@ public class HotelGUIController implements Initializable
    * When the user clicks the remove button, remove the selected row from the
    * table.
    *
-   * @param event The event that triggered the method.
    */
-  public void removeBookingFromTable(ActionEvent event)
+  public void removeBookingFromTable()
   {
     // selects booking from the table and deletes it from file
     Booking selectedBooking = allBookingsTableView.getSelectionModel()
         .getSelectedItem();
+
+    manager.createCheckOut(selectedBooking.getRoomNumber());
+
     manager.deleteBookings(selectedBooking.getFirstName(),
         selectedBooking.getLastName(), selectedBooking.getPhone());
 
