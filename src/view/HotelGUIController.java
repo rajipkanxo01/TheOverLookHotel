@@ -69,6 +69,7 @@ public class HotelGUIController implements Initializable
   @FXML private TextField checkInSearchLastName;
   @FXML private TextField checkInSearchPhoneNumber;
   @FXML private DatePicker checkInCheckedInDate;
+  @FXML private DatePicker checkInCheckOutDate;
   @FXML private TextField checkInRoomNumber;
   @FXML private Tab checkInTab;
   @FXML private TableView<Booking> checkInTableView;
@@ -90,13 +91,13 @@ public class HotelGUIController implements Initializable
 
   // All Check-In tab private fields
   @FXML private Tab allCheckInsTab;
-  @FXML private TableColumn<?, ?> allCheckInCheckedInDates;
-  @FXML private TableColumn<?, ?> allCheckInCheckedOutDates;
-  @FXML private TableColumn<?, ?> allCheckInFirstName;
-  @FXML private TableColumn<?, ?> allCheckInLastName;
-  @FXML private TableColumn<?, ?> allCheckInPhoneNumber;
-  @FXML private TableColumn<?, ?> allCheckInRoomNumber;
-  @FXML private TableView<?> allCheckInTableView;
+  @FXML private TableColumn<Guest, LocalDate>  allCheckInCheckedInDateColumn;
+  @FXML private TableColumn<Guest, LocalDate> allCheckInCheckedOutDateColumn;
+  @FXML private TableColumn<Guest, String> allCheckInFirstNameColumn;
+  @FXML private TableColumn<Guest, String> allCheckInLastNameColumn;
+  @FXML private TableColumn<Guest, String> allCheckInPhoneNumberColumn;
+  @FXML private TableColumn<Guest, String> allCheckInRoomNumberColumn;
+  @FXML private TableView<Guest> allCheckInTableView;
 
   //All Bookings tab private fields
 
