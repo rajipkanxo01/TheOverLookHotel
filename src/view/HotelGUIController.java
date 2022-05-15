@@ -694,7 +694,6 @@ public class HotelGUIController implements Initializable
         "DR-B24", "DR-B25", "DR-B26", "DR-B27", "DR-B28", "DR-B29", "DR-B30",
         "DR-B31", "DR-B32", "DR-B33", "DR-B34", "DR-B35", "DR-B36", "DR-B37");
     checkInCombo.setItems(list);
-    checkInCombo.setPromptText("Select a room");
   }
 
   /**

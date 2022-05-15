@@ -22,6 +22,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="486.0" prefWidth="763.0" style="-fx-background-color: #E8F9FD;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.HotelGUIController">
     <children>
@@ -288,8 +289,12 @@
                           </columns>
                         </TableView>
                         <Button layoutX="631.0" layoutY="331.0" mnemonicParsing="false" onAction="#allCheckInsButton" text="Get All Check-ins" />
-                        <Button layoutX="226.0" layoutY="331.0" mnemonicParsing="false" onAction="#getAllGuestsByRoomNumber" text="Get Check-in" />
-                        <ComboBox fx:id="checkInCombo" layoutX="29.0" layoutY="331.0" prefHeight="25.0" prefWidth="185.0" />
+                        <ComboBox fx:id="checkInCombo" layoutX="120.0" layoutY="331.0" onAction="#getAllGuestsByRoomNumber" prefHeight="25.0" prefWidth="99.0" />
+                        <Text layoutX="29.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select A Room" underline="true">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Text>
                      </children>
                   </AnchorPane>
               </content>
