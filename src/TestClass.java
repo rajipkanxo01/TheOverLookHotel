@@ -22,7 +22,7 @@ public class TestClass
 //    System.out.println(manager.getAllBookings());
 //    System.out.println(manager.getAllCheckedIn().getGuestByIndex(0).getCheckInDate());
     //    System.out.println(manager.getAllRooms().getRoomByRoomNumber("3SBS-C4"));
-//    System.out.println(manager.getAllRooms());
+    System.out.println(manager.getAllRooms());
 //
   }
 }
