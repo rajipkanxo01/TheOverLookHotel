@@ -70,10 +70,11 @@ public class HotelGUIController implements Initializable
   @FXML private TextField checkInSearchPhoneNumber;
   @FXML private DatePicker checkInCheckedInDate;
   @FXML private DatePicker checkInCheckOutDate;
-  @FXML private TextField checkInRoomNumber;
+//  @FXML private TextField checkInRoomNumber;
   @FXML private Tab checkInTab;
   @FXML private TableView<Booking> checkInTableView;
   @FXML private ComboBox<String> checkInCombo;
+  @FXML private ComboBox<String> checkInRoomNumber;
 
   // Check Out tab private fields
   @FXML private TableColumn<Guest, LocalDate> checkOutCheckedIn;
@@ -120,6 +121,7 @@ public class HotelGUIController implements Initializable
 
     //This method sets all the rooms to comboBox
     setRoomToComboBox();
+    setRoomToCheckInComboBox();
   }
   // -------------------------- room status methods starts from here ------------------------------
 
@@ -382,6 +384,21 @@ public class HotelGUIController implements Initializable
   }
 
   /**
+   * This function is used to set the room number combo box in the check in tab
+   */
+  public void setRoomToCheckInComboBox()
+  {
+    ObservableList<String> list = FXCollections.observableArrayList();
+    list.addAll("SBS-C1", "SBS-C2","SBS-C3","3SBS-C4","2SBS-C5",
+        "SR-A1","SR-A2","SR-A3","SR-A4","SR-A5","SR-A6","SR-A7","SR-A8","SR-A9","SR-A10",
+        "DR-A11","DR-A12","DR-A13","DR-A14","DR-A15","DR-A16","DR-A17","DR-A18",
+        "DR-B19","DR-B20","DR-B21","DR-B22","DR-B23","DR-B24","DR-B25","DR-B26","DR-B27",
+        "DR-B28","DR-B29","DR-B30","DR-B31","DR-B32","DR-B33","DR-B34","DR-B35","DR-B36","DR-B37");
+    checkInRoomNumber.setItems(list);
+    checkInRoomNumber.setEditable(true);
+  }
+
+  /**
    * This is an event in a checkIn Tab, that searches for a booking by the guest's first name, last name, and phone
    * number, and if it finds one, it displays the guest's information in the
    * check-in tab
@@ -436,7 +453,7 @@ public class HotelGUIController implements Initializable
         checkInPhoneNumber.setText(phoneNumber);
         checkInNationality.setText(
             bookingList.getBookingByIndex(i).getGuest().getNationality());
-        checkInRoomNumber.setText(
+        checkInRoomNumber.setValue(
             bookingList.getBookingByIndex(i).getRoomNumber());
         checkInAddress.setText(
             bookingList.getBookingByIndex(i).getGuest().getAddress());
@@ -472,7 +489,7 @@ public class HotelGUIController implements Initializable
     String phoneNumber = checkInPhoneNumber.getText().trim();
     String nationality = checkInNationality.getText().trim();
     String address = checkInAddress.getText().trim();
-    String roomNumber = checkInRoomNumber.getText().trim();
+    String roomNumber = checkInRoomNumber.getValue().trim();
     LocalDate dateOfBirth = checkInDateOfBirth.getValue();
     LocalDate checkInDate = checkInCheckedInDate.getValue();
     LocalDate checkoutDate = checkInCheckOutDate.getValue();
@@ -510,7 +527,7 @@ public class HotelGUIController implements Initializable
   @FXML private void checkInClear(ActionEvent event)
   {
     clearCheckInBox();
-    checkInRoomNumber.clear();
+    checkInRoomNumber.getEditor().clear();
     checkInCheckedInDate.getEditor().clear();
   }
 
@@ -526,6 +543,7 @@ public class HotelGUIController implements Initializable
     checkInAddress.clear();
     checkInDateOfBirth.getEditor().clear();
     checkInCheckOutDate.getEditor().clear();
+    checkInCheckedInDate.getEditor().setText(checkInCheckedInDate.getValue().toString());
   }
 
   /**

@@ -184,12 +184,12 @@
                                         <Label layoutX="14.0" layoutY="169.0" prefHeight="19.0" prefWidth="68.0" text="Date of Birth" />
                                         <DatePicker fx:id="checkInDateOfBirth" layoutX="14.0" layoutY="188.0" prefHeight="25.0" prefWidth="189.0" />
                                         <Button layoutX="354.0" layoutY="311.0" mnemonicParsing="false" onAction="#checkInClear" text="Clear" />
-                              <TextField fx:id="checkInRoomNumber" layoutX="16.0" layoutY="261.0" prefHeight="25.0" prefWidth="157.0" />
                               <Label layoutX="20.0" layoutY="237.0" text="Room Number" />
                               <Label layoutX="272.0" layoutY="169.0" prefHeight="19.0" prefWidth="68.0" text="Check - In" />
                               <DatePicker fx:id="checkInCheckedInDate" layoutX="271.0" layoutY="188.0" prefHeight="25.0" prefWidth="189.0" />
                               <DatePicker fx:id="checkInCheckOutDate" layoutX="271.0" layoutY="261.0" prefHeight="25.0" prefWidth="189.0" />
                               <Label layoutX="272.0" layoutY="236.0" prefHeight="19.0" prefWidth="68.0" text="Check - Out" />
+                              <ComboBox fx:id="checkInRoomNumber" layoutX="14.0" layoutY="261.0" prefHeight="25.0" prefWidth="190.0" />
                                     </children>
                                 </Pane>
                                 <Button layoutX="569.0" layoutY="323.0" mnemonicParsing="false" onAction="#checkInBack" text="Back" />
