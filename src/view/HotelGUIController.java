@@ -17,10 +17,11 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
+ * The type Hotel gui controller.
+ *
  * @author Pramesh Shrestha, Rajib Paudyal, Rodrigo Reyes
  * @version 1.0.0
  */
-
 public class HotelGUIController implements Initializable
 {
 
@@ -540,7 +541,9 @@ public class HotelGUIController implements Initializable
   }
 
   // -------------------------- check out methods starts from here ------------------------------
-
+  /**
+   * This function searches the Room number and the Checked-In date for the given guest .
+   */
   @FXML private void searchCheckIn(ActionEvent event)
   {
     Guest guest1 = manager.searchCheckIn(
@@ -562,13 +565,54 @@ public class HotelGUIController implements Initializable
     checkOutTableView.setItems(guest);
   }
 
-  @FXML private void checkOutSave(ActionEvent event)
+  /**
+   * This function sets the number of nights stayed according to the given date interval .
+   */
+
+  @FXML private void setNumberOfNights(ActionEvent event)
   {
+
+    if (checkedOutCheckOutDate.getValue() != null)
+    {
+      int numberOfNightsStayed=manager.calculateNumberOfNights(checkedOutCheckInDate.getValue(),
+          checkedOutCheckOutDate.getValue());
+      checkedOutNightsStayed.setText(String.valueOf(numberOfNightsStayed));
+    }
 
   }
 
+  /**
+   * This function calculates the final price according to the nights stayed whether or not a given discount.
+   */
   @FXML private void checkOutCalculate(ActionEvent event)
   {
+    Guest guest1 = manager.searchCheckIn(checkOutSearchFirstName.getText(),
+        checkOutSearchLastName.getText(), checkOutSearchPhoneNumber.getText());
+    double price=manager.calculatePrice(checkedOutCheckInDate.getValue(),
+        checkedOutCheckOutDate.getValue(), guest1.getRoomNumber(),
+        Double.parseDouble(checkedOutDiscountAmount.getText()));
+    checkedOutFinalPrice.setText(String.valueOf(price));
+  }
+
+  /**
+   * This function delates guest from the guest list and booking list.
+   */
+
+  @FXML private void checkOutSave(ActionEvent event)
+  {
+    if (!checkOutSearchFirstName.getText().equals("")&&!checkOutSearchLastName.getText().equals("")&&!checkOutSearchPhoneNumber.getText().equals(""))
+    {
+      Guest guest1 = manager.searchCheckIn(checkOutSearchFirstName.getText(),
+          checkOutSearchLastName.getText(), checkOutSearchPhoneNumber.getText());
+      manager.createCheckOut(guest1.getRoomNumber());
+      manager.deleteBookings(guest1.getFirstName(),guest1.getLastName(),guest1.getPhone());
+
+      Alert alert = new Alert(Alert.AlertType.INFORMATION);
+      alert.setTitle("The OverLook Hotel");
+      alert.setContentText("Check Out saved");
+      alert.showAndWait();
+    }
+
   }
 
   // -------------------------- All check-ins tab starts from here ------------------------------

@@ -559,6 +559,21 @@ public class HotelModelManager implements Serializable
     return initialPrice - ((initialPrice) * ((discountPercent) / 100));
   }
 
+  /**
+   * Calculate number of nights the guest stayed.
+   *
+   * @param arrivalDate     The date the guest is arriving
+   * @param departureDate   The date the guest is leaving the hotel.
+   * @return numberOfNights The Number of Nights the guest stayed
+   */
+  public int calculateNumberOfNights(LocalDate arrivalDate,LocalDate departureDate)
+  {
+    DateInterval tempDate = new DateInterval(arrivalDate, departureDate);
+    int numberOfNights = tempDate.getNumberOfNight(arrivalDate,departureDate);
+    return numberOfNights;
+  }
+
+
   // guest methods
 
   // add Guest

@@ -14,6 +14,7 @@ public class TestClass
     Room room1 = roomList.getRoom(1);
     Room room2 = roomList.getRoom(2);
 
+
 //        manager.createBooking(false,5,false,room1, "Pramesh","Shrestha", "Kolding","1234","Nepali",
 //            LocalDate.parse("2000-05-08"), LocalDate.parse("2022-05-20"), LocalDate.parse("2022-05-29"));
 //
