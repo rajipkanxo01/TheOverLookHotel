@@ -477,13 +477,8 @@ public class HotelGUIController implements Initializable
       alert.setContentText("Guest successfully checked-in");
       alert.showAndWait();
 
-      checkInFirstName.clear();
-      checkInLastName.clear();
-      checkInPhoneNumber.clear();
-      checkInNationality.clear();
-      checkInAddress.clear();
-      checkInDateOfBirth.getEditor().clear();
-      checkedOutCheckInDate.getEditor().clear();
+      clearCheckInBox();
+      clearCheckInSearchBox();
     }
   }
 
@@ -626,6 +621,7 @@ public class HotelGUIController implements Initializable
       }
     }
     allCheckInTableView.setItems(checkIns);
+
   }
 
   /**
