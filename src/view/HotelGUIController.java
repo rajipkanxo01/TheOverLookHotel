@@ -632,6 +632,10 @@ public class HotelGUIController implements Initializable
       alert.showAndWait();
     }
   }
+  /**
+   * This function clear the text fields in the tab check-out
+   */
+
 
   @FXML private void checkOutClear()
   {
