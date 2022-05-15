@@ -511,6 +511,7 @@ public class HotelGUIController implements Initializable
   {
     clearCheckInBox();
     checkInRoomNumber.clear();
+    checkInCheckedInDate.getEditor().clear();
   }
 
   /**
@@ -524,7 +525,6 @@ public class HotelGUIController implements Initializable
     checkInNationality.clear();
     checkInAddress.clear();
     checkInDateOfBirth.getEditor().clear();
-    checkInCheckedInDate.getEditor().clear();
     checkInCheckOutDate.getEditor().clear();
   }
 
