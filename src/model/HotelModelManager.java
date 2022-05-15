@@ -280,6 +280,7 @@ public class HotelModelManager implements Serializable
    *
    * @return A BookingList object.
    */
+
   public BookingList getAllBookings()
   {
     BookingList allBookings = new BookingList();
