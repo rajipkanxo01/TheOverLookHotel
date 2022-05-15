@@ -597,6 +597,36 @@ public class HotelGUIController implements Initializable
     checkInCombo.setPromptText("Select a room");
   }
 
+  /**
+   * This function gets all the guests that are checked in by room number
+   *
+   * @param event The event that triggered the method.
+   */
+  @FXML private void getAllGuestsByRoomNumber(ActionEvent event)
+  {
+    String selected = checkInCombo.getSelectionModel().getSelectedItem();
+    String roomNumber = manager.displayCheckInsByRoomNumber(selected);
+
+    allCheckInRoomNumberColumn.setCellValueFactory(new PropertyValueFactory<Guest,String>("roomNumber"));
+    allCheckInFirstNameColumn.setCellValueFactory((new PropertyValueFactory<Guest, String>("firstName")));
+    allCheckInLastNameColumn.setCellValueFactory((new PropertyValueFactory<Guest, String>("lastName")));
+    allCheckInPhoneNumberColumn.setCellValueFactory((new PropertyValueFactory<Guest, String>("phone")));
+    allCheckInCheckedInDateColumn.setCellValueFactory( new PropertyValueFactory<Guest, LocalDate>("checkedInDate"));
+    allCheckInCheckedOutDateColumn.setCellValueFactory( new PropertyValueFactory<Guest, LocalDate>("checkOutDate"));
+
+    ObservableList<Guest> checkIns = FXCollections.observableArrayList();
+    GuestList allCheckIns = manager.getAllCheckedIn();
+
+    for(int i = 0; i < allCheckIns.getNumberOfGuest(); i++)
+    {
+      if(allCheckIns.getGuestByIndex(i).getRoomNumber().equals(roomNumber))
+      {
+        checkIns.add(allCheckIns.getGuestByIndex(i));
+      }
+    }
+    allCheckInTableView.setItems(checkIns);
+  }
+
 
 
   // -------------------------- All Bookings tab starts from here ------------------------------
