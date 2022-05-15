@@ -23,7 +23,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="486.0" prefWidth="763.0" style="-fx-background-color: #E8F9FD;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.HotelGUIController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="486.0" prefWidth="763.0" style="-fx-background-color: #E8F9FD;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.HotelGUIController">
     <children>
         <HBox prefHeight="33.0" prefWidth="763.0" style="-fx-background-color: #2a5176;">
             <children>
@@ -227,7 +227,7 @@
                                     <children>
                                         <DatePicker fx:id="checkedOutCheckInDate" layoutX="17.0" layoutY="23.0" />
                                         <Label layoutX="17.0" layoutY="6.0" text="Check-In" />
-                                        <DatePicker fx:id="checkedOutCheckOutDate" layoutX="248.0" layoutY="23.0" />
+                                        <DatePicker fx:id="checkedOutCheckOutDate" layoutX="248.0" layoutY="23.0" onAction="#setNumberOfNights" />
                                         <Label layoutX="251.0" layoutY="6.0" text="Check-Out" />
                                         <Label layoutX="14.0" layoutY="68.0" text="Number of nights stayed" />
                                         <TextField fx:id="checkedOutNightsStayed" layoutX="14.0" layoutY="85.0" prefHeight="11.0" prefWidth="140.0" />

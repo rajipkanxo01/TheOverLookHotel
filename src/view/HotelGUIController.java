@@ -563,6 +563,12 @@ public class HotelGUIController implements Initializable
     ObservableList<Guest> guest = FXCollections.observableArrayList();
     guest.add(new Guest(guest1.getRoomNumber(), guest1.getCheckedInDate()));
     checkOutTableView.setItems(guest);
+
+    //Set the price and check-in of the book searched in the textField Initial Price
+
+    checkInCheckedInDate.setValue(guest1.getCheckedInDate());
+    checkedOutInitialPrice.setText(String.valueOf(manager.searchBooking(checkOutSearchFirstName.getText(), checkOutSearchLastName.getText(),
+        checkOutSearchPhoneNumber.getText()).getRoom().getPrice()));
   }
 
   /**
