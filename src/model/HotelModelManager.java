@@ -445,6 +445,46 @@ public class HotelModelManager implements Serializable
     return null;
   }
 
+  /**
+   * It removes a guest from the list of checked in guests
+   *
+   * @param roomNumber The room number of the guest to be removed.
+   */
+  public void removeCheckIn(String roomNumber)
+  {
+    GuestList allGuests = getAllCheckedIn();
+    GuestList newGuestList = new GuestList();
+    for(int i = 0; i < allGuests.getNumberOfGuest(); i++)
+    {
+      if(!(allGuests.getGuestByIndex(i).getRoomNumber().equals(roomNumber)))
+      {
+        newGuestList.addGuest(allGuests.getGuestByIndex(i));
+      }
+    }
+    updateCheckIn(newGuestList);
+  }
+
+  /**
+   * This function takes in a guest list and writes it to the guest file
+   *
+   * @param guestList The guest list object that contains the updated guest list.
+   */
+  public void updateCheckIn(GuestList guestList)
+  {
+    try
+    {
+      MyFileHandler.writeToBinaryFile(guestFileName, guestList);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.err.println("File Not Found");
+    }
+    catch (IOException e)
+    {
+      System.err.println("IO Exception Error");
+    }
+  }
+
   //Check-Out methods
 
   //Create check-out
