@@ -382,12 +382,19 @@ public class HotelGUIController implements Initializable
     selectionCheckInBackButton.select(createBooking);
   }
 
+  /**
+   * This is an event in a checkIn Tab, that searches for a booking by the guest's first name, last name, and phone
+   * number, and if it finds one, it displays the guest's information in the
+   * check-in tab
+   *
+   * @param event The event that triggered the method.
+   */
   @FXML private void checkInSearch(ActionEvent event)
   {
-    String firstName = checkInSearchFirstName.getText().trim();
-    String lastName = checkInSearchLastName.getText().trim();
-    String phoneNumber = checkInSearchPhoneNumber.getText().trim();
-    boolean booked = false;
+    /*Setting up what data to display in the two columns of Table.
+    The TableView in JavaFX is used to show the which room(room number) was booked
+    in the first column and by whom (the first name and the last name)
+    in the second column*/
 
     checkInNumberColumn.setCellValueFactory(
         new PropertyValueFactory<Booking, String>("roomNumber"));
@@ -399,12 +406,25 @@ public class HotelGUIController implements Initializable
 
     ObservableList<Booking> booking = FXCollections.observableArrayList();
 
+    //The trim method at the end removes any extra spaces
+    //Getting texts from the TextField
+    String firstName = checkInSearchFirstName.getText().trim();
+    String lastName = checkInSearchLastName.getText().trim();
+    String phoneNumber = checkInSearchPhoneNumber.getText().trim();
+    //initializing a boolean value for the alert message
+    boolean booked = false;
+
+    /*This calls the search booking method which compares the provided parameters
+    in the BookingList and returns a booking that matches*/
     Booking bookingBy = manager.searchBooking(firstName, lastName, phoneNumber);
     booking.add(bookingBy);
+    //This will set the data from the booking that matched in the TableView.
     checkInTableView.setItems(booking);
 
+    /*Compares the firstname, lastname and the phone in the booking list and
+    * sets the corresponding TextFields with firstname, lastname,phoneNumber,
+    * nationality,roomNumber, address and dateOfBirth from the matched booking. */
     BookingList bookingList = manager.getAllBookings();
-
     for (int i = 0; i < bookingList.getTotalNumberOfBookings(); i++)
     {
       if (bookingList.getBookingByIndex(i).getGuest().getFirstName()
@@ -427,6 +447,7 @@ public class HotelGUIController implements Initializable
         break;
       }
     }
+    //Alert message in case no booking is matched with the provided firstName, lastName and phoneNumber
     if (!booked)
     {
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
