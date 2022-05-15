@@ -23,7 +23,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="486.0" prefWidth="763.0" style="-fx-background-color: #E8F9FD;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.HotelGUIController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="486.0" prefWidth="763.0" style="-fx-background-color: #E8F9FD;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.HotelGUIController">
     <children>
         <HBox prefHeight="33.0" prefWidth="763.0" style="-fx-background-color: #2a5176;">
             <children>
@@ -239,6 +239,8 @@
                                         <TextField fx:id="checkedOutFinalPrice" layoutX="14.0" layoutY="198.0" prefHeight="11.0" prefWidth="140.0" />
                                         <Button layoutX="403.0" layoutY="139.0" mnemonicParsing="false" onAction="#checkOutCalculate" text="Calculate" />
                                         <Button layoutX="399.0" layoutY="239.0" mnemonicParsing="false" onAction="#checkOutSave" text="Check-Out" />
+                              <Label layoutX="246.0" layoutY="67.0" text="Room Number'" />
+                              <TextField fx:id="checkOutRoomNumber" layoutX="246.0" layoutY="85.0" prefHeight="11.0" prefWidth="140.0" />
                                     </children>
                                 </Pane>
                                 <TableView fx:id="checkOutTableView" layoutX="14.0" layoutY="261.0" prefHeight="59.0" prefWidth="200.0">

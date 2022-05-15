@@ -327,7 +327,7 @@ public class HotelModelManager implements Serializable
       }
     }
 
-//    updateRoom(allRooms);
+    updateRoom(allRooms);
     updateBooking(bookings);
   }
 
@@ -473,6 +473,7 @@ public class HotelModelManager implements Serializable
   {
     GuestList allGuests = getAllCheckedIn();
     GuestList newGuestList = new GuestList();
+
     for(int i = 0; i < allGuests.getNumberOfGuest(); i++)
     {
       if(!(allGuests.getGuestByIndex(i).getRoomNumber().equals(roomNumber)))
@@ -524,33 +525,7 @@ public class HotelModelManager implements Serializable
   }
   //Check-Out methods
 
-  //Create check-out
 
-  /**
-   * This function takes in a room number and removes all guests from the guest
-   * list that are checked into that room
-   *
-   * @param roomNumber The room number of the guest that is checking out.
-   */
-  public void createCheckOut(String roomNumber)
-  {
-    GuestList guests = getAllCheckedIn();
-    RoomList allRoooms = getAllRooms();
-    ArrayList<Guest> tempGuest = new ArrayList();
-    for (int i = 0; i < guests.getNumberOfGuest(); i++)
-    {
-      if (guests.getGuestByIndex(i).getRoomNumber().equals(roomNumber))
-      {
-        tempGuest.add(guests.getGuestByIndex(i));
-      }
-    }
-    allRoooms.getRoomByRoomNumber(roomNumber).changeAvailabilityAtCheckOut();
-    guests.removeGuestList(tempGuest);
-
-    updateRoom(allRoooms);
-    updateGuest(guests);
-
-  }
 
   // calculate price for nights stayed
 
