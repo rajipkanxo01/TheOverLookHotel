@@ -182,6 +182,22 @@ public class HotelModelManager implements Serializable
   //    return allBookedRooms;
   //  }
 
+  public void updateRoom(RoomList rooms)
+  {
+    try
+    {
+      MyFileHandler.writeToBinaryFile(roomFileName, rooms);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.err.println("File Not Found");
+    }
+    catch (IOException e)
+    {
+      System.err.println("IO Exception Error");
+    }
+  }
+
   // updates availability status of room in binary file
 
   /**
@@ -241,7 +257,6 @@ public class HotelModelManager implements Serializable
     Guest guest = new Guest(firstName, lastName, address, phone, nationality,
         dateOfBirth);
 
-    DateInterval dateInterval = new DateInterval(arrivalDate, departureDate);
     //    RoomList allRooms = getAllRooms();
 
     // creating booking object , adding it to booking object and save it to file
@@ -293,6 +308,11 @@ public class HotelModelManager implements Serializable
   public void deleteBookings(String firstName, String lastName, String phone)
   {
     BookingList allBookings = getAllBookings();
+    Booking searchedBooking = searchBooking(firstName, lastName, phone);
+    RoomList allRooms = getAllRooms();
+
+    allRooms.getRoomByRoomNumber(searchedBooking.getRoomNumber())
+        .changeAvailabilityAtCheckOut();
 
     BookingList bookings = new BookingList();
     for (int i = 0; i < allBookings.getTotalNumberOfBookings(); i++)
@@ -303,12 +323,11 @@ public class HotelModelManager implements Serializable
           .getGuest().getPhone().equals(phone)))
       {
         bookings.addBooking(allBookings.getBookingByIndex(i));
-        getAllRooms().getRoomByRoomNumber(
-                allBookings.getBookingByIndex(i).getRoomNumber())
-            .changeAvailabilityAtCheckOut();
+
       }
     }
 
+    updateRoom(allRooms);
     updateBooking(bookings);
   }
 
@@ -454,6 +473,7 @@ public class HotelModelManager implements Serializable
   {
     GuestList allGuests = getAllCheckedIn();
     GuestList newGuestList = new GuestList();
+
     for(int i = 0; i < allGuests.getNumberOfGuest(); i++)
     {
       if(!(allGuests.getGuestByIndex(i).getRoomNumber().equals(roomNumber)))
@@ -505,32 +525,7 @@ public class HotelModelManager implements Serializable
   }
   //Check-Out methods
 
-  //Create check-out
 
-  /**
-   * This function takes in a room number and removes all guests from the guest
-   * list that are checked into that room
-   *
-   * @param roomNumber The room number of the guest that is checking out.
-   */
-  public void createCheckOut(String roomNumber)
-  {
-    GuestList guests = getAllCheckedIn();
-    RoomList allRoooms = getAllRooms();
-    ArrayList<Guest> tempGuest = new ArrayList();
-    for (int i = 0; i < guests.getNumberOfGuest(); i++)
-    {
-      if (guests.getGuestByIndex(i).getRoomNumber().equals(roomNumber))
-      {
-        tempGuest.add(guests.getGuestByIndex(i));
-      }
-    }
-    allRoooms.getRoomByRoomNumber(roomNumber).changeAvailabilityAtCheckOut();
-    guests.removeGuestList(tempGuest);
-
-    updateGuest(guests);
-
-  }
 
   // calculate price for nights stayed
 

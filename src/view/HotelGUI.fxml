@@ -227,7 +227,7 @@
                                     <children>
                                         <DatePicker fx:id="checkedOutCheckInDate" layoutX="17.0" layoutY="23.0" />
                                         <Label layoutX="17.0" layoutY="6.0" text="Check-In" />
-                                        <DatePicker fx:id="checkedOutCheckOutDate" layoutX="248.0" layoutY="23.0" />
+                                        <DatePicker fx:id="checkedOutCheckOutDate" layoutX="248.0" layoutY="23.0" onAction="#setNumberOfNights" />
                                         <Label layoutX="251.0" layoutY="6.0" text="Check-Out" />
                                         <Label layoutX="14.0" layoutY="68.0" text="Number of nights stayed" />
                                         <TextField fx:id="checkedOutNightsStayed" layoutX="14.0" layoutY="85.0" prefHeight="11.0" prefWidth="140.0" />
@@ -239,6 +239,8 @@
                                         <TextField fx:id="checkedOutFinalPrice" layoutX="14.0" layoutY="198.0" prefHeight="11.0" prefWidth="140.0" />
                                         <Button layoutX="403.0" layoutY="139.0" mnemonicParsing="false" onAction="#checkOutCalculate" text="Calculate" />
                                         <Button layoutX="399.0" layoutY="239.0" mnemonicParsing="false" onAction="#checkOutSave" text="Check-Out" />
+                              <Label layoutX="246.0" layoutY="67.0" text="Room Number" />
+                              <TextField fx:id="checkOutRoomNumber" layoutX="246.0" layoutY="85.0" prefHeight="11.0" prefWidth="140.0" />
                                     </children>
                                 </Pane>
                                 <TableView fx:id="checkOutTableView" layoutX="14.0" layoutY="261.0" prefHeight="59.0" prefWidth="200.0">

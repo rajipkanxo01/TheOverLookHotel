@@ -139,6 +139,8 @@ public class Room implements Serializable
   public void changeAvailabilityAtCheckOut()
   {
     available = true;
+    bookStartDate = LocalDate.MIN;
+    bookEndDate = LocalDate.MIN;
   }
 
   /**
