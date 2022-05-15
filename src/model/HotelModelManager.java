@@ -485,6 +485,24 @@ public class HotelModelManager implements Serializable
     }
   }
 
+  /**
+   * This function returns the room number of the guest who is checked in
+   *
+   * @param roomNumber The room number of the guest you want to display.
+   * @return The room number of the guest.
+   */
+  public String displayCheckInsByRoomNumber(String roomNumber)
+  {
+    GuestList allGuests = getAllCheckedIn();
+    for(int i = 0; i < allGuests.getNumberOfGuest(); i++)
+    {
+      if(allGuests.getGuestByIndex(i).getRoomNumber().equals(roomNumber))
+      {
+        return allGuests.getGuestByIndex(i).getRoomNumber();
+      }
+    }
+    return null;
+  }
   //Check-Out methods
 
   //Create check-out
