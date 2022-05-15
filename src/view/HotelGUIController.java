@@ -73,6 +73,7 @@ public class HotelGUIController implements Initializable
   @FXML private TextField checkInRoomNumber;
   @FXML private Tab checkInTab;
   @FXML private TableView<Booking> checkInTableView;
+  @FXML private ComboBox<String> checkInCombo;
 
   // Check Out tab private fields
   @FXML private TableColumn<Guest, String> checkOutCheckedIn;
@@ -116,6 +117,8 @@ public class HotelGUIController implements Initializable
         0, 10, 0);
     this.bookingNumberOfGuest.setValueFactory(spinnerValueFactory);
 
+    //This method sets all the rooms to comboBox
+    setRoomToComboBox();
   }
   // -------------------------- room status methods starts from here ------------------------------
 
@@ -484,20 +487,39 @@ public class HotelGUIController implements Initializable
   }
 
   /**
-   * It clears all the text fields in the check in tab
+   * It clears all the text fields  except the room TextField in the check in tab
    *
    * @param event The event that triggered the action.
    */
   @FXML private void checkInClear(ActionEvent event)
+  {
+    clearCheckInBox();
+    checkInRoomNumber.clear();
+  }
+
+  /**
+   * It clears all the text fields in the check in tab
+   */
+  public void clearCheckInBox()
   {
     checkInFirstName.clear();
     checkInLastName.clear();
     checkInPhoneNumber.clear();
     checkInNationality.clear();
     checkInAddress.clear();
-    checkInRoomNumber.clear();
     checkInDateOfBirth.getEditor().clear();
-    checkedOutCheckInDate.getEditor().clear();
+    checkInCheckedInDate.getEditor().clear();
+    checkInCheckOutDate.getEditor().clear();
+  }
+
+  /**
+   * This function clears the check-in search box.
+   */
+  public void clearCheckInSearchBox()
+  {
+    checkInSearchFirstName.clear();
+    checkInSearchLastName.clear();
+    checkInSearchPhoneNumber.clear();
   }
 
   // -------------------------- check out methods starts from here ------------------------------
@@ -543,6 +565,18 @@ public class HotelGUIController implements Initializable
    */
   public void getAllCheckIns(ActionEvent event)
   {
+  }
+
+  public void setRoomToComboBox()
+  {
+    ObservableList<String> list = FXCollections.observableArrayList();
+    list.addAll("SBS-C1", "SBS-C2","SBS-C3","3SBS-C4","2SBS-C5",
+        "SR-A1","SR-A2","SR-A3","SR-A4","SR-A5","SR-A6","SR-A7","SR-A8","SR-A9","SR-A10",
+        "DR-A11","DR-A12","DR-A13","DR-A14","DR-A15","DR-A16","DR-A17","DR-A18",
+        "DR-B19","DR-B20","DR-B21","DR-B22","DR-B23","DR-B24","DR-B25","DR-B26","DR-B27",
+        "DR-B28","DR-B29","DR-B30","DR-B31","DR-B32","DR-B33","DR-B34","DR-B35","DR-B36","DR-B37");
+    checkInCombo.setItems(list);
+    checkInCombo.setPromptText("Select a room");
   }
 
   // -------------------------- All Bookings tab starts from here ------------------------------
