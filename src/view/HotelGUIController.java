@@ -13,7 +13,6 @@ import model.*;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 /**
@@ -77,7 +76,7 @@ public class HotelGUIController implements Initializable
   @FXML private ComboBox<String> checkInCombo;
 
   // Check Out tab private fields
-  @FXML private TableColumn<Guest, String> checkOutCheckedIn;
+  @FXML private TableColumn<Guest, LocalDate> checkOutCheckedIn;
   @FXML private TableColumn<Guest, String> checkOutColumnNumber;
   @FXML private TextField checkOutSearchFirstName;
   @FXML private TextField checkOutSearchLastName;
@@ -552,12 +551,10 @@ public class HotelGUIController implements Initializable
         checkOutSearchPhoneNumber.getText().trim());
 
     checkOutColumnNumber.setCellValueFactory(
-        cellData -> new SimpleStringProperty(
-            cellData.getValue().getRoomNumber()));
+        new PropertyValueFactory<>("roomNumber"));
     checkOutColumnNumber.setStyle("-fx-alignment: CENTER;");
 
-    checkOutCheckedIn.setCellValueFactory(cellData -> new SimpleStringProperty(
-        cellData.getValue().getCheckedInDate().toString()));
+    checkOutCheckedIn.setCellValueFactory(new PropertyValueFactory<>("checkedIn"));
     checkOutCheckedIn.setStyle("-fx-alignment: CENTER;");
 
     ObservableList<Guest> guest = FXCollections.observableArrayList();

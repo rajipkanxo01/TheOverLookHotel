@@ -239,7 +239,7 @@
                                         <TextField fx:id="checkedOutFinalPrice" layoutX="14.0" layoutY="198.0" prefHeight="11.0" prefWidth="140.0" />
                                         <Button layoutX="403.0" layoutY="139.0" mnemonicParsing="false" onAction="#checkOutCalculate" text="Calculate" />
                                         <Button layoutX="399.0" layoutY="239.0" mnemonicParsing="false" onAction="#checkOutSave" text="Check-Out" />
-                              <Label layoutX="246.0" layoutY="67.0" text="Room Number'" />
+                              <Label layoutX="246.0" layoutY="67.0" text="Room Number" />
                               <TextField fx:id="checkOutRoomNumber" layoutX="246.0" layoutY="85.0" prefHeight="11.0" prefWidth="140.0" />
                                     </children>
                                 </Pane>
