@@ -393,12 +393,12 @@ public class HotelModelManager implements Serializable
    */
   public void createCheckIn(String firstName, String lastName, String address,
       String phone, String nationality, LocalDate dateOfBirth,
-      LocalDate checkInDate, String roomNumber)
+      LocalDate checkInDate,LocalDate checkOutDate, String roomNumber)
   {
     GuestList guests = getAllCheckedIn();
     guests.addGuest(
         new Guest(firstName, lastName, address, phone, nationality, dateOfBirth,
-            checkInDate, roomNumber));
+            checkInDate,checkOutDate, roomNumber));
 
     updateGuest(guests);
   }
@@ -464,6 +464,64 @@ public class HotelModelManager implements Serializable
     return null;
   }
 
+  /**
+   * It removes a guest from the list of checked in guests
+   *
+   * @param roomNumber The room number of the guest to be removed.
+   */
+  public void removeCheckIn(String roomNumber)
+  {
+    GuestList allGuests = getAllCheckedIn();
+    GuestList newGuestList = new GuestList();
+    for(int i = 0; i < allGuests.getNumberOfGuest(); i++)
+    {
+      if(!(allGuests.getGuestByIndex(i).getRoomNumber().equals(roomNumber)))
+      {
+        newGuestList.addGuest(allGuests.getGuestByIndex(i));
+      }
+    }
+    updateCheckIn(newGuestList);
+  }
+
+  /**
+   * This function takes in a guest list and writes it to the guest file
+   *
+   * @param guestList The guest list object that contains the updated guest list.
+   */
+  public void updateCheckIn(GuestList guestList)
+  {
+    try
+    {
+      MyFileHandler.writeToBinaryFile(guestFileName, guestList);
+    }
+    catch (FileNotFoundException e)
+    {
+      System.err.println("File Not Found");
+    }
+    catch (IOException e)
+    {
+      System.err.println("IO Exception Error");
+    }
+  }
+
+  /**
+   * This function returns the room number of the guest who is checked in
+   *
+   * @param roomNumber The room number of the guest you want to display.
+   * @return The room number of the guest.
+   */
+  public String displayCheckInsByRoomNumber(String roomNumber)
+  {
+    GuestList allGuests = getAllCheckedIn();
+    for(int i = 0; i < allGuests.getNumberOfGuest(); i++)
+    {
+      if(allGuests.getGuestByIndex(i).getRoomNumber().equals(roomNumber))
+      {
+        return allGuests.getGuestByIndex(i).getRoomNumber();
+      }
+    }
+    return null;
+  }
   //Check-Out methods
 
   //Create check-out

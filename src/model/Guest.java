@@ -18,6 +18,7 @@ public class Guest implements Serializable
   private String nationality;
   private LocalDate dateOfBirth;
   private LocalDate checkedInDate;
+  private LocalDate checkOutDate;
   private String roomNumber;
 
   /**
@@ -53,18 +54,33 @@ public class Guest implements Serializable
    * @param roomNumber   room number of guest
    */
 
-  public Guest(String firstName, String lastName, String address, String phone,
-      String nationality, LocalDate dateOfBirth, LocalDate checkedInDate, String roomNumber)
+//  public Guest(String firstName, String lastName, String address, String phone,
+//      String nationality, LocalDate dateOfBirth, LocalDate checkedInDate, String roomNumber)
+//  {
+//    this.firstName = firstName;
+//    this.lastName = lastName;
+//    this.address = address;
+//    this.phone = phone;
+//    this.nationality = nationality;
+//    this.dateOfBirth = dateOfBirth;
+//    this.checkedInDate = checkedInDate;
+//    this.roomNumber = roomNumber;
+//  }
+
+  // This is a constructor that takes in all the parameters and sets the values of
+  // the variables to the parameters.
+  public Guest(String firstName, String lastName, String address, String phone,String nationality, LocalDate dateOfBirth,
+      LocalDate checkedInDate,LocalDate checkOutDate, String roomNumber)
   {
     this.firstName = firstName;
     this.lastName = lastName;
     this.address = address;
     this.phone = phone;
+    this.roomNumber = roomNumber;
     this.nationality = nationality;
     this.dateOfBirth = dateOfBirth;
     this.checkedInDate = checkedInDate;
-    this.roomNumber = roomNumber;
-
+    this.checkOutDate = checkOutDate;
   }
 
   /**
@@ -215,9 +231,18 @@ public class Guest implements Serializable
    *
    * @return the check in date
    */
-  public LocalDate getCheckInDate()
+  public LocalDate getCheckedInDate()
   {
     return checkedInDate;
+  }
+  /**
+   * This function returns the checkOutDate of the current object
+   *
+   * @return The checkOutDate is being returned.
+   */
+  public LocalDate getCheckOutDate()
+  {
+    return checkOutDate;
   }
 
   /**

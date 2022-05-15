@@ -69,9 +69,11 @@ public class HotelGUIController implements Initializable
   @FXML private TextField checkInSearchLastName;
   @FXML private TextField checkInSearchPhoneNumber;
   @FXML private DatePicker checkInCheckedInDate;
+  @FXML private DatePicker checkInCheckOutDate;
   @FXML private TextField checkInRoomNumber;
   @FXML private Tab checkInTab;
   @FXML private TableView<Booking> checkInTableView;
+  @FXML private ComboBox<String> checkInCombo;
 
   // Check Out tab private fields
   @FXML private TableColumn<Guest, String> checkOutCheckedIn;
@@ -90,13 +92,13 @@ public class HotelGUIController implements Initializable
 
   // All Check-In tab private fields
   @FXML private Tab allCheckInsTab;
-  @FXML private TableColumn<?, ?> allCheckInCheckedInDates;
-  @FXML private TableColumn<?, ?> allCheckInCheckedOutDates;
-  @FXML private TableColumn<?, ?> allCheckInFirstName;
-  @FXML private TableColumn<?, ?> allCheckInLastName;
-  @FXML private TableColumn<?, ?> allCheckInPhoneNumber;
-  @FXML private TableColumn<?, ?> allCheckInRoomNumber;
-  @FXML private TableView<?> allCheckInTableView;
+  @FXML private TableColumn<Guest, LocalDate>  allCheckInCheckedInDateColumn;
+  @FXML private TableColumn<Guest, LocalDate> allCheckInCheckedOutDateColumn;
+  @FXML private TableColumn<Guest, String> allCheckInFirstNameColumn;
+  @FXML private TableColumn<Guest, String> allCheckInLastNameColumn;
+  @FXML private TableColumn<Guest, String> allCheckInPhoneNumberColumn;
+  @FXML private TableColumn<Guest, String> allCheckInRoomNumberColumn;
+  @FXML private TableView<Guest> allCheckInTableView;
 
   //All Bookings tab private fields
 
@@ -115,6 +117,8 @@ public class HotelGUIController implements Initializable
         0, 10, 0);
     this.bookingNumberOfGuest.setValueFactory(spinnerValueFactory);
 
+    //This method sets all the rooms to comboBox
+    setRoomToComboBox();
   }
   // -------------------------- room status methods starts from here ------------------------------
 
@@ -378,12 +382,19 @@ public class HotelGUIController implements Initializable
     selectionCheckInBackButton.select(createBooking);
   }
 
+  /**
+   * This is an event in a checkIn Tab, that searches for a booking by the guest's first name, last name, and phone
+   * number, and if it finds one, it displays the guest's information in the
+   * check-in tab
+   *
+   * @param event The event that triggered the method.
+   */
   @FXML private void checkInSearch(ActionEvent event)
   {
-    String firstName = checkInSearchFirstName.getText().trim();
-    String lastName = checkInSearchLastName.getText().trim();
-    String phoneNumber = checkInSearchPhoneNumber.getText().trim();
-    boolean booked = false;
+    /*Setting up what data to display in the two columns of Table.
+    The TableView in JavaFX is used to show the which room(room number) was booked
+    in the first column and by whom (the first name and the last name)
+    in the second column*/
 
     checkInNumberColumn.setCellValueFactory(
         new PropertyValueFactory<Booking, String>("roomNumber"));
@@ -395,12 +406,25 @@ public class HotelGUIController implements Initializable
 
     ObservableList<Booking> booking = FXCollections.observableArrayList();
 
+    //The trim method at the end removes any extra spaces
+    //Getting texts from the TextField
+    String firstName = checkInSearchFirstName.getText().trim();
+    String lastName = checkInSearchLastName.getText().trim();
+    String phoneNumber = checkInSearchPhoneNumber.getText().trim();
+    //initializing a boolean value for the alert message
+    boolean booked = false;
+
+    /*This calls the search booking method which compares the provided parameters
+    in the BookingList and returns a booking that matches*/
     Booking bookingBy = manager.searchBooking(firstName, lastName, phoneNumber);
     booking.add(bookingBy);
+    //This will set the data from the booking that matched in the TableView.
     checkInTableView.setItems(booking);
 
+    /*Compares the firstname, lastname and the phone in the booking list and
+    * sets the corresponding TextFields with firstname, lastname,phoneNumber,
+    * nationality,roomNumber, address and dateOfBirth from the matched booking. */
     BookingList bookingList = manager.getAllBookings();
-
     for (int i = 0; i < bookingList.getTotalNumberOfBookings(); i++)
     {
       if (bookingList.getBookingByIndex(i).getGuest().getFirstName()
@@ -423,6 +447,7 @@ public class HotelGUIController implements Initializable
         break;
       }
     }
+    //Alert message in case no booking is matched with the provided firstName, lastName and phoneNumber
     if (!booked)
     {
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -451,6 +476,7 @@ public class HotelGUIController implements Initializable
     String roomNumber = checkInRoomNumber.getText().trim();
     LocalDate dateOfBirth = checkInDateOfBirth.getValue();
     LocalDate checkInDate = checkInCheckedInDate.getValue();
+    LocalDate checkoutDate = checkInCheckOutDate.getValue();
 
     //If any field is left out it alerts the user with a warning message
     if (firstName.equals("") || lastName.equals("") || phoneNumber.equals("")
@@ -466,37 +492,51 @@ public class HotelGUIController implements Initializable
     else
     {
       manager.createCheckIn(firstName, lastName, address, phoneNumber,
-          nationality, dateOfBirth, checkInDate, roomNumber);
+          nationality, dateOfBirth, checkInDate, checkoutDate, roomNumber);
       Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
       alert.setHeaderText("Checked in");
       alert.setContentText("Guest successfully checked-in");
       alert.showAndWait();
 
-      checkInFirstName.clear();
-      checkInLastName.clear();
-      checkInPhoneNumber.clear();
-      checkInNationality.clear();
-      checkInAddress.clear();
-      checkInDateOfBirth.getEditor().clear();
-      checkedOutCheckInDate.getEditor().clear();
+      clearCheckInBox();
+      clearCheckInSearchBox();
     }
   }
 
   /**
-   * It clears all the text fields in the check in tab
+   * It clears all the text fields  except the room TextField in the check in tab
    *
    * @param event The event that triggered the action.
    */
   @FXML private void checkInClear(ActionEvent event)
+  {
+    clearCheckInBox();
+    checkInRoomNumber.clear();
+  }
+
+  /**
+   * It clears all the text fields in the check in tab
+   */
+  public void clearCheckInBox()
   {
     checkInFirstName.clear();
     checkInLastName.clear();
     checkInPhoneNumber.clear();
     checkInNationality.clear();
     checkInAddress.clear();
-    checkInRoomNumber.clear();
     checkInDateOfBirth.getEditor().clear();
-    checkedOutCheckInDate.getEditor().clear();
+    checkInCheckedInDate.getEditor().clear();
+    checkInCheckOutDate.getEditor().clear();
+  }
+
+  /**
+   * This function clears the check-in search box.
+   */
+  public void clearCheckInSearchBox()
+  {
+    checkInSearchFirstName.clear();
+    checkInSearchLastName.clear();
+    checkInSearchPhoneNumber.clear();
   }
 
   // -------------------------- check out methods starts from here ------------------------------
@@ -514,11 +554,11 @@ public class HotelGUIController implements Initializable
     checkOutColumnNumber.setStyle("-fx-alignment: CENTER;");
 
     checkOutCheckedIn.setCellValueFactory(cellData -> new SimpleStringProperty(
-        cellData.getValue().getCheckInDate().toString()));
+        cellData.getValue().getCheckedInDate().toString()));
     checkOutCheckedIn.setStyle("-fx-alignment: CENTER;");
 
     ObservableList<Guest> guest = FXCollections.observableArrayList();
-    guest.add(new Guest(guest1.getRoomNumber(), guest1.getCheckInDate()));
+    guest.add(new Guest(guest1.getRoomNumber(), guest1.getCheckedInDate()));
     checkOutTableView.setItems(guest);
   }
 
@@ -540,9 +580,87 @@ public class HotelGUIController implements Initializable
    * @param event The event that triggered the action.
    * @author Pramesh Shrestha
    */
-  public void getAllCheckIns(ActionEvent event)
+  //-----------------------------------------------------------------------------------------------------------------
+  @FXML
+  private void allCheckInsButton(ActionEvent event)
   {
+    allCheckInRoomNumberColumn.setCellValueFactory(new PropertyValueFactory<Guest,String>("roomNumber"));
+    allCheckInFirstNameColumn.setCellValueFactory((new PropertyValueFactory<Guest, String>("firstName")));
+    allCheckInLastNameColumn.setCellValueFactory((new PropertyValueFactory<Guest, String>("lastName")));
+    allCheckInPhoneNumberColumn.setCellValueFactory((new PropertyValueFactory<Guest, String>("phone")));
+    allCheckInCheckedInDateColumn.setCellValueFactory( new PropertyValueFactory<Guest, LocalDate>("checkedInDate"));
+    allCheckInCheckedOutDateColumn.setCellValueFactory( new PropertyValueFactory<Guest, LocalDate>("checkOutDate"));
+
+    ObservableList<Guest> checkIns = FXCollections.observableArrayList();
+    GuestList allCheckIns = manager.getAllCheckedIn();
+
+    for(int i = 0; i < allCheckIns.getNumberOfGuest(); i++)
+    {
+      checkIns.add(allCheckIns.getGuestByIndex(i));
+    }
+    allCheckInTableView.setItems(checkIns);
+
   }
+
+  public void setRoomToComboBox()
+  {
+    ObservableList<String> list = FXCollections.observableArrayList();
+    list.addAll("SBS-C1", "SBS-C2","SBS-C3","3SBS-C4","2SBS-C5",
+        "SR-A1","SR-A2","SR-A3","SR-A4","SR-A5","SR-A6","SR-A7","SR-A8","SR-A9","SR-A10",
+        "DR-A11","DR-A12","DR-A13","DR-A14","DR-A15","DR-A16","DR-A17","DR-A18",
+        "DR-B19","DR-B20","DR-B21","DR-B22","DR-B23","DR-B24","DR-B25","DR-B26","DR-B27",
+        "DR-B28","DR-B29","DR-B30","DR-B31","DR-B32","DR-B33","DR-B34","DR-B35","DR-B36","DR-B37");
+    checkInCombo.setItems(list);
+    checkInCombo.setPromptText("Select a room");
+  }
+
+  /**
+   * This function gets all the guests that are checked in by room number
+   *
+   * @param event The event that triggered the method.
+   */
+  @FXML private void getAllGuestsByRoomNumber(ActionEvent event)
+  {
+    String selected = checkInCombo.getSelectionModel().getSelectedItem();
+    String roomNumber = manager.displayCheckInsByRoomNumber(selected);
+
+    allCheckInRoomNumberColumn.setCellValueFactory(new PropertyValueFactory<Guest,String>("roomNumber"));
+    allCheckInFirstNameColumn.setCellValueFactory((new PropertyValueFactory<Guest, String>("firstName")));
+    allCheckInLastNameColumn.setCellValueFactory((new PropertyValueFactory<Guest, String>("lastName")));
+    allCheckInPhoneNumberColumn.setCellValueFactory((new PropertyValueFactory<Guest, String>("phone")));
+    allCheckInCheckedInDateColumn.setCellValueFactory( new PropertyValueFactory<Guest, LocalDate>("checkedInDate"));
+    allCheckInCheckedOutDateColumn.setCellValueFactory( new PropertyValueFactory<Guest, LocalDate>("checkOutDate"));
+
+    ObservableList<Guest> checkIns = FXCollections.observableArrayList();
+    GuestList allCheckIns = manager.getAllCheckedIn();
+
+    for(int i = 0; i < allCheckIns.getNumberOfGuest(); i++)
+    {
+      if(allCheckIns.getGuestByIndex(i).getRoomNumber().equals(roomNumber))
+      {
+        checkIns.add(allCheckIns.getGuestByIndex(i));
+      }
+    }
+    allCheckInTableView.setItems(checkIns);
+
+  }
+
+  /**
+   * The function removes the selected check-in from the check-in combo box and
+   * from the database
+   *
+   * @param event The event that triggered the method.
+   */
+  @FXML
+  private void removeCheckIn(ActionEvent event)
+  {
+    //    int selectedID = checkInTableView.getSelectionModel().getSelectedIndex();
+    //    checkInTableView.getItems().remove(selectedID);
+    String selected = checkInCombo.getSelectionModel().getSelectedItem().trim();
+    manager.removeCheckIn(selected);
+  }
+
+
 
   // -------------------------- All Bookings tab starts from here ------------------------------
 
