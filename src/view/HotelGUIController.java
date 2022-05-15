@@ -627,6 +627,21 @@ public class HotelGUIController implements Initializable
     allCheckInTableView.setItems(checkIns);
   }
 
+  /**
+   * The function removes the selected check-in from the check-in combo box and
+   * from the database
+   *
+   * @param event The event that triggered the method.
+   */
+  @FXML
+  private void removeCheckIn(ActionEvent event)
+  {
+    //    int selectedID = checkInTableView.getSelectionModel().getSelectedIndex();
+    //    checkInTableView.getItems().remove(selectedID);
+    String selected = checkInCombo.getSelectionModel().getSelectedItem().trim();
+    manager.removeCheckIn(selected);
+  }
+
 
 
   // -------------------------- All Bookings tab starts from here ------------------------------
