@@ -455,6 +455,7 @@ public class HotelGUIController implements Initializable
     String roomNumber = checkInRoomNumber.getText().trim();
     LocalDate dateOfBirth = checkInDateOfBirth.getValue();
     LocalDate checkInDate = checkInCheckedInDate.getValue();
+    LocalDate checkoutDate = checkInCheckOutDate.getValue();
 
     //If any field is left out it alerts the user with a warning message
     if (firstName.equals("") || lastName.equals("") || phoneNumber.equals("")
@@ -470,7 +471,7 @@ public class HotelGUIController implements Initializable
     else
     {
       manager.createCheckIn(firstName, lastName, address, phoneNumber,
-          nationality, dateOfBirth, checkInDate, roomNumber);
+          nationality, dateOfBirth, checkInDate, checkoutDate, roomNumber);
       Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
       alert.setHeaderText("Checked in");
       alert.setContentText("Guest successfully checked-in");
@@ -537,11 +538,11 @@ public class HotelGUIController implements Initializable
     checkOutColumnNumber.setStyle("-fx-alignment: CENTER;");
 
     checkOutCheckedIn.setCellValueFactory(cellData -> new SimpleStringProperty(
-        cellData.getValue().getCheckInDate().toString()));
+        cellData.getValue().getCheckedInDate().toString()));
     checkOutCheckedIn.setStyle("-fx-alignment: CENTER;");
 
     ObservableList<Guest> guest = FXCollections.observableArrayList();
-    guest.add(new Guest(guest1.getRoomNumber(), guest1.getCheckInDate()));
+    guest.add(new Guest(guest1.getRoomNumber(), guest1.getCheckedInDate()));
     checkOutTableView.setItems(guest);
   }
 

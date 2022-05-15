@@ -374,12 +374,12 @@ public class HotelModelManager implements Serializable
    */
   public void createCheckIn(String firstName, String lastName, String address,
       String phone, String nationality, LocalDate dateOfBirth,
-      LocalDate checkInDate, String roomNumber)
+      LocalDate checkInDate,LocalDate checkOutDate, String roomNumber)
   {
     GuestList guests = getAllCheckedIn();
     guests.addGuest(
         new Guest(firstName, lastName, address, phone, nationality, dateOfBirth,
-            checkInDate, roomNumber));
+            checkInDate,checkOutDate, roomNumber));
 
     updateGuest(guests);
   }
