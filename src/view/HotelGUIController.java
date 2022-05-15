@@ -563,8 +563,26 @@ public class HotelGUIController implements Initializable
    * @param event The event that triggered the action.
    * @author Pramesh Shrestha
    */
-  public void getAllCheckIns(ActionEvent event)
+  //-----------------------------------------------------------------------------------------------------------------
+  @FXML
+  private void allCheckInsButton(ActionEvent event)
   {
+    allCheckInRoomNumberColumn.setCellValueFactory(new PropertyValueFactory<Guest,String>("roomNumber"));
+    allCheckInFirstNameColumn.setCellValueFactory((new PropertyValueFactory<Guest, String>("firstName")));
+    allCheckInLastNameColumn.setCellValueFactory((new PropertyValueFactory<Guest, String>("lastName")));
+    allCheckInPhoneNumberColumn.setCellValueFactory((new PropertyValueFactory<Guest, String>("phone")));
+    allCheckInCheckedInDateColumn.setCellValueFactory( new PropertyValueFactory<Guest, LocalDate>("checkedInDate"));
+    allCheckInCheckedOutDateColumn.setCellValueFactory( new PropertyValueFactory<Guest, LocalDate>("checkOutDate"));
+
+    ObservableList<Guest> checkIns = FXCollections.observableArrayList();
+    GuestList allCheckIns = manager.getAllCheckedIn();
+
+    for(int i = 0; i < allCheckIns.getNumberOfGuest(); i++)
+    {
+      checkIns.add(allCheckIns.getGuestByIndex(i));
+    }
+    allCheckInTableView.setItems(checkIns);
+
   }
 
   public void setRoomToComboBox()
@@ -578,6 +596,8 @@ public class HotelGUIController implements Initializable
     checkInCombo.setItems(list);
     checkInCombo.setPromptText("Select a room");
   }
+
+
 
   // -------------------------- All Bookings tab starts from here ------------------------------
 
