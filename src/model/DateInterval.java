@@ -30,46 +30,6 @@ public class DateInterval implements Serializable
   }
 
   /**
-   * This function returns the arrival date.
-   *
-   * @return The arrival date of the guest.
-   */
-  public LocalDate getArrivalDate()
-  {
-    return arrivalDate;
-  }
-
-  /**
-   * This function sets the arrival date of the guest.
-   *
-   * @param arrivalDate The date the guest arrives at the hotel.
-   */
-  public void setArrivalDate(LocalDate arrivalDate)
-  {
-    this.arrivalDate = arrivalDate;
-  }
-
-  /**
-   * This function returns the departure date.
-   *
-   * @return The departure date.
-   */
-  public LocalDate getDepartureDate()
-  {
-    return departureDate;
-  }
-
-  /**
-   * This function sets the departure date of guest.
-   *
-   * @param departureDate The date the guest departs.
-   */
-  public void setDepartureDate(LocalDate departureDate)
-  {
-    this.departureDate = departureDate;
-  }
-
-  /**
    * Get the number of nights between two dates.
    *
    * @param arrivalDate   The date the guest arrives at the hotel.

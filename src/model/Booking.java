@@ -3,6 +3,9 @@ package model;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+/**
+ * The type Booking.
+ */
 public class Booking implements Serializable
 {
   private boolean extraBed;
@@ -29,25 +32,50 @@ public class Booking implements Serializable
     fullName = guest.getFullName();
   }
 
+  /**
+   * Gets first name.
+   *
+   * @return the first name
+   */
   public String getFirstName()
   {
     return guest.getFirstName();
   }
 
+  /**
+   * This function returns the last name of the guest.
+   *
+   * @return The last name of the guest.
+   */
   public String getLastName()
   {
     return guest.getLastName();
   }
 
+  /**
+   * This function returns the phone number of the guest.
+   *
+   * @return The phone number of the guest.
+   */
   public String getPhone()
   {
     return guest.getPhone();
   }
 
+  /**
+   * This function returns the arrival date of the flight
+   *
+   * @return The arrivalDate variable is being returned.
+   */
   public LocalDate getArrivalDate() {
     return arrivalDate;
   }
 
+  /**
+   * This function returns the departure date of the flight
+   *
+   * @return The departure date.
+   */
   public LocalDate getDepartureDate () {
     return departureDate;
   }
@@ -63,6 +91,11 @@ public class Booking implements Serializable
     return roomNumber;
   }
 
+  /**
+   * The function getFullName() returns the full name of the guest
+   *
+   * @return The full name of the guest.
+   */
   public String getFullName()
   {
     fullName = guest.getFullName();
@@ -79,37 +112,28 @@ public class Booking implements Serializable
   {
     return extraBed;
   }
+//
+//  /**
+//   * This method returns the number of guests that are expected to check in
+//   *
+//   * @return The number of guests.
+//   */
+//  public int getNumberOfGuest()
+//  {
+//    return numberOfGuest;
+//  }
+
+//  /**
+//   * This method sets the number of guests that are expected to check in for the reservation
+//   *
+//   * @param numberOfGuest The number of guests expected.
+//   */
+//  public void setNumberOfGuest(int numberOfGuest)
+//  {
+//    this.numberOfGuest = numberOfGuest;
+//  }
 
   /**
-   * This method returns the number of guests that are expected to check in
-   *
-   * @return The number of guests.
-   */
-  public int getNumberOfGuest()
-  {
-    return numberOfGuest;
-  }
-
-  /**
-   * This method sets the number of guests that are expected to check in for the reservation
-   *
-   * @param numberOfGuest The number of guests expected.
-   */
-  public void setNumberOfGuest(int numberOfGuest)
-  {
-    this.numberOfGuest = numberOfGuest;
-  }
-
-  /**
-   * This method returns true if the guest smokes, and false if the guest does
-   * not smoke.
-   *
-   * @return The boolean value of the smokes variable.
-   */
-  public boolean ifGuestSmokes()
-  {
-    return smokes;
-  }
 
   /**
    * This method returns the room that is booked.
@@ -131,15 +155,7 @@ public class Booking implements Serializable
     return guest;
   }
 
-  /**
-   * This method sets the guest variable to the guest variable passed in.
-   *
-   * @param guest The guest object
-   */
-  public void changeGuest(Guest guest)
-  {
-    this.guest = guest;
-  }
+
 
   @Override public String toString()
   {
