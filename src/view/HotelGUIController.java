@@ -554,6 +554,7 @@ public class HotelGUIController implements Initializable
     checkInSearchFirstName.clear();
     checkInSearchLastName.clear();
     checkInSearchPhoneNumber.clear();
+
   }
 
   // -------------------------- check out methods starts from here ------------------------------
