@@ -32,23 +32,6 @@ public class RoomList implements Serializable
     rooms.add(room);
   }
 
-  /**
-   * Gets the room by the roomNumber given.
-   *
-   * @param roomNumber the room number
-   * @return the room information by the number given
-   */
-  public Room getRoomByNumber(String roomNumber)
-  {
-    for (int i = 0; i < rooms.size(); i++)
-    {
-      if (rooms.get(i).getRoomNumber().equals(roomNumber))
-      {
-        return rooms.get(i);
-      }
-    }
-    return null;
-  }
 
 
   /**
@@ -93,23 +76,7 @@ public class RoomList implements Serializable
     return roomsType;
   }
 
-  /**
-   * Gets the price of that room type.
-   *
-   * @param type the type of the room
-   * @return the price of that room type
-   */
-  public double getPriceOfRoomType(String type)
-  {
-    for (int i = 0; i < rooms.size(); i++)
-    {
-      if (rooms.get(i).getType().equals(type))
-      {
-        return rooms.get(i).getPrice();
-      }
-    }
-    return 0;
-  }
+
 
   /**
    * This function returns the total number of rooms in the hotel.

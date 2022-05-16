@@ -20,23 +20,6 @@ public class Room implements Serializable
   private LocalDate bookStartDate;
   private LocalDate bookEndDate;
 
-  /**
-   * Instantiates a new Room.
-   *
-   * @param price      the price of the room
-   * @param smoking    whether the room has a smoking area
-   * @param available  the availability of the room
-   * @param roomNumber the room number
-   */
-  public Room(double price, boolean smoking, boolean available,
-      String roomNumber, String type)
-  {
-    this.price = price;
-    this.smoking = smoking;
-    this.available = true;
-    this.roomNumber = roomNumber;
-    this.type = type;
-  }
 
   /**
    * initializes the room
@@ -63,15 +46,7 @@ public class Room implements Serializable
     this.bookEndDate = bookEndDate;
   }
 
-  /**
-   * Sets room number.
-   *
-   * @param roomNumber the room number
-   */
-  public void setRoomNumber(String roomNumber)
-  {
-    this.roomNumber = roomNumber;
-  }
+
 
   /**
    * Gets the room number.
@@ -103,15 +78,6 @@ public class Room implements Serializable
     return smoking;
   }
 
-  /**
-   * Sets if room needs smoking area.
-   *
-   * @param smoking the smoking area
-   */
-  public void setSmoking(Boolean smoking)
-  {
-    this.smoking = smoking;
-  }
 
   /**
    * This function changes the availability of a room
@@ -172,16 +138,6 @@ public class Room implements Serializable
   public String getType()
   {
     return type;
-  }
-
-  /**
-   * Sets the type of the room.
-   *
-   * @param type returns the type of the room
-   */
-  public void setType(String type)
-  {
-    this.type = type;
   }
 
   public String toString()

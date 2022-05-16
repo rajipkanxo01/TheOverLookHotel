@@ -47,39 +47,6 @@ public class GuestList implements Serializable
   }
 
   /**
-   * "Remove the guest from the guest list."
-   *
-   * @param guest The guest to be removed from the guest list.
-   */
-  public void removeGuest(Guest guest)
-  {
-    for (int i = 0; i < guestList.size(); i++)
-    {
-      if (guestList.get(i).equals(guest))
-      {
-        guestList.remove(i);
-        break;
-      }
-    }
-  }
-
-  /**
-   * Remove guest list.
-   *
-   * @param guest the guest
-   */
-  public void removeGuestList(ArrayList<Guest> guest)
-  {
-    for (int i = 0; i < guest.size(); i++)
-    {
-      guestList.remove(guest.get(i));
-    }
-
-  }
-
-
-
-  /**
    * This function returns the guest at the given index.
    *
    * @param index The index of the guest you want to get.
