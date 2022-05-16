@@ -201,6 +201,23 @@ public class HotelGUIController implements Initializable
   }
 
   /**
+   * If the check-out date is before the check-in date, display an error message
+   *
+   * @param event The event that triggered the method.
+   */
+  @FXML private void disableDepartureDate(ActionEvent event)
+  {
+    if(roomDepartureDate.getValue().isBefore(roomArrivalDate.getValue()))
+    {
+      Alert alert = new Alert(Alert.AlertType.ERROR);
+      alert.setHeaderText("Invalid Check-out Date");
+      alert.setContentText("Please enter a valid check-out date.");
+      alert.showAndWait();
+    }
+    roomDepartureDate.getEditor().clear();
+  }
+
+  /**
    * The function intitializeTable() is called when the FXML file is loaded. It
    * sets the cell value factory for each column in the table view to the
    * appropriate property in the Room class
@@ -517,6 +534,23 @@ public class HotelGUIController implements Initializable
       clearCheckInBox();
       clearCheckInSearchBox();
     }
+  }
+
+  /**
+   * If the check-out date is before the check-in date, display an error message
+   *
+   * @param event The event that triggered the method.
+   */
+  @FXML private void disableCheckOutDate(ActionEvent event)
+  {
+    if(checkInCheckOutDate.getValue().isBefore(checkInCheckedInDate.getValue()))
+    {
+      Alert alert = new Alert(Alert.AlertType.ERROR);
+      alert.setHeaderText("Invalid Check-out Date");
+      alert.setContentText("Please enter a valid check-out date.");
+      alert.showAndWait();
+    }
+    checkInCheckOutDate.getEditor().clear();
   }
 
   /**
