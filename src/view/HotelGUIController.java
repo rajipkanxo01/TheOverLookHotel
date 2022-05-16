@@ -213,8 +213,9 @@ public class HotelGUIController implements Initializable
       alert.setHeaderText("Invalid Check-out Date");
       alert.setContentText("Please enter a valid check-out date.");
       alert.showAndWait();
+      roomDepartureDate.getEditor().clear();
     }
-    roomDepartureDate.getEditor().clear();
+
   }
 
   /**
@@ -549,8 +550,9 @@ public class HotelGUIController implements Initializable
       alert.setHeaderText("Invalid Check-out Date");
       alert.setContentText("Please enter a valid check-out date.");
       alert.showAndWait();
+      checkInCheckOutDate.getEditor().clear();
     }
-    checkInCheckOutDate.getEditor().clear();
+
   }
 
   /**
