@@ -618,12 +618,13 @@ public class HotelGUIController implements Initializable
 
     //Set the price and check-in of the book searched in the textField Initial Price
 
-    checkInCheckedInDate.setValue(guest1.getCheckedInDate());
+    checkedOutCheckInDate.setValue(guest1.getCheckedInDate());
     checkedOutInitialPrice.setText(String.valueOf(
         manager.searchBooking(checkOutSearchFirstName.getText(),
             checkOutSearchLastName.getText(),
             checkOutSearchPhoneNumber.getText()).getRoom().getPrice()));
     checkOutRoomNumber.setText(guest1.getRoomNumber());
+    checkedOutCheckOutDate.setValue(LocalDate.now());
   }
 
   /**
