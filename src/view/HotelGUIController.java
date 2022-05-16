@@ -1,6 +1,5 @@
 package view;
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -8,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-
 import model.*;
 
 import java.net.URL;
@@ -70,7 +68,7 @@ public class HotelGUIController implements Initializable
   @FXML private TextField checkInSearchPhoneNumber;
   @FXML private DatePicker checkInCheckedInDate;
   @FXML private DatePicker checkInCheckOutDate;
-//  @FXML private TextField checkInRoomNumber;
+  //  @FXML private TextField checkInRoomNumber;
   @FXML private Tab checkInTab;
   @FXML private TableView<Booking> checkInTableView;
   @FXML private ComboBox<String> checkInCombo;
@@ -124,72 +122,6 @@ public class HotelGUIController implements Initializable
     setRoomToCheckInComboBox();
   }
   // -------------------------- room status methods starts from here ------------------------------
-
-  /**
-   * The function is called when the user clicks the "Next" button on the "Room"
-   * tab. It sets the "Create Booking" tab as the selected tab and sets the arrival
-   * and departure dates on the "Create Booking" tab to the arrival and departure
-   * dates on the "Room" tab
-   *
-   * @author Rajib Paudyal
-   */
-  @FXML private void roomNext()
-  {
-    if (roomStatusTableView.getSelectionModel().getSelectedItem() != null)
-    {
-      // change tab from room status to create booking
-      SingleSelectionModel<Tab> selectionModelNextButton = tabPane.getSelectionModel();
-      selectionModelNextButton.select(createBooking);
-
-      // get data from room status tab and set it to create booking tab
-      bookingArrivalDate.setValue(roomArrivalDate.getValue());
-      bookingDepartureDate.setValue(roomDepartureDate.getValue());
-      bookingRoomType.setText(
-          roomStatusTableView.getSelectionModel().getSelectedItem().getType());
-      bookingRoomNumber.setText(
-          roomStatusTableView.getSelectionModel().getSelectedItem()
-              .getRoomNumber());
-
-      roomStatusError.setText("");
-
-      // refresh table and clear everything
-      roomArrivalDate.getEditor().clear();
-      roomDepartureDate.getEditor().clear();
-      isSmoking.setSelected(false);
-      roomStatusTableView.getItems().clear();
-
-    }
-    else
-    {
-      roomStatusError.setText("Select any room to continue");
-    }
-  }
-
-  /**
-   * When user clicks a "back" button, the program will switch to "room status" tab
-   *
-   * @param actionEvent The event that triggered the action.
-   */
-  @FXML private void createBack(ActionEvent actionEvent)
-  {
-    // go back to room status tab
-    SingleSelectionModel<Tab> selectionModelCreateBackButton = tabPane.getSelectionModel();
-    selectionModelCreateBackButton.select(roomStatus);
-  }
-
-  /**
-   * When the user clicks the "Check In" button, the program will switch to the
-   * "Check In" tab.
-   *
-   * @param actionEvent This is the event that is triggered when the button is
-   *                    clicked.
-   */
-  @FXML private void goToCheckIn(ActionEvent actionEvent)
-  {
-    // go to check in tab
-    SingleSelectionModel<Tab> selectionModelGoToCheckIn = tabPane.getSelectionModel();
-    selectionModelGoToCheckIn.select(checkInTab);
-  }
 
   /**
    * This function searches the available room from binary file when search button is clicked
@@ -265,6 +197,72 @@ public class HotelGUIController implements Initializable
     }
   }
 
+  /**
+   * The function is called when the user clicks the "Next" button on the "Room"
+   * tab. It sets the "Create Booking" tab as the selected tab and sets the arrival
+   * and departure dates on the "Create Booking" tab to the arrival and departure
+   * dates on the "Room" tab
+   *
+   * @author Rajib Paudyal
+   */
+  @FXML private void roomNext()
+  {
+    if (roomStatusTableView.getSelectionModel().getSelectedItem() != null)
+    {
+      // change tab from room status to create booking
+      SingleSelectionModel<Tab> selectionModelNextButton = tabPane.getSelectionModel();
+      selectionModelNextButton.select(createBooking);
+
+      // get data from room status tab and set it to create booking tab
+      bookingArrivalDate.setValue(roomArrivalDate.getValue());
+      bookingDepartureDate.setValue(roomDepartureDate.getValue());
+      bookingRoomType.setText(
+          roomStatusTableView.getSelectionModel().getSelectedItem().getType());
+      bookingRoomNumber.setText(
+          roomStatusTableView.getSelectionModel().getSelectedItem()
+              .getRoomNumber());
+
+      roomStatusError.setText("");
+
+      // refresh table and clear everything
+      roomArrivalDate.getEditor().clear();
+      roomDepartureDate.getEditor().clear();
+      isSmoking.setSelected(false);
+      roomStatusTableView.getItems().clear();
+
+    }
+    else
+    {
+      roomStatusError.setText("Select any room to continue");
+    }
+  }
+
+  /**
+   * When user clicks a "back" button, the program will switch to "room status" tab
+   *
+   * @param actionEvent The event that triggered the action.
+   */
+  @FXML private void createBack(ActionEvent actionEvent)
+  {
+    // go back to room status tab
+    SingleSelectionModel<Tab> selectionModelCreateBackButton = tabPane.getSelectionModel();
+    selectionModelCreateBackButton.select(roomStatus);
+  }
+
+  /**
+   * When the user clicks the "Check In" button, the program will switch to the
+   * "Check In" tab.
+   *
+   * @param actionEvent This is the event that is triggered when the button is
+   *                    clicked.
+   */
+  @FXML private void goToCheckIn(ActionEvent actionEvent)
+  {
+    // go to check in tab
+    SingleSelectionModel<Tab> selectionModelGoToCheckIn = tabPane.getSelectionModel();
+    selectionModelGoToCheckIn.select(checkInTab);
+  }
+
   // -------------------------- create booking methods starts from here ------------------------------
 
   /**
@@ -274,6 +272,7 @@ public class HotelGUIController implements Initializable
    */
   @FXML private void bookingClear()
   {
+    // clears every fields in booking tab
     bookingFirstName.clear();
     bookingLastName.clear();
     bookingPhoneNumber.clear();
@@ -332,8 +331,6 @@ public class HotelGUIController implements Initializable
           bookingAddressText, bookingPhoneNumberText, bookingNationalityText,
           bookingDateOfBirthValue, arrivalDateValue, departureDateValue);
 
-
-
       // clear everything after booking is created
       bookingClear();
 
@@ -353,6 +350,7 @@ public class HotelGUIController implements Initializable
    */
   @FXML private void bookingGoToCheckIn()
   {
+    // changes selected tab to check in tab
     SingleSelectionModel<Tab> selectionBookingToCheckIn = tabPane.getSelectionModel();
     selectionBookingToCheckIn.select(checkInTab);
   }
@@ -363,6 +361,7 @@ public class HotelGUIController implements Initializable
    */
   @FXML private void bookingBack()
   {
+    // changes selected tab to room status
     SingleSelectionModel<Tab> selectionBookingBack = tabPane.getSelectionModel();
     selectionBookingBack.select(roomStatus);
   }
@@ -389,11 +388,12 @@ public class HotelGUIController implements Initializable
   public void setRoomToCheckInComboBox()
   {
     ObservableList<String> list = FXCollections.observableArrayList();
-    list.addAll("SBS-C1", "SBS-C2","SBS-C3","3SBS-C4","2SBS-C5",
-        "SR-A1","SR-A2","SR-A3","SR-A4","SR-A5","SR-A6","SR-A7","SR-A8","SR-A9","SR-A10",
-        "DR-A11","DR-A12","DR-A13","DR-A14","DR-A15","DR-A16","DR-A17","DR-A18",
-        "DR-B19","DR-B20","DR-B21","DR-B22","DR-B23","DR-B24","DR-B25","DR-B26","DR-B27",
-        "DR-B28","DR-B29","DR-B30","DR-B31","DR-B32","DR-B33","DR-B34","DR-B35","DR-B36","DR-B37");
+    list.addAll("SBS-C1", "SBS-C2", "SBS-C3", "3SBS-C4", "2SBS-C5", "SR-A1",
+        "SR-A2", "SR-A3", "SR-A4", "SR-A5", "SR-A6", "SR-A7", "SR-A8", "SR-A9",
+        "SR-A10", "DR-A11", "DR-A12", "DR-A13", "DR-A14", "DR-A15", "DR-A16",
+        "DR-A17", "DR-A18", "DR-B19", "DR-B20", "DR-B21", "DR-B22", "DR-B23",
+        "DR-B24", "DR-B25", "DR-B26", "DR-B27", "DR-B28", "DR-B29", "DR-B30",
+        "DR-B31", "DR-B32", "DR-B33", "DR-B34", "DR-B35", "DR-B36", "DR-B37");
     checkInRoomNumber.setItems(list);
     checkInRoomNumber.setEditable(true);
   }
@@ -543,7 +543,8 @@ public class HotelGUIController implements Initializable
     checkInAddress.clear();
     checkInDateOfBirth.getEditor().clear();
     checkInCheckOutDate.getEditor().clear();
-    checkInCheckedInDate.getEditor().setText(checkInCheckedInDate.getValue().toString());
+    checkInCheckedInDate.getEditor()
+        .setText(checkInCheckedInDate.getValue().toString());
   }
 
   /**
@@ -572,7 +573,8 @@ public class HotelGUIController implements Initializable
         new PropertyValueFactory<>("roomNumber"));
     checkOutColumnNumber.setStyle("-fx-alignment: CENTER;");
 
-    checkOutCheckedIn.setCellValueFactory(new PropertyValueFactory<>("checkedIn"));
+    checkOutCheckedIn.setCellValueFactory(
+        new PropertyValueFactory<>("checkedIn"));
     checkOutCheckedIn.setStyle("-fx-alignment: CENTER;");
 
     ObservableList<Guest> guest = FXCollections.observableArrayList();
@@ -632,15 +634,10 @@ public class HotelGUIController implements Initializable
           checkOutSearchLastName.getText(),
           checkOutSearchPhoneNumber.getText());
 
-//      manager.createCheckOut(guest1.getRoomNumber());
-
       manager.removeCheckIn(guest1.getRoomNumber());
 
       manager.deleteBookings(guest1.getFirstName(), guest1.getLastName(),
           guest1.getPhone());
-
-//      manager.getAllRooms().getRoomByRoomNumber(guest1.getRoomNumber());
-
 
       checkOutClear();
 
@@ -650,10 +647,10 @@ public class HotelGUIController implements Initializable
       alert.showAndWait();
     }
   }
+
   /**
    * This function clear the text fields in the tab check-out
    */
-
 
   @FXML private void checkOutClear()
   {
@@ -755,8 +752,6 @@ public class HotelGUIController implements Initializable
 
   }
 
-
-
   // -------------------------- All Bookings tab starts from here ------------------------------
 
   /**
@@ -766,6 +761,7 @@ public class HotelGUIController implements Initializable
    */
   public void displayAllBookings()
   {
+    // set columns to display data by taking private instances of Guest
     allBookingsRoomNumber.setCellValueFactory(
         new PropertyValueFactory<>("roomNumber"));
     allBookingsFirstName.setCellValueFactory(
@@ -779,6 +775,7 @@ public class HotelGUIController implements Initializable
     allBookingsDepartureDate.setCellValueFactory(
         new PropertyValueFactory<>("departureDate"));
 
+    // creating new observable list and adding all bookings to that list
     ObservableList<Booking> bookings = FXCollections.observableArrayList();
     BookingList allBookings = manager.getAllBookings();
     for (int i = 0; i < allBookings.getTotalNumberOfBookings(); i++)
@@ -786,6 +783,7 @@ public class HotelGUIController implements Initializable
       bookings.add(allBookings.getBookingByIndex(i));
     }
 
+    // set observable list items to display in all bookings table view
     allBookingsTableView.setItems(bookings);
   }
 
@@ -798,13 +796,13 @@ public class HotelGUIController implements Initializable
     // selects booking from the table and deletes it from file
     Booking selectedBooking = allBookingsTableView.getSelectionModel()
         .getSelectedItem();
-
     manager.deleteBookings(selectedBooking.getFirstName(),
         selectedBooking.getLastName(), selectedBooking.getPhone());
 
     // updates the table
     displayAllBookings();
 
+    // alert to show that booking is removed
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
     alert.setTitle("The OverLook Hotel");
     alert.setContentText("Booking Removed");
