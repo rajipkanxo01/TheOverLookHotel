@@ -70,11 +70,11 @@ public class HotelGUIController implements Initializable
   @FXML private TextField checkInSearchPhoneNumber;
   @FXML private DatePicker checkInCheckedInDate;
   @FXML private DatePicker checkInCheckOutDate;
-//  @FXML private TextField checkInRoomNumber;
   @FXML private Tab checkInTab;
   @FXML private TableView<Booking> checkInTableView;
   @FXML private ComboBox<String> checkInCombo;
   @FXML private ComboBox<String> checkInRoomNumber;
+  @FXML private Button checkInButton;
 
   // Check Out tab private fields
   @FXML private TableColumn<Guest, LocalDate> checkOutCheckedIn;
@@ -122,6 +122,7 @@ public class HotelGUIController implements Initializable
     //This method sets all the rooms to comboBox
     setRoomToComboBox();
     setRoomToCheckInComboBox();
+    checkInButton.setDisable(true);
   }
   // -------------------------- room status methods starts from here ------------------------------
 
@@ -552,6 +553,11 @@ public class HotelGUIController implements Initializable
       alert.showAndWait();
       checkInCheckOutDate.getEditor().clear();
     }
+    else
+    {
+      checkInButton.setDisable(false);
+    }
+
 
   }
 

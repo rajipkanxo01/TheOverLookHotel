@@ -193,7 +193,7 @@
                                     </children>
                                 </Pane>
                                 <Button layoutX="569.0" layoutY="323.0" mnemonicParsing="false" onAction="#checkInBack" text="Back" />
-                                <Button layoutX="676.0" layoutY="322.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#checkIn" text="Check-in" />
+                                <Button fx:id="checkInButton" layoutX="676.0" layoutY="322.0" minWidth="-Infinity" mnemonicParsing="false" onAction="#checkIn" text="Check-in" />
                                 <TableView fx:id="checkInTableView" layoutX="14.0" layoutY="262.0" prefHeight="86.0" prefWidth="233.0">
                                     <columns>
                                         <TableColumn fx:id="checkInNumberColumn" prefWidth="88.66665363311768" text="Room Number" />
