@@ -572,7 +572,7 @@ public class HotelGUIController implements Initializable
         new PropertyValueFactory<>("roomNumber"));
     checkOutColumnNumber.setStyle("-fx-alignment: CENTER;");
 
-    checkOutCheckedIn.setCellValueFactory(new PropertyValueFactory<>("checkedInDate"));
+    checkOutCheckedIn.setCellValueFactory(new PropertyValueFactory<>("checkedIn"));
     checkOutCheckedIn.setStyle("-fx-alignment: CENTER;");
 
     ObservableList<Guest> guest = FXCollections.observableArrayList();

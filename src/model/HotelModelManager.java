@@ -33,7 +33,8 @@ public class HotelModelManager implements Serializable
     this.bookingFileName = bookingFileName;
   }
 
-  // Room status methods starts from here
+  // -------------------------- room starts from here ------------------------------
+
 
   // get All Rooms
 
@@ -182,6 +183,11 @@ public class HotelModelManager implements Serializable
   //    return allBookedRooms;
   //  }
 
+  /**
+   * This function takes in a RoomList object and writes it to a binary file
+   *
+   * @param rooms The RoomList object that contains all the rooms.
+   */
   public void updateRoom(RoomList rooms)
   {
     try
@@ -228,7 +234,7 @@ public class HotelModelManager implements Serializable
     }
   }
 
-  // create booking tabs starts from here
+  // -------------------------- create booking starts from here ------------------------------
 
   //create booking
 
@@ -308,10 +314,12 @@ public class HotelModelManager implements Serializable
 
   public void deleteBookings(String firstName, String lastName, String phone)
   {
+    // get all bookings stored in file and search for booking according to first name, last name and phone number
     BookingList allBookings = getAllBookings();
     Booking searchedBooking = searchBooking(firstName, lastName, phone);
     RoomList allRooms = getAllRooms();
 
+    // changes availability status of room
     allRooms.getRoomByRoomNumber(searchedBooking.getRoomNumber())
         .changeAvailabilityAtCheckOut();
 
@@ -328,6 +336,7 @@ public class HotelModelManager implements Serializable
       }
     }
 
+    // updates room and booking in binary file
     updateRoom(allRooms);
     updateBooking(bookings);
   }
@@ -355,7 +364,9 @@ public class HotelModelManager implements Serializable
     }
   }
 
-  // check-In tab methods starts from here
+
+
+  // -------------------------- check in  starts from here ------------------------------
 
   // search for booking
   public Booking searchBooking(String firstName, String lastName,
@@ -394,12 +405,12 @@ public class HotelModelManager implements Serializable
    */
   public void createCheckIn(String firstName, String lastName, String address,
       String phone, String nationality, LocalDate dateOfBirth,
-      LocalDate checkInDate,LocalDate checkOutDate, String roomNumber)
+      LocalDate checkInDate, LocalDate checkOutDate, String roomNumber)
   {
     GuestList guests = getAllCheckedIn();
     guests.addGuest(
         new Guest(firstName, lastName, address, phone, nationality, dateOfBirth,
-            checkInDate,checkOutDate, roomNumber));
+            checkInDate, checkOutDate, roomNumber));
 
     updateGuest(guests);
   }
@@ -475,9 +486,9 @@ public class HotelModelManager implements Serializable
     GuestList allGuests = getAllCheckedIn();
     GuestList newGuestList = new GuestList();
 
-    for(int i = 0; i < allGuests.getNumberOfGuest(); i++)
+    for (int i = 0; i < allGuests.getNumberOfGuest(); i++)
     {
-      if(!(allGuests.getGuestByIndex(i).getRoomNumber().equals(roomNumber)))
+      if (!(allGuests.getGuestByIndex(i).getRoomNumber().equals(roomNumber)))
       {
         newGuestList.addGuest(allGuests.getGuestByIndex(i));
       }
@@ -515,18 +526,17 @@ public class HotelModelManager implements Serializable
   public String displayCheckInsByRoomNumber(String roomNumber)
   {
     GuestList allGuests = getAllCheckedIn();
-    for(int i = 0; i < allGuests.getNumberOfGuest(); i++)
+    for (int i = 0; i < allGuests.getNumberOfGuest(); i++)
     {
-      if(allGuests.getGuestByIndex(i).getRoomNumber().equals(roomNumber))
+      if (allGuests.getGuestByIndex(i).getRoomNumber().equals(roomNumber))
       {
         return allGuests.getGuestByIndex(i).getRoomNumber();
       }
     }
     return null;
   }
-  //Check-Out methods
 
-
+  // -------------------------- check out starts from here ------------------------------
 
   // calculate price for nights stayed
 
@@ -558,17 +568,17 @@ public class HotelModelManager implements Serializable
   /**
    * Calculate number of nights the guest stayed.
    *
-   * @param arrivalDate     The date the guest is arriving
-   * @param departureDate   The date the guest is leaving the hotel.
+   * @param arrivalDate   The date the guest is arriving
+   * @param departureDate The date the guest is leaving the hotel.
    * @return numberOfNights The Number of Nights the guest stayed
    */
-  public int calculateNumberOfNights(LocalDate arrivalDate,LocalDate departureDate)
+  public int calculateNumberOfNights(LocalDate arrivalDate,
+      LocalDate departureDate)
   {
     DateInterval tempDate = new DateInterval(arrivalDate, departureDate);
-    int numberOfNights = tempDate.getNumberOfNight(arrivalDate,departureDate);
+    int numberOfNights = tempDate.getNumberOfNight(arrivalDate, departureDate);
     return numberOfNights;
   }
-
 
   // guest methods
 
