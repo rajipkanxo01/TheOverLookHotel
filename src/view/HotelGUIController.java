@@ -197,7 +197,18 @@ public class HotelGUIController implements Initializable
    */
   @FXML void searchAvailableRooms()
   {
-    intitializeTable();
+    roomStatusColumnPrice.setCellValueFactory(
+        new PropertyValueFactory<Room, Double>("price"));
+    roomStatusColumnPrice.setStyle("-fx-alignment: CENTER;");
+
+    roomStatusColumnType.setCellValueFactory(
+        new PropertyValueFactory<Room, String>("type"));
+    roomStatusColumnType.setStyle("-fx-alignment: CENTER;");
+
+    roomStatusColumnNumber.setCellValueFactory(
+        new PropertyValueFactory<Room, String>("roomNumber"));
+    roomStatusTableView.setItems(getRoom());
+    roomStatusTableView.setStyle("-fx-alignment: CENTER;");
     roomStatusTableView.refresh();
   }
 
@@ -224,21 +235,7 @@ public class HotelGUIController implements Initializable
    * sets the cell value factory for each column in the table view to the
    * appropriate property in the Room class
    */
-  @FXML private void intitializeTable()
-  {
-    roomStatusColumnPrice.setCellValueFactory(
-        new PropertyValueFactory<Room, Double>("price"));
-    roomStatusColumnPrice.setStyle("-fx-alignment: CENTER;");
 
-    roomStatusColumnType.setCellValueFactory(
-        new PropertyValueFactory<Room, String>("type"));
-    roomStatusColumnType.setStyle("-fx-alignment: CENTER;");
-
-    roomStatusColumnNumber.setCellValueFactory(
-        new PropertyValueFactory<Room, String>("roomNumber"));
-    roomStatusTableView.setItems(getRoom());
-    roomStatusTableView.setStyle("-fx-alignment: CENTER;");
-  }
 
   /**
    * It returns an ObservableList of Room objects that are available for the given
@@ -257,7 +254,6 @@ public class HotelGUIController implements Initializable
     // search available rooms according to provided data
     RoomList allAvailableRooms = manager.getAllAvailableRooms(arrivalDate,
         departureDate, smoking);
-
     // adding smoking and non smoking rooms to observable list
     ObservableList<Room> allNonSmokingRooms = FXCollections.observableArrayList();
     ObservableList<Room> allSmokingRooms = FXCollections.observableArrayList();
