@@ -312,6 +312,15 @@ public class HotelModelManager implements Serializable
 
   // removes the booking according to first name , last name , phone
 
+  /**
+   * It deletes a booking by searching for it in the booking list, then changing
+   * the availability of the room to true, and then updating the booking list and
+   * room list in the binary files
+   *
+   * @param firstName the first name of the guest
+   * @param lastName The last name of the guest
+   * @param phone String
+   */
   public void deleteBookings(String firstName, String lastName, String phone)
   {
     // get all bookings stored in file and search for booking according to first name, last name and phone number

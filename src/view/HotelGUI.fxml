@@ -271,7 +271,7 @@
                         <Button layoutX="616.0" layoutY="315.0" mnemonicParsing="false" onAction="#displayAllBookings" text="Get All Bookings" />
                         <Button layoutX="616.0" layoutY="353.0" mnemonicParsing="false" onAction="#removeBookingFromTable" text="Remove Booking" />
                         <DatePicker fx:id="bookingSelectDate" layoutX="27.0" layoutY="330.0" />
-                        <Button layoutX="212.0" layoutY="331.0" mnemonicParsing="false" onAction="#bookingSearch" text="Search" />
+                        <Button layoutX="212.0" layoutY="331.0" mnemonicParsing="false" onAction="#bookingSearchForDay" text="Search" />
                      </children>
                   </AnchorPane>
               </content>

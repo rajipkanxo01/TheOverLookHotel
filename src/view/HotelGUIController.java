@@ -255,18 +255,16 @@ public class HotelGUIController implements Initializable
     RoomList allAvailableRooms = manager.getAllAvailableRooms(arrivalDate,
         departureDate, smoking);
     // adding smoking and non smoking rooms to observable list
-    ObservableList<Room> allNonSmokingRooms = FXCollections.observableArrayList();
+    ObservableList<Room> allRooms = FXCollections.observableArrayList();
     ObservableList<Room> allSmokingRooms = FXCollections.observableArrayList();
     for (int i = 0; i < allAvailableRooms.getTotalNumberOfRooms(); i++)
     {
-      if (!allAvailableRooms.getRoom(i).ifSmoking())
-      {
-        allNonSmokingRooms.add(allAvailableRooms.getRoom(i));
-      }
-      else
+      allRooms.add(allAvailableRooms.getRoom(i));
+      if (allAvailableRooms.getRoom(i).ifSmoking())
       {
         allSmokingRooms.add(allAvailableRooms.getRoom(i));
       }
+
     }
 
     // checking if smoking is selected or not
@@ -276,7 +274,7 @@ public class HotelGUIController implements Initializable
     }
     else
     {
-      return allNonSmokingRooms;
+      return allRooms;
     }
   }
 
@@ -854,7 +852,13 @@ public class HotelGUIController implements Initializable
 
   }
 
-  @FXML private void bookingSearch()
+  /**
+   * The function takes the date selected from the date picker and searches the
+   * booking list for any bookings on that date. If there are bookings on that
+   * date, the function displays them in a table view. If there are no bookings on
+   * that date, the function displays an error message
+   */
+  @FXML private void bookingSearchForDay()
   {
     BookingList allBookings = manager.getAllBookings();
     ObservableList<Booking> bookingsOnDay = FXCollections.observableArrayList();
@@ -865,13 +869,16 @@ public class HotelGUIController implements Initializable
       {
         bookingsOnDay.add(allBookings.getBookingByIndex(i));
       }
-      else {
+      else
+      {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("The OverLook Hotel");
         alert.setContentText("No Bookings on " + bookingSelectDate.getValue());
         alert.showAndWait();
       }
     }
+
+    // sets data to display for table columns
     allBookingsRoomNumber.setCellValueFactory(
         new PropertyValueFactory<>("roomNumber"));
     allBookingsFirstName.setCellValueFactory(
