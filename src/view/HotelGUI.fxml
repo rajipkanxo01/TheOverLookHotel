@@ -76,7 +76,7 @@
                                         <DatePicker fx:id="roomArrivalDate" layoutX="9.0" layoutY="29.0" prefHeight="26.0" prefWidth="185.0" showWeekNumbers="true" />
                                         <DatePicker fx:id="roomDepartureDate" layoutX="8.0" layoutY="80.0" onAction="#disableDepartureDate" prefHeight="26.0" prefWidth="185.0" showWeekNumbers="true" />
                                         <Label layoutX="9.0" layoutY="63.0" text="Departure Date" />
-                                        <CheckBox fx:id="isSmoking" layoutX="14.0" layoutY="121.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="88.0" text="Smoking" />
+                                        <CheckBox fx:id="isSmoking" layoutX="14.0" layoutY="122.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="88.0" text="Smoking" />
                                         <Button layoutX="163.0" layoutY="158.0" mnemonicParsing="false" onAction="#searchAvailableRooms" prefHeight="26.0" prefWidth="61.0" text="Search" />
                                     </children>
                                 </Pane>
@@ -114,7 +114,7 @@
                                         <Label layoutX="274.0" layoutY="57.0" prefHeight="19.0" prefWidth="68.0" text="Nationality" />
                                         <TextField fx:id="bookingNationality" layoutX="272.0" layoutY="76.0" prefHeight="25.0" prefWidth="206.0" />
                                         <Label layoutX="14.0" layoutY="169.0" prefHeight="19.0" prefWidth="68.0" text="Date of Birth" />
-                                        <CheckBox fx:id="bookingSmoking" layoutX="15.0" layoutY="229.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="116.0" text="Smoking" />
+                                        <CheckBox fx:id="bookingSmoking" disable="true" layoutX="15.0" layoutY="229.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="116.0" text="Smoking" />
                                         <DatePicker fx:id="bookingDateOfBirth" layoutX="14.0" layoutY="188.0" prefHeight="25.0" prefWidth="207.0" />
                                         <CheckBox fx:id="bookingExtraBed" layoutX="14.0" layoutY="256.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="116.0" text="Extra bed" />
                                         <Button layoutX="419.0" layoutY="313.0" mnemonicParsing="false" onAction="#bookingSave" text="Save" />
@@ -128,15 +128,9 @@
                                 <Pane layoutX="13.0" layoutY="11.0" prefHeight="231.0" prefWidth="200.0" style="-fx-background-color: #F5F5F5; -fx-border-color: #000000;">
                                     <children>
                                         <Label layoutX="7.0" layoutY="112.0" text="Room Type" />
-                                        <TextField fx:id="bookingRoomType" disable="true" editable="false" layoutX="6.0" layoutY="133.0" prefHeight="25.0" prefWidth="174.0">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font></TextField>
+                                        <TextField fx:id="bookingRoomType" disable="true" editable="false" layoutX="6.0" layoutY="133.0" prefHeight="25.0" prefWidth="174.0" />
                                         <Label layoutX="7.0" layoutY="167.0" text="Room Number" />
-                                        <TextField fx:id="bookingRoomNumber" disable="true" editable="false" layoutX="6.0" layoutY="188.0" prefHeight="25.0" prefWidth="174.0">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font></TextField>
+                                        <TextField fx:id="bookingRoomNumber" disable="true" editable="false" layoutX="6.0" layoutY="188.0" prefHeight="25.0" prefWidth="174.0" />
                                     </children>
                                 </Pane>
                                 <Label layoutX="21.0" layoutY="19.0" text="Arrival Date" />
@@ -190,6 +184,7 @@
                               <DatePicker fx:id="checkInCheckOutDate" layoutX="271.0" layoutY="261.0" onAction="#disableCheckOutDate" prefHeight="25.0" prefWidth="189.0" />
                               <Label layoutX="272.0" layoutY="236.0" prefHeight="19.0" prefWidth="68.0" text="Check - Out" />
                               <ComboBox fx:id="checkInRoomNumber" layoutX="14.0" layoutY="261.0" prefHeight="25.0" prefWidth="190.0" />
+                              <CheckBox fx:id="checkInSmoking" disable="true" layoutX="15.0" layoutY="305.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="116.0" text="Smoking" />
                                     </children>
                                 </Pane>
                                 <Button layoutX="569.0" layoutY="323.0" mnemonicParsing="false" onAction="#checkInBack" text="Back" />
@@ -242,6 +237,7 @@
                                         <Button layoutX="399.0" layoutY="239.0" mnemonicParsing="false" onAction="#checkOutSave" text="Check-Out" />
                               <Label layoutX="246.0" layoutY="67.0" text="Room Number" />
                               <TextField fx:id="checkOutRoomNumber" layoutX="246.0" layoutY="85.0" prefHeight="11.0" prefWidth="140.0" />
+                              <CheckBox fx:id="checkOutSmoking" disable="true" layoutX="15.0" layoutY="239.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="116.0" text="Smoking" />
                                     </children>
                                 </Pane>
                                 <TableView fx:id="checkOutTableView" layoutX="14.0" layoutY="261.0" prefHeight="59.0" prefWidth="200.0">

@@ -112,7 +112,18 @@ public class Booking implements Serializable
   {
     return extraBed;
   }
-//
+
+  /**
+   * Returns true if the person smokes, false otherwise.
+   *
+   * @return The boolean value of the smokes variable.
+   */
+  public boolean ifSmokes()
+  {
+    return smokes;
+  }
+
+  //
 //  /**
 //   * This method returns the number of guests that are expected to check in
 //   *

@@ -414,12 +414,12 @@ public class HotelModelManager implements Serializable
    */
   public void createCheckIn(String firstName, String lastName, String address,
       String phone, String nationality, LocalDate dateOfBirth,
-      LocalDate checkInDate, LocalDate checkOutDate, String roomNumber)
+      LocalDate checkInDate, LocalDate checkOutDate, String roomNumber, boolean smoking)
   {
     GuestList guests = getAllCheckedIn();
     guests.addGuest(
         new Guest(firstName, lastName, address, phone, nationality, dateOfBirth,
-            checkInDate, checkOutDate, roomNumber));
+            checkInDate, checkOutDate, roomNumber , smoking));
 
     updateGuest(guests);
   }
@@ -559,10 +559,11 @@ public class HotelModelManager implements Serializable
    * @param departureDate   The date the guest is leaving the hotel.
    * @param roomNumber      The room number of the room that the customer wants to book.
    * @param discountPercent The percentage of the discount.
+   * @param smoking if smoking or not
    * @return The price of the room after the discount has been applied.
    */
   public double calculatePrice(LocalDate arrivalDate, LocalDate departureDate,
-      String roomNumber, double discountPercent)
+      String roomNumber, double discountPercent, boolean smoking)
   {
     DateInterval dateInterval = new DateInterval(arrivalDate, departureDate);
     int numberOfNights = dateInterval.getNumberOfNight(arrivalDate,
@@ -570,8 +571,14 @@ public class HotelModelManager implements Serializable
     RoomList allRooms = getAllRooms();
     double price = allRooms.getRoomByRoomNumber(roomNumber).getPrice();
     double initialPrice = numberOfNights * price;
+    double smokingFee = 30;
 
-    return initialPrice - ((initialPrice) * ((discountPercent) / 100));
+    if (!smoking) {
+      return initialPrice - ((initialPrice) * ((discountPercent) / 100));
+    }
+    else {
+      return (initialPrice+ smokingFee )- ((initialPrice) * ((discountPercent) / 100));
+    }
   }
 
   /**

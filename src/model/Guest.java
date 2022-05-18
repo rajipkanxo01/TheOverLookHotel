@@ -20,6 +20,7 @@ public class Guest implements Serializable
   private LocalDate checkedInDate;
   private LocalDate checkOutDate;
   private String roomNumber;
+  private boolean smoking;
 
   /**
    * initiates the Guest class
@@ -46,8 +47,9 @@ public class Guest implements Serializable
 
   // This is a constructor that takes in all the parameters and sets the values of
   // the variables to the parameters.
+
   public Guest(String firstName, String lastName, String address, String phone,String nationality, LocalDate dateOfBirth,
-      LocalDate checkedInDate,LocalDate checkOutDate, String roomNumber)
+      LocalDate checkedInDate,LocalDate checkOutDate, String roomNumber , boolean smoking)
   {
     this.firstName = firstName;
     this.lastName = lastName;
@@ -58,6 +60,7 @@ public class Guest implements Serializable
     this.dateOfBirth = dateOfBirth;
     this.checkedInDate = checkedInDate;
     this.checkOutDate = checkOutDate;
+    this.smoking = smoking;
   }
 
   /**
@@ -174,6 +177,16 @@ public class Guest implements Serializable
   public String getFullName()
   {
     return fullName;
+  }
+
+
+  /**
+   * If the person is smoking, return true.
+   *
+   * @return true if smoking or else false
+   */
+  public boolean ifSmoking() {
+    return smoking;
   }
 
   /**
