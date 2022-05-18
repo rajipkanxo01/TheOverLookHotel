@@ -258,7 +258,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="allBookingsTableView" layoutX="27.0" layoutY="14.0" prefHeight="300.0" prefWidth="709.0">
+                        <TableView fx:id="allBookingsTableView" layoutX="27.0" layoutY="14.0" prefHeight="294.0" prefWidth="710.0">
                            <columns>
                               <TableColumn fx:id="allBookingsRoomNumber" prefWidth="92.0" text="Room Number" />
                               <TableColumn fx:id="allBookingsFirstName" prefWidth="132.0" text="First Name" />
@@ -268,8 +268,10 @@
                               <TableColumn fx:id="allBookingsDepartureDate" prefWidth="129.0" text="Departure Date" />
                            </columns>
                         </TableView>
-                        <Button layoutX="393.0" layoutY="335.0" mnemonicParsing="false" onAction="#displayAllBookings" text="Get All Bookings" />
-                        <Button layoutX="266.0" layoutY="335.0" mnemonicParsing="false" onAction="#removeBookingFromTable" text="Remove Booking" />
+                        <Button layoutX="616.0" layoutY="315.0" mnemonicParsing="false" onAction="#displayAllBookings" text="Get All Bookings" />
+                        <Button layoutX="616.0" layoutY="353.0" mnemonicParsing="false" onAction="#removeBookingFromTable" text="Remove Booking" />
+                        <DatePicker fx:id="bookingSelectDate" layoutX="27.0" layoutY="330.0" />
+                        <Button layoutX="212.0" layoutY="331.0" mnemonicParsing="false" onAction="#bookingSearch" text="Search" />
                      </children>
                   </AnchorPane>
               </content>

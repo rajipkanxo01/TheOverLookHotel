@@ -111,6 +111,7 @@ public class HotelGUIController implements Initializable
   @FXML private TableColumn<Booking, String> allBookingsPhoneNumber;
   @FXML private TableColumn<Booking, String> allBookingsRoomNumber;
   @FXML private TableView<Booking> allBookingsTableView;
+  @FXML private DatePicker bookingSelectDate;
 
   public void initialize(URL url, ResourceBundle resourceBundle)
   {
@@ -219,7 +220,7 @@ public class HotelGUIController implements Initializable
    */
   @FXML private void disableDepartureDate(ActionEvent event)
   {
-    if(roomDepartureDate.getValue().isBefore(roomArrivalDate.getValue()))
+    if (roomDepartureDate.getValue().isBefore(roomArrivalDate.getValue()))
     {
       Alert alert = new Alert(Alert.AlertType.ERROR);
       alert.setHeaderText("Invalid Check-out Date");
@@ -235,7 +236,6 @@ public class HotelGUIController implements Initializable
    * sets the cell value factory for each column in the table view to the
    * appropriate property in the Room class
    */
-
 
   /**
    * It returns an ObservableList of Room objects that are available for the given
@@ -347,8 +347,6 @@ public class HotelGUIController implements Initializable
           bookingAddressText, bookingPhoneNumberText, bookingNationalityText,
           bookingDateOfBirthValue, arrivalDateValue, departureDateValue);
 
-
-
       // clear everything after booking is created
       bookingClear();
 
@@ -404,11 +402,12 @@ public class HotelGUIController implements Initializable
   public void setRoomToCheckInComboBox()
   {
     ObservableList<String> list = FXCollections.observableArrayList();
-    list.addAll("SBS-C1", "SBS-C2","SBS-C3","3SBS-C4","2SBS-C5",
-        "SR-A1","SR-A2","SR-A3","SR-A4","SR-A5","SR-A6","SR-A7","SR-A8","SR-A9","SR-A10",
-        "DR-A11","DR-A12","DR-A13","DR-A14","DR-A15","DR-A16","DR-A17","DR-A18",
-        "DR-B19","DR-B20","DR-B21","DR-B22","DR-B23","DR-B24","DR-B25","DR-B26","DR-B27",
-        "DR-B28","DR-B29","DR-B30","DR-B31","DR-B32","DR-B33","DR-B34","DR-B35","DR-B36","DR-B37");
+    list.addAll("SBS-C1", "SBS-C2", "SBS-C3", "3SBS-C4", "2SBS-C5", "SR-A1",
+        "SR-A2", "SR-A3", "SR-A4", "SR-A5", "SR-A6", "SR-A7", "SR-A8", "SR-A9",
+        "SR-A10", "DR-A11", "DR-A12", "DR-A13", "DR-A14", "DR-A15", "DR-A16",
+        "DR-A17", "DR-A18", "DR-B19", "DR-B20", "DR-B21", "DR-B22", "DR-B23",
+        "DR-B24", "DR-B25", "DR-B26", "DR-B27", "DR-B28", "DR-B29", "DR-B30",
+        "DR-B31", "DR-B32", "DR-B33", "DR-B34", "DR-B35", "DR-B36", "DR-B37");
     checkInRoomNumber.setItems(list);
     checkInRoomNumber.setEditable(true);
   }
@@ -470,12 +469,14 @@ public class HotelGUIController implements Initializable
             bookingList.getBookingByIndex(i).getGuest().getNationality());
         checkInRoomNumber.setValue(
             bookingList.getBookingByIndex(i).getRoomNumber());
-        checkInDateOfBirth.setValue(bookingList.getBookingByIndex(i).getGuest().getDateOfBirth());
+        checkInDateOfBirth.setValue(
+            bookingList.getBookingByIndex(i).getGuest().getDateOfBirth());
         checkInAddress.setText(
             bookingList.getBookingByIndex(i).getGuest().getAddress());
         checkInDateOfBirth.setValue(
             bookingList.getBookingByIndex(i).getGuest().getDateOfBirth());
-        checkInCheckedInDate.setValue(bookingList.getBookingByIndex(i).getArrivalDate());
+        checkInCheckedInDate.setValue(
+            bookingList.getBookingByIndex(i).getArrivalDate());
         booked = true;
         break;
       }
@@ -543,7 +544,8 @@ public class HotelGUIController implements Initializable
    */
   @FXML private void disableCheckOutDate(ActionEvent event)
   {
-    if(checkInCheckOutDate.getValue().isBefore(checkInCheckedInDate.getValue()))
+    if (checkInCheckOutDate.getValue()
+        .isBefore(checkInCheckedInDate.getValue()))
     {
       Alert alert = new Alert(Alert.AlertType.ERROR);
       alert.setHeaderText("Invalid Check-out Date");
@@ -555,7 +557,6 @@ public class HotelGUIController implements Initializable
     {
       checkInButton.setDisable(false);
     }
-
 
   }
 
@@ -583,7 +584,8 @@ public class HotelGUIController implements Initializable
     checkInAddress.clear();
     checkInDateOfBirth.getEditor().clear();
     checkInCheckOutDate.getEditor().clear();
-    checkInCheckedInDate.getEditor().setText(checkInCheckedInDate.getValue().toString());
+    checkInCheckedInDate.getEditor()
+        .setText(checkInCheckedInDate.getValue().toString());
   }
 
   /**
@@ -613,7 +615,8 @@ public class HotelGUIController implements Initializable
         new PropertyValueFactory<>("roomNumber"));
     checkOutColumnNumber.setStyle("-fx-alignment: CENTER;");
 
-    checkOutCheckedIn.setCellValueFactory(new PropertyValueFactory<>("checkedInDate"));
+    checkOutCheckedIn.setCellValueFactory(
+        new PropertyValueFactory<>("checkedInDate"));
     checkOutCheckedIn.setStyle("-fx-alignment: CENTER;");
 
     ObservableList<Guest> guest = FXCollections.observableArrayList();
@@ -674,15 +677,14 @@ public class HotelGUIController implements Initializable
           checkOutSearchLastName.getText(),
           checkOutSearchPhoneNumber.getText());
 
-//      manager.createCheckOut(guest1.getRoomNumber());
+      //      manager.createCheckOut(guest1.getRoomNumber());
 
       manager.removeCheckIn(guest1.getRoomNumber());
 
       manager.deleteBookings(guest1.getFirstName(), guest1.getLastName(),
           guest1.getPhone());
 
-//      manager.getAllRooms().getRoomByRoomNumber(guest1.getRoomNumber());
-
+      //      manager.getAllRooms().getRoomByRoomNumber(guest1.getRoomNumber());
 
       checkOutClear();
 
@@ -692,10 +694,10 @@ public class HotelGUIController implements Initializable
       alert.showAndWait();
     }
   }
+
   /**
    * This function clear the text fields in the tab check-out
    */
-
 
   @FXML private void checkOutClear()
   {
@@ -797,8 +799,6 @@ public class HotelGUIController implements Initializable
 
   }
 
-
-
   // -------------------------- All Bookings tab starts from here ------------------------------
 
   /**
@@ -852,5 +852,39 @@ public class HotelGUIController implements Initializable
     alert.setContentText("Booking Removed");
     alert.showAndWait();
 
+  }
+
+  @FXML private void bookingSearch()
+  {
+    BookingList allBookings = manager.getAllBookings();
+    ObservableList<Booking> bookingsOnDay = FXCollections.observableArrayList();
+    for (int i = 0; i < allBookings.getTotalNumberOfBookings(); i++)
+    {
+      if (allBookings.getBookingByIndex(i).getArrivalDate()
+          .isEqual(bookingSelectDate.getValue()))
+      {
+        bookingsOnDay.add(allBookings.getBookingByIndex(i));
+      }
+      else {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("The OverLook Hotel");
+        alert.setContentText("No Bookings on " + bookingSelectDate.getValue());
+        alert.showAndWait();
+      }
+    }
+    allBookingsRoomNumber.setCellValueFactory(
+        new PropertyValueFactory<>("roomNumber"));
+    allBookingsFirstName.setCellValueFactory(
+        new PropertyValueFactory<>("firstName"));
+    allBookingsLastName.setCellValueFactory(
+        new PropertyValueFactory<>("lastName"));
+    allBookingsPhoneNumber.setCellValueFactory(
+        new PropertyValueFactory<>("phone"));
+    allBookingsArrivalDate.setCellValueFactory(
+        new PropertyValueFactory<>("arrivalDate"));
+    allBookingsDepartureDate.setCellValueFactory(
+        new PropertyValueFactory<>("departureDate"));
+
+    allBookingsTableView.setItems(bookingsOnDay);
   }
 }
