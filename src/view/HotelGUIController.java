@@ -126,7 +126,34 @@ public class HotelGUIController implements Initializable
     setRoomToComboBox();
     setRoomToCheckInComboBox();
     checkInButton.setDisable(true);
+
+    // styling for disabled objects
+    bookingArrivalDate.getEditor().setStyle("-fx-opacity: 1.0");
+    bookingArrivalDate.setStyle("-fx-opacity: 1.0");
+
+    bookingDepartureDate.getEditor().setStyle("-fx-opacity: 1.0");
+    bookingDepartureDate.setStyle("-fx-opacity: 1.0");
+
+    bookingRoomType.setStyle("-fx-opacity: 1.0");
+    bookingRoomNumber.setStyle("-fx-opacity: 1.0");
+    bookingSmoking.setStyle("-fx-opacity: 1.0");
+    checkInSmoking.setStyle("-fx-opacity: 1");
+    checkOutSmoking.setStyle("-fx-opacity: 1");
+
+    // styling for align items in center
+
+    roomStatusColumnPrice.setStyle("-fx-alignment: CENTER;");
+    roomStatusColumnType.setStyle("-fx-alignment: CENTER;");
+    checkInNumberColumn.setStyle("-fx-alignment: CENTER;");
+    roomStatusTableView.setStyle("-fx-alignment: CENTER;");
+    checkInBookedBy.setStyle("-fx-alignment: CENTER;");
+    checkOutColumnNumber.setStyle("-fx-alignment: CENTER;");
+    checkOutCheckedIn.setStyle("-fx-alignment: CENTER;");
+
+
+
   }
+
   // -------------------------- room status methods starts from here ------------------------------
 
   /**
@@ -147,25 +174,21 @@ public class HotelGUIController implements Initializable
 
       // get data from room status tab and set it to create booking tab
       bookingArrivalDate.setValue(roomArrivalDate.getValue());
-      bookingArrivalDate.getEditor().setStyle("-fx-opacity: 1.0");
-      bookingArrivalDate.setStyle("-fx-opacity: 1.0");
+
 
       bookingDepartureDate.setValue(roomDepartureDate.getValue());
-      bookingDepartureDate.getEditor().setStyle("-fx-opacity: 1.0");
-      bookingDepartureDate.setStyle("-fx-opacity: 1.0");
 
       bookingRoomType.setText(
           roomStatusTableView.getSelectionModel().getSelectedItem().getType());
-      bookingRoomType.setStyle("-fx-opacity: 1.0");
+
 
       bookingRoomNumber.setText(
           roomStatusTableView.getSelectionModel().getSelectedItem()
               .getRoomNumber());
-      bookingRoomNumber.setStyle("-fx-opacity: 1.0");
+
 
       bookingSmoking.setSelected(isSmoking.isSelected());
       bookingSmoking.setDisable(true);
-      bookingSmoking.setStyle("-fx-opacity: 1.0");
 
 
       roomStatusError.setText("");
@@ -216,16 +239,15 @@ public class HotelGUIController implements Initializable
   {
     roomStatusColumnPrice.setCellValueFactory(
         new PropertyValueFactory<Room, Double>("price"));
-    roomStatusColumnPrice.setStyle("-fx-alignment: CENTER;");
+
 
     roomStatusColumnType.setCellValueFactory(
         new PropertyValueFactory<Room, String>("type"));
-    roomStatusColumnType.setStyle("-fx-alignment: CENTER;");
+
 
     roomStatusColumnNumber.setCellValueFactory(
         new PropertyValueFactory<Room, String>("roomNumber"));
     roomStatusTableView.setItems(getRoom());
-    roomStatusTableView.setStyle("-fx-alignment: CENTER;");
     roomStatusTableView.refresh();
   }
 
@@ -443,11 +465,10 @@ public class HotelGUIController implements Initializable
 
     checkInNumberColumn.setCellValueFactory(
         new PropertyValueFactory<Booking, String>("roomNumber"));
-    checkInNumberColumn.setStyle("-fx-alignment: CENTER;");
+
 
     checkInBookedBy.setCellValueFactory(
         new PropertyValueFactory<Booking, String>("fullName"));
-    checkInBookedBy.setStyle("-fx-alignment: CENTER;");
 
     ObservableList<Booking> booking = FXCollections.observableArrayList();
 
@@ -494,7 +515,6 @@ public class HotelGUIController implements Initializable
             bookingList.getBookingByIndex(i).getArrivalDate());
 
         checkInSmoking.setSelected(bookingList.getBookingByIndex(i).ifSmokes());
-        checkInSmoking.setStyle("-fx-opacity: 1");
         booked = true;
         break;
       }
@@ -632,11 +652,9 @@ public class HotelGUIController implements Initializable
 
     checkOutColumnNumber.setCellValueFactory(
         new PropertyValueFactory<>("roomNumber"));
-    checkOutColumnNumber.setStyle("-fx-alignment: CENTER;");
 
     checkOutCheckedIn.setCellValueFactory(
         new PropertyValueFactory<>("checkedInDate"));
-    checkOutCheckedIn.setStyle("-fx-alignment: CENTER;");
 
     ObservableList<Guest> guest = FXCollections.observableArrayList();
     guest.add(new Guest(guest1.getRoomNumber(), guest1.getCheckedInDate()));
@@ -653,7 +671,6 @@ public class HotelGUIController implements Initializable
     checkedOutCheckOutDate.setValue(LocalDate.now());
 
     checkOutSmoking.setSelected(guest1.ifSmoking());
-    checkOutSmoking.setStyle("-fx-opacity: 1");
   }
 
   /**
