@@ -514,6 +514,7 @@ public class HotelGUIController implements Initializable
             bookingList.getBookingByIndex(i).getGuest().getDateOfBirth());
         checkInCheckedInDate.setValue(
             bookingList.getBookingByIndex(i).getArrivalDate());
+        checkInCheckOutDate.setValue(bookingList.getBookingByIndex(i).getDepartureDate());
 
         checkInSmoking.setSelected(bookingList.getBookingByIndex(i).ifSmokes());
         booked = true;
