@@ -134,8 +134,8 @@
                                     </children>
                                 </Pane>
                                 <Label layoutX="21.0" layoutY="19.0" text="Arrival Date" />
-                                <DatePicker fx:id="bookingArrivalDate" disable="true" editable="false" layoutX="20.0" layoutY="36.0" prefHeight="26.0" prefWidth="185.0" />
-                                <DatePicker fx:id="bookingDepartureDate" disable="true" editable="false" layoutX="19.0" layoutY="87.0" prefHeight="26.0" prefWidth="185.0" showWeekNumbers="true" />
+                                <DatePicker fx:id="bookingArrivalDate" editable="false" layoutX="20.0" layoutY="36.0" prefHeight="26.0" prefWidth="185.0" />
+                                <DatePicker fx:id="bookingDepartureDate" editable="false" layoutX="19.0" layoutY="87.0" prefHeight="26.0" prefWidth="185.0" showWeekNumbers="true" />
                                 <Label layoutX="20.0" layoutY="70.0" text="Departure Date" />
                         <Label fx:id="createBookingError" layoutX="13.0" layoutY="256.0" prefHeight="22.0" prefWidth="201.0" textFill="RED">
                            <font>
@@ -237,7 +237,7 @@
                                         <Button layoutX="399.0" layoutY="239.0" mnemonicParsing="false" onAction="#checkOutSave" text="Check-Out" />
                               <Label layoutX="246.0" layoutY="67.0" text="Room Number" />
                               <TextField fx:id="checkOutRoomNumber" layoutX="246.0" layoutY="85.0" prefHeight="11.0" prefWidth="140.0" />
-                              <CheckBox fx:id="checkOutSmoking" disable="true" layoutX="15.0" layoutY="239.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="116.0" text="Smoking" />
+                              <CheckBox fx:id="checkOutSmoking" disable="true" layoutX="15.0" layoutY="239.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="116.0" text="Smoking (25 kr.)" />
                                     </children>
                                 </Pane>
                                 <TableView fx:id="checkOutTableView" layoutX="14.0" layoutY="261.0" prefHeight="59.0" prefWidth="200.0">

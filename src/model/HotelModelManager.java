@@ -35,7 +35,6 @@ public class HotelModelManager implements Serializable
 
   // -------------------------- room starts from here ------------------------------
 
-
   // get All Rooms
 
   /**
@@ -263,8 +262,6 @@ public class HotelModelManager implements Serializable
     Guest guest = new Guest(firstName, lastName, address, phone, nationality,
         dateOfBirth);
 
-    //    RoomList allRooms = getAllRooms();
-
     // creating booking object , adding it to booking object and save it to file
     Booking booking = new Booking(extraBed, numberOfGuest, smoking, room, guest,
         arrivalDate, departureDate);
@@ -318,36 +315,45 @@ public class HotelModelManager implements Serializable
    * room list in the binary files
    *
    * @param firstName the first name of the guest
-   * @param lastName The last name of the guest
-   * @param phone String
+   * @param lastName  The last name of the guest
+   * @param phone     String
    */
   public void deleteBookings(String firstName, String lastName, String phone)
   {
     // get all bookings stored in file and search for booking according to first name, last name and phone number
-    BookingList allBookings = getAllBookings();
-    Booking searchedBooking = searchBooking(firstName, lastName, phone);
-    RoomList allRooms = getAllRooms();
+    BookingList allBookings = getAllBookings(); // this takes 1
+    Booking searchedBooking = searchBooking(firstName, lastName,
+        phone); // this runs O(n) times as we call function searchBooking which run n times
+    RoomList allRooms = getAllRooms(); // this takes 1
 
     // changes availability status of room
     allRooms.getRoomByRoomNumber(searchedBooking.getRoomNumber())
-        .changeAvailabilityAtCheckOut();
+        .changeAvailabilityAtCheckOut(); // this runs O(n) times as we call function getRoomByRoomNumber which runs n times
 
-    BookingList bookings = new BookingList();
-    for (int i = 0; i < allBookings.getTotalNumberOfBookings(); i++)
+    BookingList bookings = new BookingList(); // this take 1
+    for (int i = 0; i
+        < allBookings.getTotalNumberOfBookings(); i++) // this runs O(n) times
     {
       if (!(allBookings.getBookingByIndex(i).getGuest().getFirstName()
           .equals(firstName) && allBookings.getBookingByIndex(i).getGuest()
           .getLastName().equals(lastName) && allBookings.getBookingByIndex(i)
-          .getGuest().getPhone().equals(phone)))
+          .getGuest().getPhone()
+          .equals(phone))) // this comparison runs O(n) times
       {
-        bookings.addBooking(allBookings.getBookingByIndex(i));
-
+        bookings.addBooking(
+            allBookings.getBookingByIndex(i)); // this runs O(n-1) times
       }
     }
 
     // updates room and booking in binary file
-    updateRoom(allRooms);
-    updateBooking(bookings);
+    updateRoom(allRooms); // this takes 1
+    updateBooking(bookings); // this takes 1
+
+    // We have no recursion, so we do not need base case
+    // T(n) = 1+n+1+n+1+n+n+(n-1)+1+1 = 4+5n
+    // So, ignoring all constants, we get time complexity of,
+    // T(n) = O(n)
+    // We choose this method since it calls another function which uses for loop
   }
 
   // updates booking in the file
@@ -372,8 +378,6 @@ public class HotelModelManager implements Serializable
       System.err.println("IO Exception Error");
     }
   }
-
-
 
   // -------------------------- check in  starts from here ------------------------------
 
@@ -414,12 +418,13 @@ public class HotelModelManager implements Serializable
    */
   public void createCheckIn(String firstName, String lastName, String address,
       String phone, String nationality, LocalDate dateOfBirth,
-      LocalDate checkInDate, LocalDate checkOutDate, String roomNumber, boolean smoking)
+      LocalDate checkInDate, LocalDate checkOutDate, String roomNumber,
+      boolean smoking)
   {
     GuestList guests = getAllCheckedIn();
     guests.addGuest(
         new Guest(firstName, lastName, address, phone, nationality, dateOfBirth,
-            checkInDate, checkOutDate, roomNumber , smoking));
+            checkInDate, checkOutDate, roomNumber, smoking));
 
     updateGuest(guests);
   }
@@ -559,26 +564,37 @@ public class HotelModelManager implements Serializable
    * @param departureDate   The date the guest is leaving the hotel.
    * @param roomNumber      The room number of the room that the customer wants to book.
    * @param discountPercent The percentage of the discount.
-   * @param smoking if smoking or not
+   * @param smoking         if smoking or not
    * @return The price of the room after the discount has been applied.
    */
   public double calculatePrice(LocalDate arrivalDate, LocalDate departureDate,
       String roomNumber, double discountPercent, boolean smoking)
   {
-    DateInterval dateInterval = new DateInterval(arrivalDate, departureDate);
+    DateInterval dateInterval = new DateInterval(arrivalDate,
+        departureDate); // this takes 1
     int numberOfNights = dateInterval.getNumberOfNight(arrivalDate,
-        departureDate);
-    RoomList allRooms = getAllRooms();
-    double price = allRooms.getRoomByRoomNumber(roomNumber).getPrice();
-    double initialPrice = numberOfNights * price;
-    double smokingFee = 30;
+        departureDate); // this takes 1
+    RoomList allRooms = getAllRooms(); // this takes 1
+    double price = allRooms.getRoomByRoomNumber(roomNumber)
+        .getPrice(); // this runs O(n) times as we call getRoomByRoom Number which runs n times
+    double initialPrice = numberOfNights * price; // this takes 1
+    double smokingFee = 25; // this takes 1
 
-    if (!smoking) {
-      return initialPrice - ((initialPrice) * ((discountPercent) / 100));
+    if (!smoking)
+    {
+      return initialPrice - ((initialPrice) * ((discountPercent)
+          / 100)); // this takes 1
     }
-    else {
-      return (initialPrice+ smokingFee )- ((initialPrice) * ((discountPercent) / 100));
+    else
+    {
+      return (initialPrice + smokingFee) - ((initialPrice) * ((discountPercent)
+          / 100)); // this also takes 1 if above condition doesn't execute
     }
+    // We have no recursion, so we do need base case
+    // T(n) = 1+1+1+n+1+1+1 = 6 + n
+    // So, ignoring all coefficients, we get,
+    // T(n) = O(n)
+    // We choose this method since it calls another function which uses for loop
   }
 
   /**

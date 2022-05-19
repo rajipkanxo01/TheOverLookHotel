@@ -128,11 +128,11 @@ public class HotelGUIController implements Initializable
     checkInButton.setDisable(true);
 
     // styling for disabled objects
-    bookingArrivalDate.getEditor().setStyle("-fx-opacity: 1.0");
-    bookingArrivalDate.setStyle("-fx-opacity: 1.0");
-
-    bookingDepartureDate.getEditor().setStyle("-fx-opacity: 1.0");
-    bookingDepartureDate.setStyle("-fx-opacity: 1.0");
+//    bookingArrivalDate.getEditor().setStyle("-fx-opacity: 1.0");
+//    bookingArrivalDate.setStyle("-fx-opacity: 1.0");
+//
+//    bookingDepartureDate.getEditor().setStyle("-fx-opacity: 1.0");
+//    bookingDepartureDate.setStyle("-fx-opacity: 1.0");
 
     bookingRoomType.setStyle("-fx-opacity: 1.0");
     bookingRoomNumber.setStyle("-fx-opacity: 1.0");
@@ -196,6 +196,7 @@ public class HotelGUIController implements Initializable
       // refresh table and clear everything
       roomArrivalDate.getEditor().clear();
       roomDepartureDate.getEditor().clear();
+
       isSmoking.setSelected(false);
       roomStatusTableView.getItems().clear();
 

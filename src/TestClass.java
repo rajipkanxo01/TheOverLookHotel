@@ -9,7 +9,7 @@ public class TestClass
     HotelModelManager manager = new HotelModelManager("rooms.bin", "guests.bin",
         "bookings.bin");
 
-//    manager.addRooms();
+    manager.addRooms();
 //    RoomList roomList = manager.getAllRooms();
 //    Room room1 = roomList.getRoom(1);
 //    Room room2 = roomList.getRoom(2);
