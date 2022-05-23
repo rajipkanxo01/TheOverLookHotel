@@ -70,6 +70,7 @@
         <bookStartDate>-999999999-01-01</bookStartDate>
         <bookEndDate>-999999999-01-01</bookEndDate>
     </rooms>
+
     <rooms roomNumber="SR-A10">
         <roomType>Single Room</roomType>
         <bookStartDate>-999999999-01-01</bookStartDate>
