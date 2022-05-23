@@ -481,6 +481,7 @@ public class HotelGUIController implements Initializable
             bookingList.getBookingByIndex(i).getGuest().getDateOfBirth());
         checkInCheckedInDate.setValue(
             bookingList.getBookingByIndex(i).getArrivalDate());
+        checkInCheckOutDate.setValue(bookingList.getBookingByIndex(i).getDepartureDate());
 
         checkInSmoking.setSelected(bookingList.getBookingByIndex(i).ifSmokes());
         booked = true;
@@ -614,32 +615,39 @@ public class HotelGUIController implements Initializable
    */
   @FXML private void searchCheckIn(ActionEvent event)
   {
-    Guest guest1 = manager.searchCheckIn(
-        checkOutSearchFirstName.getText().trim(),
-        checkOutSearchLastName.getText().trim(),
-        checkOutSearchPhoneNumber.getText().trim());
+    if (manager.searchCheckIn(checkOutSearchFirstName.getText(),
+        checkOutSearchLastName.getText(), checkOutSearchPhoneNumber.getText())
+        == null)
+    {
+      Alert alert = new Alert(Alert.AlertType.INFORMATION);
+      alert.setTitle("The OverLook Hotel");
+      alert.setContentText("The check-in was not found");
+      alert.showAndWait();
+    }
+    else
+    {
+      Guest guest1 = manager.searchCheckIn(checkOutSearchFirstName.getText().trim(),
+          checkOutSearchLastName.getText().trim(),
+          checkOutSearchPhoneNumber.getText().trim());
 
-    checkOutColumnNumber.setCellValueFactory(
-        new PropertyValueFactory<>("roomNumber"));
+      checkOutColumnNumber.setCellValueFactory(new PropertyValueFactory<>("roomNumber"));
 
-    checkOutCheckedIn.setCellValueFactory(
-        new PropertyValueFactory<>("checkedInDate"));
+      checkOutCheckedIn.setCellValueFactory(new PropertyValueFactory<>("checkedInDate"));
 
-    ObservableList<Guest> guest = FXCollections.observableArrayList();
-    guest.add(new Guest(guest1.getRoomNumber(), guest1.getCheckedInDate()));
-    checkOutTableView.setItems(guest);
+      ObservableList<Guest> guest = FXCollections.observableArrayList();
+      guest.add(new Guest(guest1.getRoomNumber(), guest1.getCheckedInDate()));
+      checkOutTableView.setItems(guest);
 
-    //Set the price and check-in of the book searched in the textField Initial Price
+      //Set the price and check-in of the book searched in the textField Initial Price
 
-    checkedOutCheckInDate.setValue(guest1.getCheckedInDate());
-    checkedOutInitialPrice.setText(String.valueOf(
-        manager.searchBooking(checkOutSearchFirstName.getText(),
-            checkOutSearchLastName.getText(),
-            checkOutSearchPhoneNumber.getText()).getRoom().getPrice()));
-    checkOutRoomNumber.setText(guest1.getRoomNumber());
-    checkedOutCheckOutDate.setValue(LocalDate.now());
+      checkedOutCheckInDate.setValue(guest1.getCheckedInDate());
+      checkedOutInitialPrice.setText(String.valueOf(manager.searchBooking(checkOutSearchFirstName.getText(),
+          checkOutSearchLastName.getText(), checkOutSearchPhoneNumber.getText()).getRoom().getPrice()));
+      checkOutRoomNumber.setText(guest1.getRoomNumber());
+      checkedOutCheckOutDate.setValue(LocalDate.now());
 
-    checkOutSmoking.setSelected(guest1.ifSmoking());
+      checkOutSmoking.setSelected(guest1.ifSmoking());
+    }
   }
 
   /**
@@ -680,22 +688,40 @@ public class HotelGUIController implements Initializable
 
   @FXML private void checkOutSave(ActionEvent event)
   {
-    if (!checkOutSearchFirstName.getText().equals("")
-        && !checkOutSearchLastName.getText().equals("")
-        && !checkOutSearchPhoneNumber.getText().equals(""))
+    if (checkOutSearchFirstName.getText().equals("")
+        || checkOutSearchLastName.getText().equals("")
+        || checkOutSearchPhoneNumber.getText().equals("")||
+        checkedOutCheckInDate.getValue()==null||
+        checkedOutCheckOutDate.getValue()==null||checkedOutNightsStayed.getText().equals("")||
+        checkOutRoomNumber.getText().equals("")|| checkedOutInitialPrice.getText().equals("")||
+        checkedOutDiscountAmount.getText().equals("")||checkedOutFinalPrice.getText().equals(""))
+    {
+      Alert alert = new Alert(Alert.AlertType.INFORMATION);
+      alert.setTitle("The OverLook Hotel");
+      alert.setContentText("Fill all the fields");
+      alert.showAndWait();
+    }
+    else if (manager.searchCheckIn(checkOutSearchFirstName.getText(),
+        checkOutSearchLastName.getText(),
+        checkOutSearchPhoneNumber.getText())==null)
+    {
+      Alert alert = new Alert(Alert.AlertType.INFORMATION);
+      alert.setTitle("The OverLook Hotel");
+      alert.setContentText("The check-in was not found");
+      alert.showAndWait();
+    }
+    else
     {
       Guest guest1 = manager.searchCheckIn(checkOutSearchFirstName.getText(),
           checkOutSearchLastName.getText(),
           checkOutSearchPhoneNumber.getText());
 
-      //      manager.createCheckOut(guest1.getRoomNumber());
 
       manager.removeCheckIn(guest1.getRoomNumber());
 
       manager.deleteBookings(guest1.getFirstName(), guest1.getLastName(),
           guest1.getPhone());
 
-      //      manager.getAllRooms().getRoomByRoomNumber(guest1.getRoomNumber());
 
       checkOutClear();
 
@@ -705,6 +731,7 @@ public class HotelGUIController implements Initializable
       alert.showAndWait();
     }
   }
+
 
   /**
    * This function clear the text fields in the tab check-out
@@ -721,7 +748,8 @@ public class HotelGUIController implements Initializable
     checkOutSearchFirstName.clear();
     checkOutSearchLastName.clear();
     checkOutSearchPhoneNumber.clear();
-    checkInTableView.getItems().clear();
+    checkOutTableView.getItems().clear();
+
   }
 
   // -------------------------- All check-ins tab starts from here ------------------------------
