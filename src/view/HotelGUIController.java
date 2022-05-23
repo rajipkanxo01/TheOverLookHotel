@@ -1,6 +1,5 @@
 package view;
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -128,17 +127,19 @@ public class HotelGUIController implements Initializable
     checkInButton.setDisable(true);
 
     // styling for disabled objects
-//    bookingArrivalDate.getEditor().setStyle("-fx-opacity: 1.0");
-//    bookingArrivalDate.setStyle("-fx-opacity: 1.0");
-//
-//    bookingDepartureDate.getEditor().setStyle("-fx-opacity: 1.0");
-//    bookingDepartureDate.setStyle("-fx-opacity: 1.0");
+    //    bookingArrivalDate.getEditor().setStyle("-fx-opacity: 1.0");
+    //    bookingArrivalDate.setStyle("-fx-opacity: 1.0");
+    //
+    //    bookingDepartureDate.getEditor().setStyle("-fx-opacity: 1.0");
+    //    bookingDepartureDate.setStyle("-fx-opacity: 1.0");
 
     bookingRoomType.setStyle("-fx-opacity: 1.0");
     bookingRoomNumber.setStyle("-fx-opacity: 1.0");
     bookingSmoking.setStyle("-fx-opacity: 1.0");
     checkInSmoking.setStyle("-fx-opacity: 1");
     checkOutSmoking.setStyle("-fx-opacity: 1");
+
+
 
     // styling for align items in center
 
@@ -149,8 +150,6 @@ public class HotelGUIController implements Initializable
     checkInBookedBy.setStyle("-fx-alignment: CENTER;");
     checkOutColumnNumber.setStyle("-fx-alignment: CENTER;");
     checkOutCheckedIn.setStyle("-fx-alignment: CENTER;");
-
-
 
   }
 
@@ -175,21 +174,17 @@ public class HotelGUIController implements Initializable
       // get data from room status tab and set it to create booking tab
       bookingArrivalDate.setValue(roomArrivalDate.getValue());
 
-
       bookingDepartureDate.setValue(roomDepartureDate.getValue());
 
       bookingRoomType.setText(
           roomStatusTableView.getSelectionModel().getSelectedItem().getType());
 
-
       bookingRoomNumber.setText(
           roomStatusTableView.getSelectionModel().getSelectedItem()
               .getRoomNumber());
 
-
       bookingSmoking.setSelected(isSmoking.isSelected());
       bookingSmoking.setDisable(true);
-
 
       roomStatusError.setText("");
 
@@ -238,37 +233,10 @@ public class HotelGUIController implements Initializable
    */
   @FXML void searchAvailableRooms()
   {
-    roomStatusColumnPrice.setCellValueFactory(
-        new PropertyValueFactory<Room, Double>("price"));
+    roomStatusColumnPrice.setCellValueFactory(new PropertyValueFactory<Room, Double>("price"));
+    roomStatusColumnType.setCellValueFactory(new PropertyValueFactory<Room, String>("type"));
+    roomStatusColumnNumber.setCellValueFactory(new PropertyValueFactory<Room, String>("roomNumber"));
 
-
-    roomStatusColumnType.setCellValueFactory(
-        new PropertyValueFactory<Room, String>("type"));
-
-
-    roomStatusColumnNumber.setCellValueFactory(
-        new PropertyValueFactory<Room, String>("roomNumber"));
-    roomStatusTableView.setItems(getRoom());
-    roomStatusTableView.refresh();
-  }
-
-
-  /**
-   * The function intitializeTable() is called when the FXML file is loaded. It
-   * sets the cell value factory for each column in the table view to the
-   * appropriate property in the Room class
-   */
-
-  /**
-   * It returns an ObservableList of Room objects that are available for the given
-   * arrival and departure dates and smoking preference
-   *
-   * @return The method is returning an ObservableList of Room objects.
-   */
-  @FXML private ObservableList<Room> getRoom()
-  {
-
-    // getting arrival date, departure date and smoking value from gui
     LocalDate arrivalDate = roomArrivalDate.getValue();
     LocalDate departureDate = roomDepartureDate.getValue();
     boolean smoking = isSmoking.isSelected();
@@ -282,23 +250,20 @@ public class HotelGUIController implements Initializable
     for (int i = 0; i < allAvailableRooms.getTotalNumberOfRooms(); i++)
     {
       allRooms.add(allAvailableRooms.getRoom(i));
-      if (allAvailableRooms.getRoom(i).ifSmoking())
+      if (allAvailableRooms.getRoom(i).isSmoking())
       {
         allSmokingRooms.add(allAvailableRooms.getRoom(i));
       }
-
     }
-
-    // checking if smoking is selected or not
-    if (isSmoking.isSelected())
-    {
-      return allSmokingRooms;
+    if (smoking) {
+      roomStatusTableView.setItems(allSmokingRooms);
     }
-    else
-    {
-      return allRooms;
+    else {
+      roomStatusTableView.setItems(allRooms);
     }
   }
+
+
 
   /**
    * If the check-out date is before the check-in date, display an error message
@@ -348,7 +313,6 @@ public class HotelGUIController implements Initializable
    */
   @FXML private void bookingSave()
   {
-
     // get information from fields and assign it to the variable
     String bookingFirstNameText = bookingFirstName.getText().trim();
     String bookingLastNameText = bookingLastName.getText().trim();
@@ -359,23 +323,19 @@ public class HotelGUIController implements Initializable
     boolean smokingSelected = bookingSmoking.isSelected();
     boolean extraBedSelected = bookingExtraBed.isSelected();
     Integer numberOfGuestValue = bookingNumberOfGuest.getValue();
-
     // get room according to the room number given in field
     RoomList allRooms = manager.getAllRooms();
     Room room = allRooms.getRoomByRoomNumber(
         bookingRoomNumber.getText().trim());
-
     // get arrival and departure date
     LocalDate arrivalDateValue = bookingArrivalDate.getValue();
     LocalDate departureDateValue = bookingDepartureDate.getValue();
-
     // if any field is empty, gives an error message
     if (bookingFirstNameText.equals("") || bookingLastNameText.equals("")
         || bookingPhoneNumberText.equals("") || bookingNationalityText.equals(
-        "") || bookingAddressText.equals("") || numberOfGuestValue == 0)
+        "") || bookingAddressText.equals("") || numberOfGuestValue == 0 )
     {
       createBookingError.setText("Fields can't be empty.");
-      //      bookingClear();
     }
     else
     {
@@ -384,7 +344,6 @@ public class HotelGUIController implements Initializable
           smokingSelected, room, bookingFirstNameText, bookingLastNameText,
           bookingAddressText, bookingPhoneNumberText, bookingNationalityText,
           bookingDateOfBirthValue, arrivalDateValue, departureDateValue);
-
       // clear everything after booking is created
       bookingClear();
 
@@ -395,7 +354,16 @@ public class HotelGUIController implements Initializable
       alert.setContentText("Your Booking is Confirmed. Enjoy Your Stay");
       alert.showAndWait();
     }
+  }
 
+  public void validDateOfBirth(ActionEvent event)
+  {
+    if (bookingDateOfBirth.getValue().isAfter(LocalDate.now())) {
+      Alert alert = new Alert(Alert.AlertType.WARNING);
+      alert.setTitle("The Overlook Hotel");
+      alert.setContentText("Invalid Date of Birth");
+      alert.showAndWait();
+    }
   }
 
   /**
@@ -466,7 +434,6 @@ public class HotelGUIController implements Initializable
 
     checkInNumberColumn.setCellValueFactory(
         new PropertyValueFactory<Booking, String>("roomNumber"));
-
 
     checkInBookedBy.setCellValueFactory(
         new PropertyValueFactory<Booking, String>("fullName"));
@@ -566,7 +533,8 @@ public class HotelGUIController implements Initializable
     else
     {
       manager.createCheckIn(firstName, lastName, address, phoneNumber,
-          nationality, dateOfBirth, checkInDate, checkoutDate, roomNumber , smoking );
+          nationality, dateOfBirth, checkInDate, checkoutDate, roomNumber,
+          smoking);
       Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
       alert.setHeaderText("Checked in");
       alert.setContentText("Guest successfully checked-in");
@@ -699,11 +667,10 @@ public class HotelGUIController implements Initializable
     Guest guest1 = manager.searchCheckIn(checkOutSearchFirstName.getText(),
         checkOutSearchLastName.getText(), checkOutSearchPhoneNumber.getText());
 
-
     double price = manager.calculatePrice(checkedOutCheckInDate.getValue(),
         checkedOutCheckOutDate.getValue(), guest1.getRoomNumber(),
-        Double.parseDouble(checkedOutDiscountAmount.getText()) , checkOutSmoking.isSelected()
-        );
+        Double.parseDouble(checkedOutDiscountAmount.getText()),
+        checkOutSmoking.isSelected());
     checkedOutFinalPrice.setText(String.valueOf(price));
   }
 
@@ -940,4 +907,6 @@ public class HotelGUIController implements Initializable
 
     allBookingsTableView.setItems(bookingsOnDay);
   }
+
+
 }

@@ -73,7 +73,7 @@ public class Room implements Serializable
    *
    * @return boolean as true or false if smoking or not
    */
-  public boolean ifSmoking()
+  public boolean isSmoking()
   {
     return smoking;
   }
@@ -130,6 +130,21 @@ public class Room implements Serializable
     return available;
   }
 
+  public boolean isAvailable()
+  {
+    return available;
+  }
+
+  public LocalDate getBookStartDate()
+  {
+    return bookStartDate;
+  }
+
+  public LocalDate getBookEndDate()
+  {
+    return bookEndDate;
+  }
+
   /**
    * Gets the  type of the room.
    *
@@ -145,4 +160,6 @@ public class Room implements Serializable
     return "Room{" + "price=" + price + ", smoking=" + smoking + ", available="
         + available + ", roomNumber='" + roomNumber + "}\n";
   }
+
+
 }

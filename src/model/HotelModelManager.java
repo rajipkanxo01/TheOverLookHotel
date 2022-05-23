@@ -1,12 +1,24 @@
 package model;
 
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import utils.MyFileHandler;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class HotelModelManager implements Serializable
 {
@@ -650,6 +662,75 @@ public class HotelModelManager implements Serializable
     {
       System.err.println("IO Exception Error");
     }
+  }
+
+  public void exportRoomsToXML()
+  {
+    try
+    {
+      RoomList allRooms = getAllRooms();
+
+      DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+      DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+      Document doc = dBuilder.newDocument();
+
+      // root element
+      Element rootElement = doc.createElement("RoomList");
+      doc.appendChild(rootElement);
+
+
+      for (int i = 0; i < allRooms.getTotalNumberOfRooms(); i++)
+      {
+        Room room = allRooms.getRoom(i);
+
+        // rooms element
+        Element rooms = doc.createElement("rooms");
+        Attr attrType = doc.createAttribute("roomNumber");
+        attrType.setValue(room.getRoomNumber());
+        rooms.setAttributeNode(attrType);
+        rootElement.appendChild(rooms);
+
+        // roomType element
+        Element roomType = doc.createElement("roomType");
+        roomType.appendChild(doc.createTextNode(room.getType()));
+        rooms.appendChild(roomType);
+
+
+        // bookStartDate element
+        Element bookStartDate = doc.createElement("bookStartDate");
+        bookStartDate.appendChild(
+            doc.createTextNode(String.valueOf(room.getBookStartDate())));
+        rooms.appendChild(bookStartDate);
+
+        //bookEndDate element
+        Element bookEndDate = doc.createElement("bookEndDate");
+        bookEndDate.appendChild(
+            doc.createTextNode(String.valueOf(room.getBookEndDate())));
+        rooms.appendChild(bookEndDate);
+      }
+
+
+      TransformerFactory transformerFactory = TransformerFactory.newInstance();
+      Transformer transformer = transformerFactory.newTransformer();
+      DOMSource source = new DOMSource(rootElement);
+      StreamResult result = new StreamResult(new File("rooms.xml"));
+      transformer.transform(source,result);
+
+
+    }
+    catch (ParserConfigurationException e)
+    {
+      System.err.println("Parsing Error");
+    }
+    catch (TransformerConfigurationException e)
+    {
+      System.err.println("Transformer Configuration Error");
+    }
+    catch (TransformerException e)
+    {
+      System.err.println("Transformer Exception");
+    }
+
   }
 
 }
