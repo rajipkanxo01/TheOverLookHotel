@@ -8,6 +8,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="JavaFX" level="application" />
-    <orderEntry type="library" name="XmlJsonParser-1.4" level="application" />
+    <orderEntry type="library" exported="" name="XmlJsonParser-1.4" level="application" />
+    <orderEntry type="library" exported="" name="JavaFx" level="application" />
   </component>
 </module>

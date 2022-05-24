@@ -269,6 +269,7 @@ public class HotelGUIController implements Initializable
    * If the check-out date is before the check-in date, display an error message
    *
    * @param event The event that triggered the method.
+   * @author Pramesh Shrestha
    */
   @FXML private void disableDepartureDate(ActionEvent event)
   {
@@ -356,6 +357,11 @@ public class HotelGUIController implements Initializable
     }
   }
 
+  /**
+   * If the date of birth is after today's date, display an alert
+   *
+   * @param event The event that triggered the method.
+   */
   public void validDateOfBirth(ActionEvent event)
   {
     if (bookingDateOfBirth.getValue().isAfter(LocalDate.now())) {
@@ -398,6 +404,7 @@ public class HotelGUIController implements Initializable
    */
   @FXML private void checkInBack(ActionEvent actionEvent)
   {
+    //switch back to Create Booking tab
     SingleSelectionModel<Tab> selectionCheckInBackButton = tabPane.getSelectionModel();
     selectionCheckInBackButton.select(createBooking);
   }
@@ -407,6 +414,7 @@ public class HotelGUIController implements Initializable
    */
   public void setRoomToCheckInComboBox()
   {
+    //adding rooms to combo box
     ObservableList<String> list = FXCollections.observableArrayList();
     list.addAll("SBS-C1", "SBS-C2", "SBS-C3", "3SBS-C4", "2SBS-C5", "SR-A1",
         "SR-A2", "SR-A3", "SR-A4", "SR-A5", "SR-A6", "SR-A7", "SR-A8", "SR-A9",
@@ -509,6 +517,7 @@ public class HotelGUIController implements Initializable
    */
   @FXML private void checkIn(ActionEvent event)
   {
+    //getting string value from the GUI and assigning to them to the variables of respective data type
     String firstName = checkInFirstName.getText().trim();
     String lastName = checkInLastName.getText().trim();
     String phoneNumber = checkInPhoneNumber.getText().trim();
@@ -553,6 +562,7 @@ public class HotelGUIController implements Initializable
    */
   @FXML private void disableCheckOutDate(ActionEvent event)
   {
+    //Alert box pops up check out date is before check in date and then clears check out field in GUI
     if (checkInCheckOutDate.getValue()
         .isBefore(checkInCheckedInDate.getValue()))
     {
@@ -564,6 +574,7 @@ public class HotelGUIController implements Initializable
     }
     else
     {
+      //check in button is on available to be used
       checkInButton.setDisable(false);
     }
 
@@ -576,6 +587,7 @@ public class HotelGUIController implements Initializable
    */
   @FXML private void checkInClear(ActionEvent event)
   {
+    //clearing out fields in GUI
     clearCheckInBox();
     checkInRoomNumber.getEditor().clear();
     checkInCheckedInDate.getEditor().clear();
@@ -586,6 +598,7 @@ public class HotelGUIController implements Initializable
    */
   public void clearCheckInBox()
   {
+    //clear fields in GUI
     checkInFirstName.clear();
     checkInLastName.clear();
     checkInPhoneNumber.clear();
@@ -593,8 +606,6 @@ public class HotelGUIController implements Initializable
     checkInAddress.clear();
     checkInDateOfBirth.getEditor().clear();
     checkInCheckOutDate.getEditor().clear();
-    checkInCheckedInDate.getEditor()
-        .setText(checkInCheckedInDate.getValue().toString());
   }
 
   /**
@@ -602,6 +613,7 @@ public class HotelGUIController implements Initializable
    */
   public void clearCheckInSearchBox()
   {
+    //clears Check-In tab's search box's  fields
     checkInSearchFirstName.clear();
     checkInSearchLastName.clear();
     checkInSearchPhoneNumber.clear();
@@ -612,6 +624,7 @@ public class HotelGUIController implements Initializable
 
   /**
    * This function searches the Room number and the Checked-In date for the given guest .
+   * @author Rodrigo Reyes
    */
   @FXML private void searchCheckIn(ActionEvent event)
   {
@@ -761,9 +774,10 @@ public class HotelGUIController implements Initializable
    * @param event The event that triggered the action.
    * @author Pramesh Shrestha
    */
-  //-----------------------------------------------------------------------------------------------------------------
+
   @FXML private void allCheckInsButton(ActionEvent event)
   {
+    //setting up columns of table
     allCheckInRoomNumberColumn.setCellValueFactory(
         new PropertyValueFactory<Guest, String>("roomNumber"));
     allCheckInFirstNameColumn.setCellValueFactory(
@@ -777,11 +791,13 @@ public class HotelGUIController implements Initializable
     allCheckInCheckedOutDateColumn.setCellValueFactory(
         new PropertyValueFactory<Guest, LocalDate>("checkOutDate"));
 
+    //creating observableArrayList
     ObservableList<Guest> checkIns = FXCollections.observableArrayList();
     GuestList allCheckIns = manager.getAllCheckedIn();
 
     for (int i = 0; i < allCheckIns.getNumberOfGuest(); i++)
     {
+      //adding guest that checked in into the observableArrayList
       checkIns.add(allCheckIns.getGuestByIndex(i));
     }
     checkInCombo.getSelectionModel().clearSelection();
@@ -789,8 +805,12 @@ public class HotelGUIController implements Initializable
 
   }
 
+  /**
+   * This function is used to set the room numbers to the combo box
+   */
   public void setRoomToComboBox()
   {
+    //adding rooms to the combo box
     ObservableList<String> list = FXCollections.observableArrayList();
     list.addAll("SBS-C1", "SBS-C2", "SBS-C3", "3SBS-C4", "2SBS-C5", "SR-A1",
         "SR-A2", "SR-A3", "SR-A4", "SR-A5", "SR-A6", "SR-A7", "SR-A8", "SR-A9",
@@ -808,6 +828,7 @@ public class HotelGUIController implements Initializable
    */
   @FXML private void getAllGuestsByRoomNumber(ActionEvent event)
   {
+    //displays all the guests that checked-in in a certain room by room number
     String selected = checkInCombo.getSelectionModel().getSelectedItem();
     String roomNumber = manager.displayCheckInsByRoomNumber(selected);
 
@@ -827,6 +848,7 @@ public class HotelGUIController implements Initializable
     ObservableList<Guest> checkIns = FXCollections.observableArrayList();
     GuestList allCheckIns = manager.getAllCheckedIn();
 
+    //if a guest is check-in into the given room number, the guest is added into the observableArrayList and then displayed in the table
     for (int i = 0; i < allCheckIns.getNumberOfGuest(); i++)
     {
       if (allCheckIns.getGuestByIndex(i).getRoomNumber().equals(roomNumber))

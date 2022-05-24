@@ -5,6 +5,7 @@ import java.time.LocalDate;
 
 /**
  * The type Booking.
+ * @author Pramesh Shrestha
  */
 public class Booking implements Serializable
 {
@@ -123,26 +124,16 @@ public class Booking implements Serializable
     return smokes;
   }
 
-  //
-//  /**
-//   * This method returns the number of guests that are expected to check in
-//   *
-//   * @return The number of guests.
-//   */
-//  public int getNumberOfGuest()
-//  {
-//    return numberOfGuest;
-//  }
 
-//  /**
-//   * This method sets the number of guests that are expected to check in for the reservation
-//   *
-//   * @param numberOfGuest The number of guests expected.
-//   */
-//  public void setNumberOfGuest(int numberOfGuest)
-//  {
-//    this.numberOfGuest = numberOfGuest;
-//  }
+  /**
+   * This method returns the number of guests that are expected to check in
+   *
+   * @return The number of guests.
+   */
+  public int getNumberOfGuest()
+  {
+    return numberOfGuest;
+  }
 
   /**
 
@@ -168,6 +159,12 @@ public class Booking implements Serializable
 
 
 
+  /**
+   * The `toString()` function is a function that is automatically called when you
+   * try to print an object
+   *
+   * @return The toString method is being returned.
+   */
   @Override public String toString()
   {
     return "extraBed=" + extraBed + ", numberOfGuest="
@@ -175,6 +172,13 @@ public class Booking implements Serializable
         + guest + "\n";
   }
 
+  /**
+   * If the object is not a Booking, return false. Otherwise, compare the extraBed,
+   * numberOfGuest, smokes, room and guest fields
+   *
+   * @param obj The object to compare with.
+   * @return The hashcode of the object.
+   */
   public boolean equals(Object obj)
   {
     if (!(obj instanceof Booking))

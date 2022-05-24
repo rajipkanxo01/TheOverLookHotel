@@ -48,29 +48,6 @@ public class BookingList implements Serializable
     return bookingList.size();
   }
 
-  public ArrayList<Booking> getAllBookings()
-  {
-    ArrayList<Booking> allBookings = new ArrayList<>();
-    for (int i = 0; i < bookingList.size(); i++)
-    {
-      allBookings.add(bookingList.get(i));
-    }
-    return allBookings;
-  }
-
-
-
-  /**
-   * Remove a booking from the booking list.
-   *
-   * @param booking The booking to be removed from the booking list.
-   */
-  public void removeBooking(Booking booking)
-  {
-    bookingList.remove(booking);
-  }
-
-
   /**
    * The toString() function returns a string representation of the object
    *
