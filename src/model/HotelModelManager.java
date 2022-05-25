@@ -511,7 +511,8 @@ public class HotelModelManager implements Serializable
   {
     GuestList allGuests = getAllCheckedIn();
     GuestList newGuestList = new GuestList();
-
+    /* search guest that are not in the Guest list and creates a new list to
+    remove those that already have a check-in*/
     for (int i = 0; i < allGuests.getNumberOfGuest(); i++)
     {
       if (!(allGuests.getGuestByIndex(i).getRoomNumber().equals(roomNumber)))
@@ -582,6 +583,7 @@ public class HotelModelManager implements Serializable
   public double calculatePrice(LocalDate arrivalDate, LocalDate departureDate,
       String roomNumber, double discountPercent, boolean smoking)
   {
+    // Calculates date interval and gets the price
     DateInterval dateInterval = new DateInterval(arrivalDate,
         departureDate); // this takes 1
     int numberOfNights = dateInterval.getNumberOfNight(arrivalDate,
@@ -592,6 +594,7 @@ public class HotelModelManager implements Serializable
     double initialPrice = numberOfNights * price; // this takes 1
     double smokingFee = 25; // this takes 1
 
+    // adds smoking fee if it is true
     if (!smoking)
     {
       return initialPrice - ((initialPrice) * ((discountPercent)

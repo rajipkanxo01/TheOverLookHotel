@@ -628,6 +628,8 @@ public class HotelGUIController implements Initializable
    */
   @FXML private void searchCheckIn(ActionEvent event)
   {
+    /*if in the Search of check-In in the binary file does not match any check-in
+    returns an alert that it was not found*/
     if (manager.searchCheckIn(checkOutSearchFirstName.getText(),
         checkOutSearchLastName.getText(), checkOutSearchPhoneNumber.getText())
         == null)
@@ -639,6 +641,8 @@ public class HotelGUIController implements Initializable
     }
     else
     {
+      /*if the Search of check-In in the binary file matches any check-in
+    then adds in the table view*/
       Guest guest1 = manager.searchCheckIn(checkOutSearchFirstName.getText().trim(),
           checkOutSearchLastName.getText().trim(),
           checkOutSearchPhoneNumber.getText().trim());
@@ -669,7 +673,8 @@ public class HotelGUIController implements Initializable
 
   @FXML private void setNumberOfNights(ActionEvent event)
   {
-
+        /*sets the number of nights in the text field
+         according to the check-out date that was selected*/
     if (checkedOutCheckOutDate.getValue() != null)
     {
       int numberOfNightsStayed = manager.calculateNumberOfNights(
@@ -684,7 +689,8 @@ public class HotelGUIController implements Initializable
    */
   @FXML private void checkOutCalculate(ActionEvent event)
   {
-
+      /*sets the final price for the number of nights stayed , the given discount
+      and if smoking fee added*/
     Guest guest1 = manager.searchCheckIn(checkOutSearchFirstName.getText(),
         checkOutSearchLastName.getText(), checkOutSearchPhoneNumber.getText());
 
@@ -701,6 +707,9 @@ public class HotelGUIController implements Initializable
 
   @FXML private void checkOutSave(ActionEvent event)
   {
+    /*If all text fields are not filled then displays an alert message
+    alerting that check in was not found or text fields are missing, otherwise
+    removes check-in and booking from binary files and clears all fields afterwards*/
     if (checkOutSearchFirstName.getText().equals("")
         || checkOutSearchLastName.getText().equals("")
         || checkOutSearchPhoneNumber.getText().equals("")||
@@ -752,6 +761,7 @@ public class HotelGUIController implements Initializable
 
   @FXML private void checkOutClear()
   {
+    /*function to clear all text fields in the check-out tab */
     checkedOutCheckInDate.getEditor().clear();
     checkedOutCheckOutDate.getEditor().clear();
     checkedOutNightsStayed.clear();
