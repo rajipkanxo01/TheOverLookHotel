@@ -361,6 +361,14 @@ public class HotelGUIController implements Initializable
       alert.setContentText("Invalid Date of Birth");
       alert.showAndWait();
     }
+    if((LocalDate.now().getYear() - bookingDateOfBirth.getValue().getYear() < 18))
+    {
+      Alert alert = new Alert(Alert.AlertType.WARNING);
+      alert.setTitle("The Overlook Hotel");
+      alert.setContentText("The age is under 18");
+      alert.showAndWait();
+      bookingDateOfBirth.getEditor().clear();
+    }
   }
 
   /**
