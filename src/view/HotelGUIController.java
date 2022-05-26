@@ -505,6 +505,7 @@ public class HotelGUIController implements Initializable
     if (!booked)
     {
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
+      alert.setTitle("The OverLook Hotel");
       alert.setHeaderText(null);
       alert.setContentText(
           "No booking found under " + firstName + " " + lastName + "'s name.");
@@ -540,6 +541,7 @@ public class HotelGUIController implements Initializable
         || checkInDate == null || roomNumber.equals(""))
     {
       Alert alert = new Alert(Alert.AlertType.WARNING);
+      alert.setTitle("The OverLook Hotel");
       alert.setHeaderText(null);
       alert.setContentText("All fields required.");
       alert.showAndWait();
@@ -551,6 +553,7 @@ public class HotelGUIController implements Initializable
           nationality, dateOfBirth, checkInDate, checkoutDate, roomNumber,
           smoking);
       Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+      alert.setTitle("The OverLook Hotel");
       alert.setHeaderText("Checked in");
       alert.setContentText("Guest successfully checked-in");
       alert.showAndWait();
@@ -572,6 +575,7 @@ public class HotelGUIController implements Initializable
         .isBefore(checkInCheckedInDate.getValue()))
     {
       Alert alert = new Alert(Alert.AlertType.ERROR);
+      alert.setTitle("The OverLook Hotel");
       alert.setHeaderText("Invalid Check-out Date");
       alert.setContentText("Please enter a valid check-out date.");
       alert.showAndWait();
