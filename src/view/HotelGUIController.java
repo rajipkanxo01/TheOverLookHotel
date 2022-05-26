@@ -60,6 +60,7 @@ public class HotelGUIController implements Initializable
   @FXML private TabPane tabPane;
   @FXML private Spinner<Integer> bookingNumberOfGuest;
   @FXML private Label createBookingError;
+  @FXML private Button bookingSave;
 
   // Check In tab private fields
   @FXML private TextField checkInAddress;
@@ -148,6 +149,8 @@ public class HotelGUIController implements Initializable
     checkOutColumnNumber.setStyle("-fx-alignment: CENTER;");
     checkOutCheckedIn.setStyle("-fx-alignment: CENTER;");
 
+    createBooking.setDisable(true);
+
   }
 
   // -------------------------- room status methods starts from here ------------------------------
@@ -192,6 +195,7 @@ public class HotelGUIController implements Initializable
       isSmoking.setSelected(false);
       roomStatusTableView.getItems().clear();
 
+      createBooking.setDisable(false);
     }
     else
     {
@@ -206,9 +210,13 @@ public class HotelGUIController implements Initializable
    */
   @FXML private void createBack(ActionEvent actionEvent)
   {
+
+
     // go back to room status tab
     SingleSelectionModel<Tab> selectionModelCreateBackButton = tabPane.getSelectionModel();
     selectionModelCreateBackButton.select(roomStatus);
+
+    createBooking.setDisable(true);
   }
 
   /**
@@ -333,7 +341,11 @@ public class HotelGUIController implements Initializable
         || bookingPhoneNumberText.equals("") || bookingNationalityText.equals(
         "") || bookingAddressText.equals("") || numberOfGuestValue == 0 )
     {
-      createBookingError.setText("Fields can't be empty.");
+      Alert alert = new Alert(Alert.AlertType.ERROR);
+      alert.setTitle("TheOverLookHotel");
+      alert.setHeaderText("Error");
+      alert.setContentText("Please, input all values.");
+      alert.showAndWait();
     }
     else
     {
@@ -345,11 +357,14 @@ public class HotelGUIController implements Initializable
       // clear everything after booking is created
       bookingClear();
 
+      // exports to xml
+      manager.exportRoomsToXML();
+
       // show dialog box when booking is done
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
       alert.setTitle("TheOverLookHotel");
       alert.setHeaderText("Booking Confirmed");
-      alert.setContentText("Your Booking is Confirmed. Enjoy Your Stay");
+      alert.setContentText("Booking Confirmed under " + bookingFirstNameText + " " + bookingLastNameText);
       alert.showAndWait();
     }
   }
@@ -751,6 +766,9 @@ public class HotelGUIController implements Initializable
 
       manager.deleteBookings(guest1.getFirstName(), guest1.getLastName(),
           guest1.getPhone());
+
+      // exports to xml
+      manager.exportRoomsToXML();
 
 
       checkOutClear();

@@ -16,7 +16,7 @@ public class TestClass
 //  RoomList roomList = manager.getAllRooms();
 //    Room room1 = roomList.getRoom(1);
 
-    manager.exportRoomsToXML();
+//    manager.exportRoomsToXML();
 //    manager.addRooms();
     //    Room room2 = roomList.getRoom(2);
 

@@ -115,7 +115,7 @@
                                         <CheckBox fx:id="bookingSmoking" disable="true" layoutX="15.0" layoutY="229.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="116.0" text="Smoking" />
                                         <DatePicker fx:id="bookingDateOfBirth" layoutX="14.0" layoutY="188.0" onAction="#validDateOfBirth" prefHeight="25.0" prefWidth="207.0" />
                                         <CheckBox fx:id="bookingExtraBed" layoutX="14.0" layoutY="256.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="116.0" text="Extra bed" />
-                                        <Button layoutX="419.0" layoutY="313.0" mnemonicParsing="false" onAction="#bookingSave" text="Save" />
+                                        <Button fx:id="bookingSave" layoutX="419.0" layoutY="313.0" mnemonicParsing="false" onAction="#bookingSave" text="Save" />
                                         <Button layoutX="359.0" layoutY="313.0" mnemonicParsing="false" onAction="#bookingClear" text="Clear" />
                                         <Button layoutX="254.0" layoutY="313.0" mnemonicParsing="false" onAction="#bookingGoToCheckIn" text="Go To Check-In" />
                                         <Button layoutX="206.0" layoutY="313.0" mnemonicParsing="false" onAction="#bookingBack" text="Back" />
