@@ -126,20 +126,11 @@ public class HotelGUIController implements Initializable
     setRoomToCheckInComboBox();
     checkInButton.setDisable(true);
 
-    // styling for disabled objects
-    //    bookingArrivalDate.getEditor().setStyle("-fx-opacity: 1.0");
-    //    bookingArrivalDate.setStyle("-fx-opacity: 1.0");
-    //
-    //    bookingDepartureDate.getEditor().setStyle("-fx-opacity: 1.0");
-    //    bookingDepartureDate.setStyle("-fx-opacity: 1.0");
-
     bookingRoomType.setStyle("-fx-opacity: 1.0");
     bookingRoomNumber.setStyle("-fx-opacity: 1.0");
     bookingSmoking.setStyle("-fx-opacity: 1.0");
     checkInSmoking.setStyle("-fx-opacity: 1");
     checkOutSmoking.setStyle("-fx-opacity: 1");
-
-
 
     // styling for align items in center
 
@@ -231,7 +222,7 @@ public class HotelGUIController implements Initializable
   /**
    * This function searches the available room from binary file when search button is clicked
    */
-  @FXML void searchAvailableRooms()
+  @FXML private void searchAvailableRooms()
   {
     roomStatusColumnPrice.setCellValueFactory(new PropertyValueFactory<Room, Double>("price"));
     roomStatusColumnType.setCellValueFactory(new PropertyValueFactory<Room, String>("type"));
@@ -362,7 +353,7 @@ public class HotelGUIController implements Initializable
    *
    * @param event The event that triggered the method.
    */
-  public void validDateOfBirth(ActionEvent event)
+  @FXML private void validDateOfBirth(ActionEvent event)
   {
     if (bookingDateOfBirth.getValue().isAfter(LocalDate.now())) {
       Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -412,7 +403,7 @@ public class HotelGUIController implements Initializable
   /**
    * This function is used to set the room number combo box in the check in tab
    */
-  public void setRoomToCheckInComboBox()
+  @FXML private void setRoomToCheckInComboBox()
   {
     //adding rooms to combo box
     ObservableList<String> list = FXCollections.observableArrayList();
@@ -582,10 +573,9 @@ public class HotelGUIController implements Initializable
 
   /**
    * It clears all the text fields  except the room TextField in the check in tab
-   *
-   * @param event The event that triggered the action.
+
    */
-  @FXML private void checkInClear(ActionEvent event)
+  @FXML private void checkInClear()
   {
     //clearing out fields in GUI
     clearCheckInBox();
@@ -596,7 +586,7 @@ public class HotelGUIController implements Initializable
   /**
    * It clears all the text fields in the check in tab
    */
-  public void clearCheckInBox()
+  @FXML private void clearCheckInBox()
   {
     //clear fields in GUI
     checkInFirstName.clear();
@@ -611,7 +601,7 @@ public class HotelGUIController implements Initializable
   /**
    * This function clears the check-in search box.
    */
-  public void clearCheckInSearchBox()
+  @FXML private void clearCheckInSearchBox()
   {
     //clears Check-In tab's search box's  fields
     checkInSearchFirstName.clear();
@@ -818,7 +808,7 @@ public class HotelGUIController implements Initializable
   /**
    * This function is used to set the room numbers to the combo box
    */
-  public void setRoomToComboBox()
+  @FXML private void setRoomToComboBox()
   {
     //adding rooms to the combo box
     ObservableList<String> list = FXCollections.observableArrayList();
@@ -877,7 +867,7 @@ public class HotelGUIController implements Initializable
    *
    * @author Rajiv Paudyal
    */
-  public void displayAllBookings()
+  @FXML private void displayAllBookings()
   {
     allBookingsRoomNumber.setCellValueFactory(
         new PropertyValueFactory<>("roomNumber"));
@@ -906,7 +896,7 @@ public class HotelGUIController implements Initializable
    * When the user clicks the remove button, remove the selected row from the
    * table.
    */
-  public void removeBookingFromTable()
+  @FXML private void removeBookingFromTable()
   {
     // selects booking from the table and deletes it from file
     Booking selectedBooking = allBookingsTableView.getSelectionModel()
@@ -968,5 +958,33 @@ public class HotelGUIController implements Initializable
     allBookingsTableView.setItems(bookingsOnDay);
   }
 
+  //----------------------------------Menu items starts here--------------------------------
 
+
+  /**
+   * The function asks the user for confirmation to close the program
+   *
+   * @param event The event that triggered the action.
+   */
+  @FXML private void exitWindow(ActionEvent event)
+  {
+    //Ask user for the confirmation to close the program
+    Alert alert = new Alert(Alert.AlertType.WARNING,"Do you really want to exit?",ButtonType.YES, ButtonType.NO);
+    alert.setTitle("Overlook Hotel");
+    alert .setHeaderText(null);
+    alert.showAndWait();
+    if(alert.getResult() == ButtonType.YES)
+    {
+      System.exit(0);
+    }
+  }
+
+ // Clearing all the fields in the tabs.
+ @FXML private void clearAllFields(ActionEvent event)
+  {
+    //clears all the tabs' fields
+    bookingClear();
+    checkInClear();
+    checkOutClear();
+  }
 }
