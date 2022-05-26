@@ -4,12 +4,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import model.*;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -973,6 +979,7 @@ public class HotelGUIController implements Initializable
    * The function asks the user for confirmation to close the program
    *
    * @param event The event that triggered the action.
+   * @author Pramesh Shrestha
    */
   @FXML private void exitWindow(ActionEvent event)
   {
@@ -994,5 +1001,31 @@ public class HotelGUIController implements Initializable
     bookingClear();
     checkInClear();
     checkOutClear();
+  }
+
+  /**
+   * It opens a new window with the title "About the Software" and the content of
+   * the About.fxml file
+   *
+   */
+  @FXML private void about()
+  {
+    try
+    {
+      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("About.fxml"));
+      Parent root = fxmlLoader.load();
+      Scene scene = new Scene(root);
+      Stage stage = new Stage();
+      stage.setResizable(false);
+      stage.setTitle("About the Software");
+      stage.initModality(Modality.APPLICATION_MODAL);
+      stage.setScene(scene);
+      stage.show();
+
+    }
+    catch (IOException ex)
+    {
+      ex.printStackTrace();
+    }
   }
 }

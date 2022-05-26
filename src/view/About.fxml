@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AboutController">
+   <children>
+      <HBox prefHeight="33.0" prefWidth="763.0" style="-fx-background-color: #2a5176;">
+         <children>
+            <ImageView fitHeight="40.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/logo2.png" />
+               </image>
+            </ImageView>
+            <Label prefHeight="35.0" prefWidth="226.0" text="The Overlook Hotel" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="21.0" />
+               </font>
+            </Label>
+         </children>
+         <effect>
+            <InnerShadow />
+         </effect>
+      </HBox>
+      <TextArea layoutX="11.0" layoutY="140.0" prefHeight="252.0" prefWidth="741.0" text="Product Version&#10;The Overlook Hotel App&#10;&#10;Build Information&#10;Version 18.0.0&#10;Date: 2022-03-31 20:20:30&#10;JavaFX Version: 18&#10;Java Version: 17, OpenJDK Runtime Environment&#10;Developer: Pramesh Shrestha, Rajib Paudyal, Rodrigo Reyes&#10;&#10;JavaFX&#10;18&#10;&#10;Java&#10;18, OpenJDK Runtime Environment&#10;&#10;&#10;Operating System&#10;Windows 11, amd64, 10.0&#10;&#10;Application Data Folder:&#10;&#9;C:\Users\prmss\AppData\Roaming\The Overlook Hotell&#10;&#10;User Library Folder:&#10;&#9;C:\Users\prmss\AppData\Roaming\The Overlook Hotel\Library&#10;&#10;Application Folder:&#10;&#9;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2021.3.1\jbr\bin&#10;&#10;Copyright (c) 2015-2021, Gluon.&#10;All rights reserved. Use is subject to license terms.&#10;&#10;This file is available and licensed under the following license:&#10;&#10;Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions&#10; are met:&#10;&#10; - Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.&#10; - Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in &#10;    the documentation and/or other materials provided with the distribution.&#10; - Neither the name of Gluon nor the names of its contributors may be used to endorse or promote products derived from this &#10;   software without specific prior written permission.&#10;&#10;THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY EXPRESS OR IMPLIED&#10; WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A &#10;PARTICULARPURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORSBE LIABLE FOR &#10;ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED &#10;TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)&#10; HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING &#10;NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY&#10; OF SUCH DAMAGE." />
+      <ImageView fitHeight="96.0" fitWidth="122.0" layoutX="161.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/java.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="96.0" fitWidth="93.0" layoutX="345.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/gluon.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="96.0" fitWidth="88.0" layoutX="525.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/scenebuilder1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="47.0" fitWidth="138.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>
