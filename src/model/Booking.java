@@ -3,8 +3,10 @@ package model;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+
 /**
- * The type Booking.
+ * A `Booking` object contains information about a booking, including the guest,
+ * the room, and the arrival and departure dates
  * @author Pramesh Shrestha
  */
 public class Booking implements Serializable
@@ -19,7 +21,16 @@ public class Booking implements Serializable
   private String roomNumber;
   private String fullName;
 
-  // This is a constructor. It is used to create an object of the Booking class and initialize the fields.
+  /**
+   * initiates the booking class
+   * @param extraBed if guest requires extra bed or not
+   * @param numberOfGuest number of guest arriving
+   * @param smokes if guest smokes or not
+   * @param room room object
+   * @param guest guest object
+   * @param arrivalDate arrival date of guest
+   * @param departureDate departure date of guest
+   */
   public Booking(boolean extraBed, int numberOfGuest, boolean smokes, Room room,
       Guest guest, LocalDate arrivalDate , LocalDate departureDate)
   {
@@ -33,6 +44,8 @@ public class Booking implements Serializable
     fullName = guest.getFullName();
   }
 
+
+
   /**
    * Gets first name.
    *
@@ -42,6 +55,8 @@ public class Booking implements Serializable
   {
     return guest.getFirstName();
   }
+
+
 
   /**
    * This function returns the last name of the guest.
@@ -53,6 +68,8 @@ public class Booking implements Serializable
     return guest.getLastName();
   }
 
+
+
   /**
    * This function returns the phone number of the guest.
    *
@@ -63,6 +80,8 @@ public class Booking implements Serializable
     return guest.getPhone();
   }
 
+
+
   /**
    * This function returns the arrival date of the flight
    *
@@ -72,6 +91,8 @@ public class Booking implements Serializable
     return arrivalDate;
   }
 
+
+
   /**
    * This function returns the departure date of the flight
    *
@@ -80,6 +101,8 @@ public class Booking implements Serializable
   public LocalDate getDepartureDate () {
     return departureDate;
   }
+
+
 
   /**
    * This function gets the room number from the room object and returns it
@@ -92,6 +115,8 @@ public class Booking implements Serializable
     return roomNumber;
   }
 
+
+
   /**
    * The function getFullName() returns the full name of the guest
    *
@@ -102,6 +127,8 @@ public class Booking implements Serializable
     fullName = guest.getFullName();
     return fullName;
   }
+
+
 
   /**
    * This method returns a boolean value that indicates whether or not the guest
