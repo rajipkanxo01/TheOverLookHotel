@@ -3,15 +3,18 @@ package model;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * This class is used to store a list of bookings
+ * @author Pramesh Shrestha
+ */
 public class BookingList implements Serializable
 {
-  /**
-   * @author Pramesh Shrestha, Rajib Paudyal
-   * @version 1.0.0
-   */
+
   private ArrayList<Booking> bookingList;
 
-  // Creating a new ArrayList of Booking objects.
+  /**
+   * initiates booking list object
+   */
   public BookingList()
   {
     bookingList = new ArrayList<>();
