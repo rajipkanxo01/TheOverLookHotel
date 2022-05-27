@@ -23,7 +23,7 @@ public class Guest implements Serializable
   private boolean smoking;
 
   /**
-   * initiates the Guest class
+   * instantiates the Guest class
    *
    * @param firstName   first name of guest
    * @param lastName    last name of guest

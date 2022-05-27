@@ -22,7 +22,7 @@ public class Room implements Serializable
 
 
   /**
-   * initializes the room
+   * instantiates the room
    *
    * @param price         the price of the room
    * @param smoking       whether the room has a smoking area
@@ -130,16 +130,26 @@ public class Room implements Serializable
     return available;
   }
 
-  public boolean isAvailable()
-  {
-    return available;
-  }
+//  public boolean isAvailable()
+//  {
+//    return available;
+//  }
 
+  /**
+   * This function returns the bookStartDate
+   *
+   * @return The bookStartDate is being returned.
+   */
   public LocalDate getBookStartDate()
   {
     return bookStartDate;
   }
 
+  /**
+   * This function returns the bookEndDate
+   *
+   * @return The bookEndDate is being returned.
+   */
   public LocalDate getBookEndDate()
   {
     return bookEndDate;
@@ -155,6 +165,11 @@ public class Room implements Serializable
     return type;
   }
 
+  /**
+   * The toString() method returns a string representation of the object
+   *
+   * @return The room number, price, smoking status, and availability.
+   */
   public String toString()
   {
     return "Room{" + "price=" + price + ", smoking=" + smoking + ", available="

@@ -31,7 +31,7 @@ public class HotelModelManager implements Serializable
   private String bookingFileName;
 
   /**
-   * initializes the hotel model manager class
+   * instantiates the hotel model manager class
    *
    * @param roomFileName    file name for room.bin
    * @param guestFileName   file name for guests.bin
@@ -170,29 +170,6 @@ public class HotelModelManager implements Serializable
     return allAvailableRooms;
   }
 
-  // getBookedRooms
-
-  //  /**
-  //   * Get all the rooms that are booked between the given dates.
-  //   *
-  //   * @param arrivalDate   The date the guest is arriving
-  //   * @param departureDate The date the guest is leaving the hotel.
-  //   * @return A list of all the rooms that are booked.
-  //   */
-  //  public RoomList getBookedRooms(LocalDate arrivalDate, LocalDate departureDate)
-  //  {
-  //    RoomList allRooms = getAllRooms();
-  //    RoomList allBookedRooms = new RoomList();
-  //    for (int i = 0; i < allRooms.getTotalNumberOfRooms(); i++)
-  //    {
-  //      if (!(allRooms.getRoom(i).ifAvailable(arrivalDate, departureDate)))
-  //      {
-  //        allBookedRooms.addRoom(allRooms.getRoom(i));
-  //
-  //      }
-  //    }
-  //    return allBookedRooms;
-  //  }
 
   /**
    * This function takes in a RoomList object and writes it to a binary file
@@ -394,6 +371,14 @@ public class HotelModelManager implements Serializable
   // -------------------------- check in  starts from here ------------------------------
 
   // search for booking
+  /**
+   * Search booking from booking list using first name, last name and phone number.
+   *
+   * @param firstName The first name of the guest
+   * @param lastName The last name of the guest.
+   * @param phoneNumber The phone number of the guest.
+   * @return A booking object.
+   */
   public Booking searchBooking(String firstName, String lastName,
       String phoneNumber)
   {
@@ -451,7 +436,6 @@ public class HotelModelManager implements Serializable
    */
   public GuestList getAllCheckedIn()
   {
-    BookingList bookingList = new BookingList();
     GuestList checkedIn = new GuestList();
     try
     {
@@ -667,6 +651,10 @@ public class HotelModelManager implements Serializable
     }
   }
 
+  /**
+   * It creates an XML file called rooms.xml and writes all the rooms in the hotel
+   * to it
+   */
   public void exportRoomsToXML()
   {
     try

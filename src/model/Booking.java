@@ -22,7 +22,7 @@ public class Booking implements Serializable
   private String fullName;
 
   /**
-   * initiates the booking class
+   * instantiates the booking class
    * @param extraBed if guest requires extra bed or not
    * @param numberOfGuest number of guest arriving
    * @param smokes if guest smokes or not

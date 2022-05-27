@@ -13,7 +13,7 @@ public class BookingList implements Serializable
   private ArrayList<Booking> bookingList;
 
   /**
-   * initiates booking list object
+   * instantiates booking list object
    */
   public BookingList()
   {

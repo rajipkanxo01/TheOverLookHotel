@@ -18,7 +18,7 @@ public class DateInterval implements Serializable
   private LocalDate departureDate;
 
   /**
-   * initiates the date interval
+   * instantiates the date interval
    *
    * @param arrivalDate   arrival date of guest
    * @param departureDate departure date of guest

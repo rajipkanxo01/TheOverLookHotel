@@ -15,7 +15,7 @@ public class RoomList implements Serializable
   private ArrayList<Room> rooms;
 
   /**
-   * Constructor that Instantiates a new Room list.l
+   * Constructor that instantiates a new Room list
    */
   public RoomList()
   {

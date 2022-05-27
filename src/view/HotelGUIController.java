@@ -121,6 +121,14 @@ public class HotelGUIController implements Initializable
   @FXML private TableView<Booking> allBookingsTableView;
   @FXML private DatePicker bookingSelectDate;
 
+  /**
+   * runs when gui loads
+   *
+   * @param url            The location used to resolve relative paths for the root object, or
+   *                       null if the location is not known.
+   * @param resourceBundle This is a ResourceBundle object that contains the
+   *                       resources for the application.
+   */
   public void initialize(URL url, ResourceBundle resourceBundle)
   {
     // Configure the spinner with values 1 to 10
@@ -207,10 +215,10 @@ public class HotelGUIController implements Initializable
    * When user clicks a "back" button, the program will switch to "room status" tab
    *
    * @param actionEvent The event that triggered the action.
+   * @author Rajib Paudyal
    */
   @FXML private void createBack(ActionEvent actionEvent)
   {
-
 
     // go back to room status tab
     SingleSelectionModel<Tab> selectionModelCreateBackButton = tabPane.getSelectionModel();
@@ -225,6 +233,7 @@ public class HotelGUIController implements Initializable
    *
    * @param actionEvent This is the event that is triggered when the button is
    *                    clicked.
+   * @author Rajib Paudyal
    */
   @FXML private void goToCheckIn(ActionEvent actionEvent)
   {
@@ -235,12 +244,17 @@ public class HotelGUIController implements Initializable
 
   /**
    * This function searches the available room from binary file when search button is clicked
+   *
+   * @author Rajib Paudyal
    */
   @FXML private void searchAvailableRooms()
   {
-    roomStatusColumnPrice.setCellValueFactory(new PropertyValueFactory<Room, Double>("price"));
-    roomStatusColumnType.setCellValueFactory(new PropertyValueFactory<Room, String>("type"));
-    roomStatusColumnNumber.setCellValueFactory(new PropertyValueFactory<Room, String>("roomNumber"));
+    roomStatusColumnPrice.setCellValueFactory(
+        new PropertyValueFactory<Room, Double>("price"));
+    roomStatusColumnType.setCellValueFactory(
+        new PropertyValueFactory<Room, String>("type"));
+    roomStatusColumnNumber.setCellValueFactory(
+        new PropertyValueFactory<Room, String>("roomNumber"));
 
     LocalDate arrivalDate = roomArrivalDate.getValue();
     LocalDate departureDate = roomDepartureDate.getValue();
@@ -260,15 +274,15 @@ public class HotelGUIController implements Initializable
         allSmokingRooms.add(allAvailableRooms.getRoom(i));
       }
     }
-    if (smoking) {
+    if (smoking)
+    {
       roomStatusTableView.setItems(allSmokingRooms);
     }
-    else {
+    else
+    {
       roomStatusTableView.setItems(allRooms);
     }
   }
-
-
 
   /**
    * If the check-out date is before the check-in date, display an error message
@@ -316,6 +330,8 @@ public class HotelGUIController implements Initializable
 
   /**
    * It creates a booking from the information given in the fields
+   *
+   * @author Rajib Paudyal
    */
   @FXML private void bookingSave()
   {
@@ -339,7 +355,7 @@ public class HotelGUIController implements Initializable
     // if any field is empty, gives an error message
     if (bookingFirstNameText.equals("") || bookingLastNameText.equals("")
         || bookingPhoneNumberText.equals("") || bookingNationalityText.equals(
-        "") || bookingAddressText.equals("") || numberOfGuestValue == 0 )
+        "") || bookingAddressText.equals("") || numberOfGuestValue == 0)
     {
       Alert alert = new Alert(Alert.AlertType.ERROR);
       alert.setTitle("TheOverLookHotel");
@@ -364,7 +380,9 @@ public class HotelGUIController implements Initializable
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
       alert.setTitle("TheOverLookHotel");
       alert.setHeaderText("Booking Confirmed");
-      alert.setContentText("Booking Confirmed under " + bookingFirstNameText + " " + bookingLastNameText);
+      alert.setContentText(
+          "Booking Confirmed under " + bookingFirstNameText + " "
+              + bookingLastNameText);
       alert.showAndWait();
     }
   }
@@ -373,16 +391,19 @@ public class HotelGUIController implements Initializable
    * If the date of birth is after today's date, display an alert
    *
    * @param event The event that triggered the method.
+   * @author Pramesh Shrestha
    */
   @FXML private void validDateOfBirth(ActionEvent event)
   {
-    if (bookingDateOfBirth.getValue().isAfter(LocalDate.now())) {
+    if (bookingDateOfBirth.getValue().isAfter(LocalDate.now()))
+    {
       Alert alert = new Alert(Alert.AlertType.WARNING);
       alert.setTitle("The Overlook Hotel");
       alert.setContentText("Invalid Date of Birth");
       alert.showAndWait();
     }
-    if((LocalDate.now().getYear() - bookingDateOfBirth.getValue().getYear() < 18))
+    if ((LocalDate.now().getYear() - bookingDateOfBirth.getValue().getYear()
+        < 18))
     {
       Alert alert = new Alert(Alert.AlertType.WARNING);
       alert.setTitle("The Overlook Hotel");
@@ -395,6 +416,8 @@ public class HotelGUIController implements Initializable
   /**
    * When the user clicks the "Go to Check-In" button in the Booking tab, the
    * Check-In tab is selected
+   *
+   * @author Rajib Paudyal
    */
   @FXML private void bookingGoToCheckIn()
   {
@@ -405,6 +428,8 @@ public class HotelGUIController implements Initializable
   /**
    * A function that is called when the user clicks the back button on the booking
    * tab. It takes the user back to the room status tab.
+   *
+   * @author Rajib Paudyal
    */
   @FXML private void bookingBack()
   {
@@ -431,6 +456,8 @@ public class HotelGUIController implements Initializable
 
   /**
    * This function is used to set the room number combo box in the check in tab
+   *
+   * @author Pramesh Shrestha
    */
   @FXML private void setRoomToCheckInComboBox()
   {
@@ -452,6 +479,7 @@ public class HotelGUIController implements Initializable
    * check-in tab
    *
    * @param event The event that triggered the method.
+   * @author Rajib Paudyal
    */
   @FXML private void checkInSearch(ActionEvent event)
   {
@@ -509,7 +537,8 @@ public class HotelGUIController implements Initializable
             bookingList.getBookingByIndex(i).getGuest().getDateOfBirth());
         checkInCheckedInDate.setValue(
             bookingList.getBookingByIndex(i).getArrivalDate());
-        checkInCheckOutDate.setValue(bookingList.getBookingByIndex(i).getDepartureDate());
+        checkInCheckOutDate.setValue(
+            bookingList.getBookingByIndex(i).getDepartureDate());
 
         checkInSmoking.setSelected(bookingList.getBookingByIndex(i).ifSmokes());
         booked = true;
@@ -535,6 +564,7 @@ public class HotelGUIController implements Initializable
    * clears all the text fields
    *
    * @param event The event that triggered the method.
+   * @author Rajib Paudyal
    */
   @FXML private void checkIn(ActionEvent event)
   {
@@ -582,6 +612,7 @@ public class HotelGUIController implements Initializable
    * If the check-out date is before the check-in date, display an error message
    *
    * @param event The event that triggered the method.
+   * @author Rajib Paudyal
    */
   @FXML private void disableCheckOutDate(ActionEvent event)
   {
@@ -606,7 +637,7 @@ public class HotelGUIController implements Initializable
 
   /**
    * It clears all the text fields  except the room TextField in the check in tab
-
+   * @author Rajib Paudyal
    */
   @FXML private void checkInClear()
   {
@@ -618,6 +649,7 @@ public class HotelGUIController implements Initializable
 
   /**
    * It clears all the text fields in the check in tab
+   * @author Pramesh Shrestha
    */
   @FXML private void clearCheckInBox()
   {
@@ -633,6 +665,7 @@ public class HotelGUIController implements Initializable
 
   /**
    * This function clears the check-in search box.
+   * @author Pramesh Shrestha
    */
   @FXML private void clearCheckInSearchBox()
   {
@@ -647,6 +680,7 @@ public class HotelGUIController implements Initializable
 
   /**
    * This function searches the Room number and the Checked-In date for the given guest .
+   *
    * @author Rodrigo Reyes
    */
   @FXML private void searchCheckIn(ActionEvent event)
@@ -666,13 +700,16 @@ public class HotelGUIController implements Initializable
     {
       /*if the Search of check-In in the binary file matches any check-in
     then adds in the table view*/
-      Guest guest1 = manager.searchCheckIn(checkOutSearchFirstName.getText().trim(),
+      Guest guest1 = manager.searchCheckIn(
+          checkOutSearchFirstName.getText().trim(),
           checkOutSearchLastName.getText().trim(),
           checkOutSearchPhoneNumber.getText().trim());
 
-      checkOutColumnNumber.setCellValueFactory(new PropertyValueFactory<>("roomNumber"));
+      checkOutColumnNumber.setCellValueFactory(
+          new PropertyValueFactory<>("roomNumber"));
 
-      checkOutCheckedIn.setCellValueFactory(new PropertyValueFactory<>("checkedInDate"));
+      checkOutCheckedIn.setCellValueFactory(
+          new PropertyValueFactory<>("checkedInDate"));
 
       ObservableList<Guest> guest = FXCollections.observableArrayList();
       guest.add(new Guest(guest1.getRoomNumber(), guest1.getCheckedInDate()));
@@ -681,8 +718,10 @@ public class HotelGUIController implements Initializable
       //Set the price and check-in of the book searched in the textField Initial Price
 
       checkedOutCheckInDate.setValue(guest1.getCheckedInDate());
-      checkedOutInitialPrice.setText(String.valueOf(manager.searchBooking(checkOutSearchFirstName.getText(),
-          checkOutSearchLastName.getText(), checkOutSearchPhoneNumber.getText()).getRoom().getPrice()));
+      checkedOutInitialPrice.setText(String.valueOf(
+          manager.searchBooking(checkOutSearchFirstName.getText(),
+              checkOutSearchLastName.getText(),
+              checkOutSearchPhoneNumber.getText()).getRoom().getPrice()));
       checkOutRoomNumber.setText(guest1.getRoomNumber());
       checkedOutCheckOutDate.setValue(LocalDate.now());
 
@@ -691,7 +730,8 @@ public class HotelGUIController implements Initializable
   }
 
   /**
-   * This function sets the number of nights stayed according to the given date interval .
+   * This function sets the number of nights stayed according to the given date interval.
+   * @author Rodrigo Reyes
    */
 
   @FXML private void setNumberOfNights(ActionEvent event)
@@ -709,6 +749,7 @@ public class HotelGUIController implements Initializable
 
   /**
    * This function calculates the final price according to the nights stayed whether or not a given discount.
+   * @author Rodrigo Reyes
    */
   @FXML private void checkOutCalculate(ActionEvent event)
   {
@@ -725,7 +766,8 @@ public class HotelGUIController implements Initializable
   }
 
   /**
-   * This function delates guest from the guest list and booking list.
+   * This function deletes guest from the guest list and booking list.
+   * @author Rodrigo Reyes
    */
 
   @FXML private void checkOutSave(ActionEvent event)
@@ -735,11 +777,14 @@ public class HotelGUIController implements Initializable
     removes check-in and booking from binary files and clears all fields afterwards*/
     if (checkOutSearchFirstName.getText().equals("")
         || checkOutSearchLastName.getText().equals("")
-        || checkOutSearchPhoneNumber.getText().equals("")||
-        checkedOutCheckInDate.getValue()==null||
-        checkedOutCheckOutDate.getValue()==null||checkedOutNightsStayed.getText().equals("")||
-        checkOutRoomNumber.getText().equals("")|| checkedOutInitialPrice.getText().equals("")||
-        checkedOutDiscountAmount.getText().equals("")||checkedOutFinalPrice.getText().equals(""))
+        || checkOutSearchPhoneNumber.getText().equals("")
+        || checkedOutCheckInDate.getValue() == null
+        || checkedOutCheckOutDate.getValue() == null
+        || checkedOutNightsStayed.getText().equals("")
+        || checkOutRoomNumber.getText().equals("")
+        || checkedOutInitialPrice.getText().equals("")
+        || checkedOutDiscountAmount.getText().equals("")
+        || checkedOutFinalPrice.getText().equals(""))
     {
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
       alert.setTitle("The OverLook Hotel");
@@ -747,8 +792,8 @@ public class HotelGUIController implements Initializable
       alert.showAndWait();
     }
     else if (manager.searchCheckIn(checkOutSearchFirstName.getText(),
-        checkOutSearchLastName.getText(),
-        checkOutSearchPhoneNumber.getText())==null)
+        checkOutSearchLastName.getText(), checkOutSearchPhoneNumber.getText())
+        == null)
     {
       Alert alert = new Alert(Alert.AlertType.INFORMATION);
       alert.setTitle("The OverLook Hotel");
@@ -761,7 +806,6 @@ public class HotelGUIController implements Initializable
           checkOutSearchLastName.getText(),
           checkOutSearchPhoneNumber.getText());
 
-
       manager.removeCheckIn(guest1.getRoomNumber());
 
       manager.deleteBookings(guest1.getFirstName(), guest1.getLastName(),
@@ -769,7 +813,6 @@ public class HotelGUIController implements Initializable
 
       // exports to xml
       manager.exportRoomsToXML();
-
 
       checkOutClear();
 
@@ -780,9 +823,9 @@ public class HotelGUIController implements Initializable
     }
   }
 
-
   /**
    * This function clear the text fields in the tab check-out
+   * @author Rajib Paudyal
    */
 
   @FXML private void checkOutClear()
@@ -843,6 +886,7 @@ public class HotelGUIController implements Initializable
 
   /**
    * This function is used to set the room numbers to the combo box
+   * @author Pramesh Shrestha
    */
   @FXML private void setRoomToComboBox()
   {
@@ -859,7 +903,7 @@ public class HotelGUIController implements Initializable
 
   /**
    * This function gets all the guests that are checked in by room number
-   *
+   * @author Pramesh Shrestha
    * @param event The event that triggered the method.
    */
   @FXML private void getAllGuestsByRoomNumber(ActionEvent event)
@@ -901,7 +945,7 @@ public class HotelGUIController implements Initializable
   /**
    * This function displays all bookings.
    *
-   * @author Rajiv Paudyal
+   * @author Rajib Paudyal
    */
   @FXML private void displayAllBookings()
   {
@@ -931,6 +975,7 @@ public class HotelGUIController implements Initializable
   /**
    * When the user clicks the remove button, remove the selected row from the
    * table.
+   * @author Rajib Paudyal
    */
   @FXML private void removeBookingFromTable()
   {
@@ -956,6 +1001,7 @@ public class HotelGUIController implements Initializable
    * booking list for any bookings on that date. If there are bookings on that
    * date, the function displays them in a table view. If there are no bookings on
    * that date, the function displays an error message
+   * @author Rajib Paudyal
    */
   @FXML private void bookingSearchForDay()
   {
@@ -996,7 +1042,6 @@ public class HotelGUIController implements Initializable
 
   //----------------------------------Menu items starts here--------------------------------
 
-
   /**
    * The function asks the user for confirmation to close the program
    *
@@ -1006,18 +1051,19 @@ public class HotelGUIController implements Initializable
   @FXML private void exitWindow(ActionEvent event)
   {
     //Ask user for the confirmation to close the program
-    Alert alert = new Alert(Alert.AlertType.WARNING,"Do you really want to exit?",ButtonType.YES, ButtonType.NO);
+    Alert alert = new Alert(Alert.AlertType.WARNING,
+        "Do you really want to exit?", ButtonType.YES, ButtonType.NO);
     alert.setTitle("Overlook Hotel");
-    alert .setHeaderText(null);
+    alert.setHeaderText(null);
     alert.showAndWait();
-    if(alert.getResult() == ButtonType.YES)
+    if (alert.getResult() == ButtonType.YES)
     {
       System.exit(0);
     }
   }
 
- // Clearing all the fields in the tabs.
- @FXML private void clearAllFields(ActionEvent event)
+  // Clearing all the fields in the tabs.
+  @FXML private void clearAllFields(ActionEvent event)
   {
     //clears all the tabs' fields
     bookingClear();
@@ -1028,13 +1074,14 @@ public class HotelGUIController implements Initializable
   /**
    * It opens a new window with the title "About the Software" and the content of
    * the About.fxml file
-   *
+   * @author Pramesh Shrestha
    */
   @FXML private void about()
   {
     try
     {
-      FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("About.fxml"));
+      FXMLLoader fxmlLoader = new FXMLLoader(
+          getClass().getResource("About.fxml"));
       Parent root = fxmlLoader.load();
       Scene scene = new Scene(root);
       Stage stage = new Stage();

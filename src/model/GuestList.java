@@ -4,21 +4,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * The type Guest list.
+ * This class stores guest list
+ * @author  Rajib Paudyal
  */
 public class GuestList implements Serializable
 {
-  /**
-   * This class deals with adding and removing of guests.
-   *
-   * @author Rajib Paudyal
-   * @version 1.0.0
-   */
 
   private ArrayList<Guest> guestList;
 
   /**
-   * Creating a new GuestList object with a guestNumber.
+   * instantiates guest list object
    */
 
   public GuestList()
@@ -27,7 +22,7 @@ public class GuestList implements Serializable
   }
 
   /**
-   * If the size of guest list is less than guest number, add the guest to the guest list
+   * add the guest to the guest list
    *
    * @param guest The guest to be added to the guest list.
    */
