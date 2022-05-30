@@ -4,15 +4,16 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * class that is used to store the arrival and departure
+ * dates of a guest.
+ *
+ * @author Rajib Paudyal
+ * @version 1.0.0
+ */
 public class DateInterval implements Serializable
 {
-  /**
-   * class that is used to store the arrival and departure
-   * dates of a guest.
-   *
-   * @author Rajib Paudyal
-   * @version 1.0.0
-   */
+
 
   private LocalDate arrivalDate;
   private LocalDate departureDate;

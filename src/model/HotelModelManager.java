@@ -1,3 +1,4 @@
+
 package model;
 
 import org.w3c.dom.Attr;
@@ -20,12 +21,15 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+/**
+ * this class deals with everything related to files writing and GUI
+ * @author Pramesh Shrestha, Rajib Paudyal, Rodrigo Reyes
+ * @version 1.0.0
+ */
+
 public class HotelModelManager implements Serializable
 {
-  /**
-   * @author Pramesh Shrestha, Rajib Paudyal, Rodrigo Reyes
-   * @version 1.0.0
-   */
+
   private String roomFileName;
   private String guestFileName;
   private String bookingFileName;

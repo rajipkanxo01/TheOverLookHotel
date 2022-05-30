@@ -292,15 +292,39 @@ public class HotelGUIController implements Initializable
    */
   @FXML private void disableDepartureDate(ActionEvent event)
   {
-    if (roomDepartureDate.getValue().isBefore(roomArrivalDate.getValue()))
-    {
+    if (!roomDepartureDate.getValue().isBefore(LocalDate.now())) {
+      if (roomDepartureDate.getValue().isBefore(roomArrivalDate.getValue()))
+      {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText("Invalid Check-out Date");
+        alert.setContentText("Please enter a valid check-out date.");
+        alert.showAndWait();
+        roomDepartureDate.getEditor().clear();
+      }
+    }
+    else {
       Alert alert = new Alert(Alert.AlertType.ERROR);
-      alert.setHeaderText("Invalid Check-out Date");
-      alert.setContentText("Please enter a valid check-out date.");
+      alert.setHeaderText("Invalid  Date");
+      alert.setContentText("Departure Date is before today's date.");
       alert.showAndWait();
       roomDepartureDate.getEditor().clear();
     }
 
+
+  }
+
+  /**
+   * If the user enters a date that is before today's date, an error message is
+   * displayed
+   */
+  public void disablePastArrivalDate()
+  {  if (roomArrivalDate.getValue().isBefore(LocalDate.now())) {
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setHeaderText("Invalid  Date");
+    alert.setContentText("Arrival Date is before today's date.");
+    alert.showAndWait();
+    roomArrivalDate.getEditor().clear();
+  }
   }
 
   // -------------------------- create booking methods starts from here ------------------------------
@@ -384,6 +408,11 @@ public class HotelGUIController implements Initializable
           "Booking Confirmed under " + bookingFirstNameText + " "
               + bookingLastNameText);
       alert.showAndWait();
+
+      SingleSelectionModel<Tab> selectionModelCreateBackButton = tabPane.getSelectionModel();
+      selectionModelCreateBackButton.select(roomStatus);
+
+      createBooking.setDisable(true);
     }
   }
 
@@ -1097,4 +1126,6 @@ public class HotelGUIController implements Initializable
       ex.printStackTrace();
     }
   }
+
+
 }
