@@ -71,7 +71,7 @@
                                 <Pane layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="239.0" style="-fx-background-color: #F5F5F5; -fx-border-color: #000000;">
                                     <children>
                                         <Label layoutX="10.0" layoutY="12.0" text="Arrival Date" />
-                                        <DatePicker fx:id="roomArrivalDate" layoutX="9.0" layoutY="29.0" prefHeight="26.0" prefWidth="185.0" showWeekNumbers="true" />
+                                        <DatePicker fx:id="roomArrivalDate" layoutX="9.0" layoutY="29.0" onAction="#disablePastArrivalDate" prefHeight="26.0" prefWidth="185.0" showWeekNumbers="true" />
                                         <DatePicker fx:id="roomDepartureDate" layoutX="8.0" layoutY="80.0" onAction="#disableDepartureDate" prefHeight="26.0" prefWidth="185.0" showWeekNumbers="true" />
                                         <Label layoutX="9.0" layoutY="63.0" text="Departure Date" />
                                         <CheckBox fx:id="isSmoking" layoutX="14.0" layoutY="122.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="88.0" text="Smoking" />

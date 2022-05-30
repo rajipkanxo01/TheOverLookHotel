@@ -292,7 +292,8 @@ public class HotelGUIController implements Initializable
    */
   @FXML private void disableDepartureDate(ActionEvent event)
   {
-    if (!roomDepartureDate.getValue().isBefore(LocalDate.now())) {
+    if (roomArrivalDate.getValue() != null)
+    {
       if (roomDepartureDate.getValue().isBefore(roomArrivalDate.getValue()))
       {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -302,15 +303,14 @@ public class HotelGUIController implements Initializable
         roomDepartureDate.getEditor().clear();
       }
     }
-    else {
-      Alert alert = new Alert(Alert.AlertType.ERROR);
-      alert.setHeaderText("Invalid  Date");
-      alert.setContentText("Departure Date is before today's date.");
+    else
+    {
+      Alert alert = new Alert(Alert.AlertType.WARNING);
+      alert.setTitle("The Overlook Hotel");
+      alert.setHeaderText("Check in date not entered");
+      alert.setContentText("Please enter a check-in date first");
       alert.showAndWait();
-      roomDepartureDate.getEditor().clear();
     }
-
-
   }
 
   /**
