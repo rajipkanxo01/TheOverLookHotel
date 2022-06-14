@@ -318,13 +318,18 @@ public class HotelGUIController implements Initializable
    * displayed
    */
   public void disablePastArrivalDate()
-  {  if (roomArrivalDate.getValue().isBefore(LocalDate.now())) {
-    Alert alert = new Alert(Alert.AlertType.ERROR);
-    alert.setHeaderText("Invalid  Date");
-    alert.setContentText("Arrival Date is before today's date.");
-    alert.showAndWait();
-    roomArrivalDate.getEditor().clear();
-  }
+  {
+    if (roomArrivalDate.getValue() != null)
+    {
+      if (roomArrivalDate.getValue().isBefore(LocalDate.now())) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText("Invalid  Date");
+        alert.setContentText("Arrival Date is before today's date.");
+        alert.showAndWait();
+        roomArrivalDate.getEditor().clear();
+      }
+    }
+
   }
 
   // -------------------------- create booking methods starts from here ------------------------------
